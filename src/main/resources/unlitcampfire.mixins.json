@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "cech12.unlitcampfire.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "unlitcampfire.refmap.json",
+  "mixins": [
+    "CampfireBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
