@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/cech12/UnlitCampfire/issues"
+license="The MIT License (MIT)"
+[[mods]]
+    modId="unlitcampfire"
+    version="${file.jarVersion}"
+    displayName="Unlit Campfire"
+    displayURL="https://github.com/cech12/UnlitCampfire"
+    logoFile="logo.png"
+    authors="Cech12"
+    description='''
+    A mod were placed Campfires are unlit.
+    '''
+[[dependencies.ceramicbucket]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31.2.44,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.ceramicbucket]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2,)"
+    ordering="NONE"
+    side="BOTH"
