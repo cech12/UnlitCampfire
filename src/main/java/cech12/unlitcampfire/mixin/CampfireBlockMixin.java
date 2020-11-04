@@ -22,10 +22,6 @@ public abstract class CampfireBlockMixin extends ContainerBlock {
         this.setDefaultState(this.getDefaultState().with(CampfireBlock.LIT, false));
     }
 
-    /**
-     * Add a tree like automatic growing.
-     * The automatic multiplication still remaining.
-     */
     @Inject(at = @At("RETURN"), method = "getStateForPlacement", cancellable = true)
     protected void getStateForPlacementProxy(BlockItemUseContext context, CallbackInfoReturnable<BlockState> cir) {
         if (cir.getReturnValue() != null) {
