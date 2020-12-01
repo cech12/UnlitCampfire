@@ -10,8 +10,9 @@ public class ServerConfig {
     public static ForgeConfigSpec SERVER_CONFIG;
 
     public static final ForgeConfigSpec.IntValue CAMPFIRE_LIT_TIME;
-    public static final ForgeConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_AFTER_LIT_TIME;
-    public static final ForgeConfigSpec.BooleanValue CAMPFIRE_BREAKS_AFTER_LIT_TIME;
+    public static final ForgeConfigSpec.BooleanValue UNLIT_CAMPFIRE_WITH_RAIN;
+    public static final ForgeConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
+    public static final ForgeConfigSpec.BooleanValue CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
 
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -22,13 +23,17 @@ public class ServerConfig {
                 .comment("The time (ticks) a campfire burns until it goes out by itself. (2000 ticks default; 0 means it burns forever)")
                 .defineInRange("campfireLitTime", 2000, 0, 10000);
 
-        CAMPFIRE_DROPS_ITEMS_AFTER_LIT_TIME = builder
-                .comment("Whether the containing items should be dropped when a campfire goes out by itself.")
-                .define("campfireDropsItemsAfterLitTime", true);
+        UNLIT_CAMPFIRE_WITH_RAIN = builder
+                .comment("Whether a campfire should go out when rain falls on it.")
+                .define("unlitCampfireWithRain", true);
 
-        CAMPFIRE_BREAKS_AFTER_LIT_TIME = builder
-                .comment("Whether the campfire should be destroyed when it goes out by itself.")
-                .define("campfireBreaksAfterLitTime", false);
+        CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN = builder
+                .comment("Whether the contained items should be dropped when a campfire goes out by itself or by rain.")
+                .define("campfireDropsItemsWhenUnlitByTimeOrRain", true);
+
+        CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME = builder
+                .comment("Whether a campfire should be destroyed when it goes out by itself.")
+                .define("campfireBreaksWhenUnlitByTime", false);
 
         builder.pop();
 
