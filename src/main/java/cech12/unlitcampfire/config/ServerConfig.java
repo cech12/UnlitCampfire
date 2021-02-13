@@ -14,11 +14,17 @@ public class ServerConfig {
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
 
+    public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_LIT_TIME;
+    public static final ForgeConfigSpec.BooleanValue UNLIT_SOUL_CAMPFIRE_WITH_RAIN;
+    public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
+    public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
+
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
         builder.push("unlitcampfire");
 
+        //campfire
         CAMPFIRE_LIT_TIME = builder
                 .comment("The time (ticks) a campfire burns until it goes out by itself. (2000 ticks default; 0 means it burns forever)")
                 .defineInRange("campfireLitTime", 2000, 0, 10000);
@@ -34,6 +40,23 @@ public class ServerConfig {
         CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME = builder
                 .comment("Whether a campfire should be destroyed when it goes out by itself.")
                 .define("campfireBreaksWhenUnlitByTime", false);
+
+        //soul campfire
+        SOUL_CAMPFIRE_LIT_TIME = builder
+                .comment("The time (ticks) a soul campfire burns until it goes out by itself. (2000 ticks default; 0 means it burns forever)")
+                .defineInRange("soulCampfireLitTime", 2000, 0, 10000);
+
+        UNLIT_SOUL_CAMPFIRE_WITH_RAIN = builder
+                .comment("Whether a soul campfire should go out when rain falls on it.")
+                .define("unlitSoulCampfireWithRain", false);
+
+        SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN = builder
+                .comment("Whether the contained items should be dropped when a soul campfire goes out by itself or by rain.")
+                .define("soulCampfireDropsItemsWhenUnlitByTimeOrRain", true);
+
+        SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME = builder
+                .comment("Whether a soul campfire should be destroyed when it goes out by itself.")
+                .define("soulCampfireBreaksWhenUnlitByTime", false);
 
         builder.pop();
 

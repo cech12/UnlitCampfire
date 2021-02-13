@@ -24,6 +24,38 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
         super(TileEntityType.CAMPFIRE);
     }
 
+    private boolean isSoulCampfire() {
+        return this.world != null && this.world.getBlockState(this.pos).getBlock() == Blocks.SOUL_CAMPFIRE;
+    }
+
+    private int getMaxLitTime() {
+        if (isSoulCampfire()) {
+            return ServerConfig.SOUL_CAMPFIRE_LIT_TIME.get();
+        }
+        return ServerConfig.CAMPFIRE_LIT_TIME.get();
+    }
+
+    private boolean dropsItemsWhenUnlitByTimeOrRain() {
+        if (isSoulCampfire()) {
+            return ServerConfig.SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.get();
+        }
+        return ServerConfig.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.get();
+    }
+
+    private boolean breaksWhenUnlitByTime() {
+        if (isSoulCampfire()) {
+            return ServerConfig.SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.get();
+        }
+        return ServerConfig.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.get();
+    }
+
+    private boolean unlitByRain() {
+        if (isSoulCampfire()) {
+            return ServerConfig.UNLIT_SOUL_CAMPFIRE_WITH_RAIN.get();
+        }
+        return ServerConfig.UNLIT_CAMPFIRE_WITH_RAIN.get();
+    }
+
     private void playUnlitSound() {
         if (this.world != null && !this.world.isRemote()) {
             this.world.playEvent(null, 1009, this.getPos(), 0);
@@ -47,7 +79,7 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
     private void unlitCampfire() {
         if (this.world != null) {
             this.playUnlitSound();
-            if (ServerConfig.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.get()) {
+            if (this.dropsItemsWhenUnlitByTimeOrRain()) {
                 this.dropAllContainingItems();
             }
             this.world.setBlockState(this.getPos(), this.getBlockState().with(CampfireBlock.LIT, false));
@@ -58,21 +90,22 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
     protected void tickProxy(CallbackInfo info) {
         World world = this.getWorld();
         if (world != null) {
-            int maxLitTime = ServerConfig.CAMPFIRE_LIT_TIME.get();
+            int maxLitTime = this.getMaxLitTime();
             if (this.getBlockState().get(CampfireBlock.LIT)) {
                 //if lit time is active
                 if (maxLitTime > 0) {
                     litTime++;
                     if (litTime >= maxLitTime) {
-                        if (ServerConfig.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.get()) {
+                        if (this.breaksWhenUnlitByTime()) {
                             this.destroyCampfire();
                         } else {
                             this.unlitCampfire();
                         }
+                        return; //fixes destroying while raining
                     }
                 }
                 //if rain should unlit a campfire and it is raining there
-                if (ServerConfig.UNLIT_CAMPFIRE_WITH_RAIN.get() && world.isRainingAt(this.getPos().up())) {
+                if (this.unlitByRain() && world.isRainingAt(this.getPos().up())) {
                     this.unlitCampfire();
                 }
             } else {
