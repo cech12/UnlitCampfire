@@ -19,6 +19,7 @@ public class ServerConfig {
 
         builder.push("unlitcampfire");
 
+        //campfire
         CAMPFIRE_LIT_TIME = builder
                 .comment("The time (ticks) a campfire burns until it goes out by itself. (2000 ticks default; 0 means it burns forever)")
                 .defineInRange("campfireLitTime", 2000, 0, 10000);
