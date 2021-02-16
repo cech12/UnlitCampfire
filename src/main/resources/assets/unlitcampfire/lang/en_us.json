@@ -1,0 +1,59 @@
+{
+    "text.autoconfig.unlitcampfire.title": "Unlit Campfire Settings",
+
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE": "Campfire",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.@Tooltip[0]": "§6§lCampfire",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.@Tooltip[1]": "Configures the campfire behavior.",
+
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_LIT_TIME": "Campfire Lit Time (ticks)",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_LIT_TIME.@Tooltip[0]": "§6§lCampfire Lit Time",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_LIT_TIME.@Tooltip[1]": "The time (ticks) a campfire burns until",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_LIT_TIME.@Tooltip[2]": "it goes out by itself.",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_LIT_TIME.@Tooltip[3]": "§7§o(Default: 2000; 0 means it burns forever)",
+
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.UNLIT_CAMPFIRE_WITH_RAIN": "Unlit Campfire On Rain",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.UNLIT_CAMPFIRE_WITH_RAIN.@Tooltip[0]": "§6§lUnlit Campfire On Rain",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.UNLIT_CAMPFIRE_WITH_RAIN.@Tooltip[1]": "Whether a campfire should go out when rain",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.UNLIT_CAMPFIRE_WITH_RAIN.@Tooltip[2]": "falls on it.",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.UNLIT_CAMPFIRE_WITH_RAIN.@Tooltip[3]": "§7§o(Default: true)",
+
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN": "Drop Items on Unlit",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.@Tooltip[0]": "§6§lDrop Items on Unlit",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.@Tooltip[1]": "Whether the contained items should be dropped",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.@Tooltip[2]": "when a campfire goes out by itself or by rain.",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.@Tooltip[3]": "§7§o(Default: true)",
+
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME": "Break Campfire on Burnout",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.@Tooltip[0]": "§6§lBreak Campfire on Burnout",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.@Tooltip[1]": "Whether a campfire should be destroyed when it",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.@Tooltip[2]": "goes out by itself.",
+    "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.@Tooltip[3]": "§7§o(Default: false)",
+
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE": "Soul Campfire",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.@Tooltip[0]": "§6§lSoul Campfire",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.@Tooltip[1]": "Configures the soul campfire behavior.",
+
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME": "Soul Campfire Lit Time (ticks)",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME.@Tooltip[0]": "§6§lSoul Campfire Lit Time",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME.@Tooltip[1]": "The time (ticks) a soul campfire burns until",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME.@Tooltip[2]": "it goes out by itself.",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME.@Tooltip[3]": "§7§o(Default: 2000; 0 means it burns forever)",
+
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.UNLIT_SOUL_CAMPFIRE_WITH_RAIN": "Unlit Soul Campfire On Rain",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.UNLIT_SOUL_CAMPFIRE_WITH_RAIN.@Tooltip[0]": "§6§lUnlit Soul Campfire On Rain",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.UNLIT_SOUL_CAMPFIRE_WITH_RAIN.@Tooltip[1]": "Whether a soul campfire should go out when",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.UNLIT_SOUL_CAMPFIRE_WITH_RAIN.@Tooltip[2]": "rain falls on it.",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.UNLIT_SOUL_CAMPFIRE_WITH_RAIN.@Tooltip[3]": "§7§o(Default: false)",
+
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN": "Drop Items on Unlit",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.@Tooltip[0]": "§6§lDrop Items on Unlit",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.@Tooltip[1]": "Whether the contained items should be dropped when",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.@Tooltip[2]": "a soul campfire goes out by itself or by rain.",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.@Tooltip[3]": "§7§o(Default: true)",
+
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME": "Break Soul Campfire on Burnout",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.@Tooltip[0]": "§6§lBreak Soul Campfire on Burnout",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.@Tooltip[1]": "Whether a soul campfire should be destroyed",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.@Tooltip[2]": "when it goes out by itself.",
+    "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.@Tooltip[3]": "§7§o(Default: false)"
+}
