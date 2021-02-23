@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "unlitcampfire.refmap.json",
   "mixins": [
-    "CampfireBlockMixin",
-    "CampfireTileEntityMixin"
+    "CampfireBlockEntityMixin",
+    "CampfireBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

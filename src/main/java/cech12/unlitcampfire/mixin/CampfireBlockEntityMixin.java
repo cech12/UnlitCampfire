@@ -1,13 +1,15 @@
 package cech12.unlitcampfire.mixin;
 
-import cech12.unlitcampfire.config.ServerConfig;
+import cech12.unlitcampfire.UnlitCampfireMod;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.CampfireTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.CampfireBlockEntity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,13 +17,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(CampfireTileEntity.class)
-public abstract class CampfireTileEntityMixin extends TileEntity {
+@Mixin(CampfireBlockEntity.class)
+public abstract class CampfireBlockEntityMixin extends BlockEntity {
 
     private int litTime = 0;
 
-    public CampfireTileEntityMixin() {
-        super(TileEntityType.CAMPFIRE);
+    public CampfireBlockEntityMixin() {
+        super(BlockEntityType.CAMPFIRE);
     }
 
     private boolean isSoulCampfire() {
@@ -30,41 +32,41 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
 
     private int getMaxLitTime() {
         if (isSoulCampfire()) {
-            return ServerConfig.SOUL_CAMPFIRE_LIT_TIME.get();
+            return UnlitCampfireMod.CONFIG.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME;
         }
-        return ServerConfig.CAMPFIRE_LIT_TIME.get();
+        return UnlitCampfireMod.CONFIG.CAMPFIRE.CAMPFIRE_LIT_TIME;
     }
 
     private boolean dropsItemsWhenUnlitByTimeOrRain() {
         if (isSoulCampfire()) {
-            return ServerConfig.SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.get();
+            return UnlitCampfireMod.CONFIG.SOUL_CAMPFIRE.SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
         }
-        return ServerConfig.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.get();
+        return UnlitCampfireMod.CONFIG.CAMPFIRE.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     }
 
     private boolean breaksWhenUnlitByTime() {
         if (isSoulCampfire()) {
-            return ServerConfig.SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.get();
+            return UnlitCampfireMod.CONFIG.SOUL_CAMPFIRE.SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
         }
-        return ServerConfig.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME.get();
+        return UnlitCampfireMod.CONFIG.CAMPFIRE.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     }
 
     private boolean unlitByRain() {
         if (isSoulCampfire()) {
-            return ServerConfig.UNLIT_SOUL_CAMPFIRE_WITH_RAIN.get();
+            return UnlitCampfireMod.CONFIG.SOUL_CAMPFIRE.UNLIT_SOUL_CAMPFIRE_WITH_RAIN;
         }
-        return ServerConfig.UNLIT_CAMPFIRE_WITH_RAIN.get();
+        return UnlitCampfireMod.CONFIG.CAMPFIRE.UNLIT_CAMPFIRE_WITH_RAIN;
     }
 
     private void playUnlitSound() {
-        if (this.world != null && !this.world.isRemote()) {
-            this.world.playEvent(null, 1009, this.getPos(), 0);
+        if (this.world != null && !this.world.isClient()) {
+            this.world.playSound(null, this.getPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
     }
 
     private void dropAllContainingItems() {
         if (this.world != null) {
-            CampfireBlock.func_235475_c_(this.world, this.getPos(), this.getBlockState());
+            CampfireBlock.extinguish(this.world, this.getPos(), this.getCachedState());
         }
     }
 
@@ -82,7 +84,7 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
             if (this.dropsItemsWhenUnlitByTimeOrRain()) {
                 this.dropAllContainingItems();
             }
-            this.world.setBlockState(this.getPos(), this.getBlockState().with(CampfireBlock.LIT, false));
+            this.world.setBlockState(this.getPos(), this.getCachedState().with(CampfireBlock.LIT, false));
         }
     }
 
@@ -91,7 +93,7 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
         World world = this.getWorld();
         if (world != null) {
             int maxLitTime = this.getMaxLitTime();
-            if (this.getBlockState().get(CampfireBlock.LIT)) {
+            if (this.getCachedState().get(CampfireBlock.LIT)) {
                 //if lit time is active
                 if (maxLitTime > 0) {
                     litTime++;
@@ -105,7 +107,7 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
                     }
                 }
                 //if rain should unlit a campfire and it is raining there
-                if (this.unlitByRain() && world.isRainingAt(this.getPos().up())) {
+                if (this.unlitByRain() && world.hasRain(this.getPos().up())) {
                     this.unlitCampfire();
                 }
             } else {
@@ -115,16 +117,16 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
     }
 
 
-    @Inject(at = @At("RETURN"), method = "read")
-    protected void readProxy(BlockState stateIn, CompoundNBT nbtIn, CallbackInfo info) {
+    @Inject(at = @At("RETURN"), method = "fromTag")
+    protected void fromTagProxy(BlockState stateIn, CompoundTag nbtIn, CallbackInfo info) {
         if (nbtIn.contains("CampfireLitTime")) {
             this.litTime = nbtIn.getInt("CampfireLitTime");
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "write", cancellable = true)
-    protected void writeProxy(CompoundNBT compound, CallbackInfoReturnable<CompoundNBT> cir) {
-        CompoundNBT nbt = cir.getReturnValue();
+    @Inject(at = @At("RETURN"), method = "toTag", cancellable = true)
+    protected void toTagProxy(CompoundTag compound, CallbackInfoReturnable<CompoundTag> cir) {
+        CompoundTag nbt = cir.getReturnValue();
         if (nbt != null) {
             nbt.putInt("CampfireLitTime", this.litTime);
             cir.setReturnValue(nbt);

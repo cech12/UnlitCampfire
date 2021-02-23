@@ -1,0 +1,41 @@
+{
+    "schemaVersion": 1,
+    "id": "unlitcampfire",
+    "name": "Unlit Campfire",
+    "version": "1.2.0",
+    "environment": "*",
+    "license": "MIT",
+    "icon": "assets/unlitcampfire/icon.png",
+    "description": "Placing a lit campfire is a hot task. With this mod, you won't burn your hands when you place a campfire.",
+    "authors": [
+        "cech12",
+        "JayCeeCreates"
+    ],
+    "contact": {
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/unlit-campfire",
+        "sources": "https://github.com/JayCeeCreates/UnlitCampfire.git",
+        "issues": "https://github.com/JayCeeCreates/UnlitCampfire/issues"
+    },
+  
+  
+    "entrypoints": {
+        "main": [
+            "cech12.unlitcampfire.UnlitCampfireMod"
+        ],
+        "modmenu": [
+            "cech12.unlitcampfire.config.ModMenuIntegration"
+        ]
+    },
+    "mixins": [
+        "unlitcampfire.mixins.json"
+    ],
+  
+    "depends": {
+        "fabricloader": ">=0.7.4",
+        "fabric": "*",
+        "minecraft": "1.16.x"
+    },
+    "suggests": {
+        "flamingo": "*"
+    }
+}
