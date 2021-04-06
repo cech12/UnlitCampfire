@@ -10,12 +10,14 @@ public class ServerConfig {
     public static ForgeConfigSpec SERVER_CONFIG;
 
     public static final ForgeConfigSpec.IntValue CAMPFIRE_LIT_TIME;
-    public static final ForgeConfigSpec.BooleanValue UNLIT_CAMPFIRE_WITH_RAIN;
+    public static final ForgeConfigSpec.IntValue CAMPFIRE_RAIN_UNLIT_TIME;
+    public static final ForgeConfigSpec.IntValue CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
 
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_LIT_TIME;
-    public static final ForgeConfigSpec.BooleanValue UNLIT_SOUL_CAMPFIRE_WITH_RAIN;
+    public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_UNLIT_TIME;
+    public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
 
@@ -29,9 +31,13 @@ public class ServerConfig {
                 .comment("The time (ticks) a campfire burns until it goes out by itself. (2000 ticks default; 0 means it burns forever)")
                 .defineInRange("campfireLitTime", 2000, 0, 10000);
 
-        UNLIT_CAMPFIRE_WITH_RAIN = builder
-                .comment("Whether a campfire should go out when rain falls on it.")
-                .define("unlitCampfireWithRain", true);
+        CAMPFIRE_RAIN_UNLIT_TIME = builder
+                .comment("The time (ticks) a campfire burns until it goes out during rain. (160 ticks [default]; 0: it goes out immediately; -1: it burns during rain).")
+                .defineInRange("campfireRainUnlitTime", 160, -1, 10000);
+
+        CAMPFIRE_RAIN_PARTICLE_FACTOR = builder
+                .comment("The Factor of particle count of a campfire during rain. (2: doubled particles count [default]; 1: same particle count)")
+                .defineInRange("campfireRainParticleFactor", 2, 1, 10);
 
         CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN = builder
                 .comment("Whether the contained items should be dropped when a campfire goes out by itself or by rain.")
@@ -46,9 +52,13 @@ public class ServerConfig {
                 .comment("The time (ticks) a soul campfire burns until it goes out by itself. (2000 ticks default; 0 means it burns forever)")
                 .defineInRange("soulCampfireLitTime", 2000, 0, 10000);
 
-        UNLIT_SOUL_CAMPFIRE_WITH_RAIN = builder
-                .comment("Whether a soul campfire should go out when rain falls on it.")
-                .define("unlitSoulCampfireWithRain", false);
+        SOUL_CAMPFIRE_RAIN_UNLIT_TIME = builder
+                .comment("The time (ticks) a soul campfire burns until it goes out during rain. (0: it goes out immediately; -1: it burns during rain [default]).")
+                .defineInRange("soulCampfireRainUnlitTime", -1, -1, 10000);
+
+        SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR = builder
+                .comment("The Factor of particle count of a soul campfire during rain. (2: doubled particles count (default); 1: same particle count)")
+                .defineInRange("soulCampfireRainParticleFactor", 2, 1, 10);
 
         SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN = builder
                 .comment("Whether the contained items should be dropped when a soul campfire goes out by itself or by rain.")
