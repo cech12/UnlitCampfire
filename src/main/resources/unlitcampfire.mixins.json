@@ -2,7 +2,6 @@
   "required": true,
   "package": "cech12.unlitcampfire.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "unlitcampfire.refmap.json",
   "mixins": [
     "CampfireBlockEntityMixin",
     "CampfireBlockMixin"
