@@ -2,7 +2,7 @@
     "schemaVersion": 1,
     "id": "unlitcampfire",
     "name": "Unlit Campfire",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "environment": "*",
     "license": "MIT",
     "icon": "assets/unlitcampfire/icon.png",

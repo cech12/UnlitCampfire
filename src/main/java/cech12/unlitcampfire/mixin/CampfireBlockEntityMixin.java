@@ -20,14 +20,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(CampfireBlockEntity.class)
 public abstract class CampfireBlockEntityMixin extends BlockEntity {
 
+    private Boolean isSoulCampfire;
+
     private int litTime = 0;
+    private int rainTime = 0;
 
     public CampfireBlockEntityMixin() {
         super(BlockEntityType.CAMPFIRE);
     }
 
     private boolean isSoulCampfire() {
-        return this.world != null && this.world.getBlockState(this.pos).getBlock() == Blocks.SOUL_CAMPFIRE;
+        if (isSoulCampfire == null) {
+            if (this.world != null) {
+                isSoulCampfire = this.world.getBlockState(this.pos).getBlock() == Blocks.SOUL_CAMPFIRE;
+                return isSoulCampfire;
+            }
+            return false;
+        }
+        return isSoulCampfire;
     }
 
     private int getMaxLitTime() {
@@ -51,11 +61,18 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity {
         return UnlitCampfireMod.CONFIG.CAMPFIRE.CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     }
 
-    private boolean unlitByRain() {
+    private int getRainUnlitTime() {
         if (isSoulCampfire()) {
-            return UnlitCampfireMod.CONFIG.SOUL_CAMPFIRE.UNLIT_SOUL_CAMPFIRE_WITH_RAIN;
+            return UnlitCampfireMod.CONFIG.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RAIN_UNLIT_TIME;
         }
-        return UnlitCampfireMod.CONFIG.CAMPFIRE.UNLIT_CAMPFIRE_WITH_RAIN;
+        return UnlitCampfireMod.CONFIG.CAMPFIRE.CAMPFIRE_RAIN_UNLIT_TIME;
+    }
+
+    private int getParticleFactorDuringRain() {
+        if (isSoulCampfire()) {
+            return UnlitCampfireMod.CONFIG.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR;
+        }
+        return UnlitCampfireMod.CONFIG.CAMPFIRE.CAMPFIRE_RAIN_PARTICLE_FACTOR;
     }
 
     private void playUnlitSound() {
@@ -92,9 +109,9 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity {
     protected void tickProxy(CallbackInfo info) {
         World world = this.getWorld();
         if (world != null) {
-            int maxLitTime = this.getMaxLitTime();
             if (this.getCachedState().get(CampfireBlock.LIT)) {
                 //if lit time is active
+                int maxLitTime = this.getMaxLitTime();
                 if (maxLitTime > 0) {
                     litTime++;
                     if (litTime >= maxLitTime) {
@@ -106,9 +123,30 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity {
                         return; //fixes destroying while raining
                     }
                 }
-                //if rain should unlit a campfire and it is raining there
-                if (this.unlitByRain() && world.hasRain(this.getPos().up())) {
-                    this.unlitCampfire();
+                if (world.hasRain(this.getPos().up())) {
+                    //if rain should unlit a campfire and it is raining there
+                    int rainUnlitTime = this.getRainUnlitTime();
+                    if (rainUnlitTime >= 0) {
+                        rainTime++;
+                        if (rainTime >= rainUnlitTime) {
+                            rainTime = 0;
+                            this.unlitCampfire();
+                            return; //no particles needed
+                        }
+                    } else {
+                        rainTime = 0;
+                    }
+                    //during rain the campfire has more particles (if activated)
+                    int particleFactor = this.getParticleFactorDuringRain();
+                    if (this.world != null && this.world.isClient && particleFactor > 1) {
+                        BlockEntity blockEntity = this.world.getBlockEntity(this.pos);
+                        if (blockEntity instanceof CampfireBlockEntity) {
+                            CampfireBlockEntity campfireTileEntity = (CampfireBlockEntity)blockEntity;
+                            for (int i = 0; i < particleFactor - 1; i++) {
+                                campfireTileEntity.spawnSmokeParticles();
+                            }
+                        }
+                    }
                 }
             } else {
                 litTime = 0;
