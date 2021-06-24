@@ -27,13 +27,13 @@ public abstract class CampfireBlockMixin extends ContainerBlock {
 
     @Inject(at = @At("RETURN"), method = "<init>*")
     protected void initProxy(CallbackInfo info) {
-        this.setDefaultState(this.getDefaultState().with(CampfireBlock.LIT, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(CampfireBlock.LIT, false));
     }
 
     @Inject(at = @At("RETURN"), method = "getStateForPlacement", cancellable = true)
     protected void getStateForPlacementProxy(BlockItemUseContext context, CallbackInfoReturnable<BlockState> cir) {
         if (cir.getReturnValue() != null) {
-            cir.setReturnValue(cir.getReturnValue().with(CampfireBlock.LIT, false));
+            cir.setReturnValue(cir.getReturnValue().setValue(CampfireBlock.LIT, false));
             cir.cancel();
         }
     }
@@ -42,7 +42,7 @@ public abstract class CampfireBlockMixin extends ContainerBlock {
     @Intrinsic(displace = true)
     public void id$animateTick(@Nonnull BlockState stateIn, World worldIn, BlockPos pos, @Nonnull Random rand) {
         int particleFactor = 1;
-        if (worldIn.isRainingAt(pos.up())) {
+        if (worldIn.isRainingAt(pos.above())) {
             if (worldIn.getBlockState(pos).getBlock() == Blocks.SOUL_CAMPFIRE) {
                 particleFactor = ServerConfig.SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR.get();
             } else {

@@ -29,8 +29,8 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
 
     private boolean isSoulCampfire() {
         if (isSoulCampfire == null) {
-            if (this.world != null) {
-                isSoulCampfire = this.world.getBlockState(this.pos).getBlock() == Blocks.SOUL_CAMPFIRE;
+            if (this.level != null) {
+                isSoulCampfire = this.level.getBlockState(this.worldPosition).getBlock() == Blocks.SOUL_CAMPFIRE;
                 return isSoulCampfire;
             }
             return false;
@@ -74,40 +74,40 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
     }
 
     private void playUnlitSound() {
-        if (this.world != null && !this.world.isRemote()) {
-            this.world.playEvent(null, 1009, this.getPos(), 0);
+        if (this.level != null && !this.level.isClientSide()) {
+            this.level.levelEvent(null, 1009, this.getBlockPos(), 0);
         }
     }
 
     private void dropAllContainingItems() {
-        if (this.world != null) {
-            CampfireBlock.func_235475_c_(this.world, this.getPos(), this.getBlockState());
+        if (this.level != null) {
+            CampfireBlock.dowse(this.level, this.getBlockPos(), this.getBlockState());
         }
     }
 
     private void destroyCampfire() {
-        if (this.world != null) {
+        if (this.level != null) {
             this.playUnlitSound();
             this.dropAllContainingItems();
-            this.world.setBlockState(this.getPos(), Blocks.AIR.getDefaultState());
+            this.level.setBlockAndUpdate(this.getBlockPos(), Blocks.AIR.defaultBlockState());
         }
     }
 
     private void unlitCampfire() {
-        if (this.world != null) {
+        if (this.level != null) {
             this.playUnlitSound();
             if (this.dropsItemsWhenUnlitByTimeOrRain()) {
                 this.dropAllContainingItems();
             }
-            this.world.setBlockState(this.getPos(), this.getBlockState().with(CampfireBlock.LIT, false));
+            this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(CampfireBlock.LIT, false));
         }
     }
 
     @Inject(at = @At("RETURN"), method = "tick")
     protected void tickProxy(CallbackInfo info) {
-        World world = this.getWorld();
+        World world = this.getLevel();
         if (world != null) {
-            if (this.getBlockState().get(CampfireBlock.LIT)) {
+            if (this.getBlockState().getValue(CampfireBlock.LIT)) {
                 //if lit time is active
                 int maxLitTime = this.getMaxLitTime();
                 if (maxLitTime > 0) {
@@ -121,7 +121,7 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
                         return; //fixes destroying while raining
                     }
                 }
-                if (world.isRainingAt(this.getPos().up())) {
+                if (world.isRainingAt(this.getBlockPos().above())) {
                     //if rain should unlit a campfire and it is raining there
                     int rainUnlitTime = this.getRainUnlitTime();
                     if (rainUnlitTime >= 0) {
@@ -136,12 +136,12 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
                     }
                     //during rain the campfire has more particles (if activated)
                     int particleFactor = this.getParticleFactorDuringRain();
-                    if (this.world != null && this.world.isRemote && particleFactor > 1) {
-                        TileEntity tileEntity = this.world.getTileEntity(this.pos);
+                    if (this.level != null && this.level.isClientSide && particleFactor > 1) {
+                        TileEntity tileEntity = this.level.getBlockEntity(this.worldPosition);
                         if (tileEntity instanceof CampfireTileEntity) {
                             CampfireTileEntity campfireTileEntity = (CampfireTileEntity)tileEntity;
                             for (int i = 0; i < particleFactor - 1; i++) {
-                                campfireTileEntity.addParticles();
+                                campfireTileEntity.makeParticles();
                             }
                         }
                     }
@@ -153,15 +153,15 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
     }
 
 
-    @Inject(at = @At("RETURN"), method = "read")
-    protected void readProxy(BlockState stateIn, CompoundNBT nbtIn, CallbackInfo info) {
+    @Inject(at = @At("RETURN"), method = "load")
+    protected void loadProxy(BlockState stateIn, CompoundNBT nbtIn, CallbackInfo info) {
         if (nbtIn.contains("CampfireLitTime")) {
             this.litTime = nbtIn.getInt("CampfireLitTime");
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "write", cancellable = true)
-    protected void writeProxy(CompoundNBT compound, CallbackInfoReturnable<CompoundNBT> cir) {
+    @Inject(at = @At("RETURN"), method = "save", cancellable = true)
+    protected void saveProxy(CompoundNBT compound, CallbackInfoReturnable<CompoundNBT> cir) {
         CompoundNBT nbt = cir.getReturnValue();
         if (nbt != null) {
             nbt.putInt("CampfireLitTime", this.litTime);
