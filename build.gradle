@@ -178,6 +178,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
+    disableAnnotationProcessorCheck()
 }
 
 curseforge {
