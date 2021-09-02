@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [1.16.5-1.4.0.0] - 2021-09-??
 ### Changed
-- Update mod to Forge 1.16.5-36.1.0
+- Update mod to Forge 1.17.1-37.0.46
 - changed versioning to fit [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/)
 - ...
 

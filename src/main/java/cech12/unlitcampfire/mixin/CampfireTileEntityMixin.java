@@ -1,30 +1,31 @@
 package cech12.unlitcampfire.mixin;
 
 import cech12.unlitcampfire.config.ServerConfig;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.CampfireTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.CampfireBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(CampfireTileEntity.class)
-public abstract class CampfireTileEntityMixin extends TileEntity {
+@Mixin(CampfireBlockEntity.class)
+public abstract class CampfireTileEntityMixin extends BlockEntity {
 
     private Boolean isSoulCampfire;
 
     private int litTime = 0;
     private int rainTime = 0;
 
-    public CampfireTileEntityMixin() {
-        super(TileEntityType.CAMPFIRE);
+    public CampfireTileEntityMixin(BlockPos pos, BlockState state) {
+        super(BlockEntityType.CAMPFIRE, pos, state);
     }
 
     private boolean isSoulCampfire() {
@@ -81,7 +82,7 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
 
     private void dropAllContainingItems() {
         if (this.level != null) {
-            CampfireBlock.dowse(this.level, this.getBlockPos(), this.getBlockState());
+            CampfireBlock.dowse(null, this.level, this.getBlockPos(), this.getBlockState());
         }
     }
 
@@ -103,66 +104,66 @@ public abstract class CampfireTileEntityMixin extends TileEntity {
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "tick")
-    protected void tickProxy(CallbackInfo info) {
-        World world = this.getLevel();
-        if (world != null) {
-            if (this.getBlockState().getValue(CampfireBlock.LIT)) {
+    @Inject(at = @At("RETURN"), method = "cookTick")
+    protected void cookTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
+        CampfireTileEntityMixin mixinEntity = (CampfireTileEntityMixin) (BlockEntity) blockEntity;
+        if (level != null) {
+            if (state.getValue(CampfireBlock.LIT)) {
                 //if lit time is active
-                int maxLitTime = this.getMaxLitTime();
+                int maxLitTime = mixinEntity.getMaxLitTime();
                 if (maxLitTime > 0) {
-                    litTime++;
-                    if (litTime >= maxLitTime) {
-                        if (this.breaksWhenUnlitByTime()) {
-                            this.destroyCampfire();
+                    mixinEntity.litTime++;
+                    if (mixinEntity.litTime >= maxLitTime) {
+                        if (mixinEntity.breaksWhenUnlitByTime()) {
+                            mixinEntity.destroyCampfire();
                         } else {
-                            this.unlitCampfire();
+                            mixinEntity.unlitCampfire();
                         }
                         return; //fixes destroying while raining
                     }
                 }
-                if (world.isRainingAt(this.getBlockPos().above())) {
+                if (level.isRainingAt(pos.above())) {
                     //if rain should unlit a campfire and it is raining there
-                    int rainUnlitTime = this.getRainUnlitTime();
+                    int rainUnlitTime = mixinEntity.getRainUnlitTime();
                     if (rainUnlitTime >= 0) {
-                        rainTime++;
-                        if (rainTime >= rainUnlitTime) {
-                            rainTime = 0;
-                            this.unlitCampfire();
-                            return; //no particles needed
+                        mixinEntity.rainTime++;
+                        if (mixinEntity.rainTime >= rainUnlitTime) {
+                            mixinEntity.rainTime = 0;
+                            mixinEntity.unlitCampfire();
                         }
                     } else {
-                        rainTime = 0;
-                    }
-                    //during rain the campfire has more particles (if activated)
-                    int particleFactor = this.getParticleFactorDuringRain();
-                    if (this.level != null && this.level.isClientSide && particleFactor > 1) {
-                        TileEntity tileEntity = this.level.getBlockEntity(this.worldPosition);
-                        if (tileEntity instanceof CampfireTileEntity) {
-                            CampfireTileEntity campfireTileEntity = (CampfireTileEntity)tileEntity;
-                            for (int i = 0; i < particleFactor - 1; i++) {
-                                campfireTileEntity.makeParticles();
-                            }
-                        }
+                        mixinEntity.rainTime = 0;
                     }
                 }
             } else {
-                litTime = 0;
+                mixinEntity.litTime = 0;
+            }
+        }
+    }
+
+    @Inject(at = @At("RETURN"), method = "particleTick")
+    protected void particleTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
+        CampfireTileEntityMixin mixinEntity = (CampfireTileEntityMixin) (BlockEntity) blockEntity;
+        //during rain the campfire has more particles (if activated)
+        int particleFactor = mixinEntity.getParticleFactorDuringRain();
+        if (level != null && level.isClientSide && particleFactor > 1) {
+            for (int i = 0; i < particleFactor - 1; i++) {
+                CampfireBlock.makeParticles(level, pos, state.getValue(CampfireBlock.SIGNAL_FIRE), false);
             }
         }
     }
 
 
     @Inject(at = @At("RETURN"), method = "load")
-    protected void loadProxy(BlockState stateIn, CompoundNBT nbtIn, CallbackInfo info) {
+    protected void loadProxy(CompoundTag nbtIn, CallbackInfo info) {
         if (nbtIn.contains("CampfireLitTime")) {
             this.litTime = nbtIn.getInt("CampfireLitTime");
         }
     }
 
     @Inject(at = @At("RETURN"), method = "save", cancellable = true)
-    protected void saveProxy(CompoundNBT compound, CallbackInfoReturnable<CompoundNBT> cir) {
-        CompoundNBT nbt = cir.getReturnValue();
+    protected void saveProxy(CompoundTag compound, CallbackInfoReturnable<CompoundTag> cir) {
+        CompoundTag nbt = cir.getReturnValue();
         if (nbt != null) {
             nbt.putInt("CampfireLitTime", this.litTime);
             cir.setReturnValue(nbt);

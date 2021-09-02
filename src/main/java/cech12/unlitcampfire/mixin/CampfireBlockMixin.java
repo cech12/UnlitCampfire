@@ -1,13 +1,14 @@
 package cech12.unlitcampfire.mixin;
 
 import cech12.unlitcampfire.config.ServerConfig;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,19 +20,19 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 @Mixin(CampfireBlock.class)
-public abstract class CampfireBlockMixin extends ContainerBlock {
+public abstract class CampfireBlockMixin extends BaseEntityBlock {
 
     protected CampfireBlockMixin(Properties builder) {
         super(builder);
     }
 
     @Inject(at = @At("RETURN"), method = "<init>*")
-    protected void initProxy(CallbackInfo info) {
+    protected void initProxy(boolean spawnParticles, int fireDamage, BlockBehaviour.Properties properties, CallbackInfo info) {
         this.registerDefaultState(this.defaultBlockState().setValue(CampfireBlock.LIT, false));
     }
 
     @Inject(at = @At("RETURN"), method = "getStateForPlacement", cancellable = true)
-    protected void getStateForPlacementProxy(BlockItemUseContext context, CallbackInfoReturnable<BlockState> cir) {
+    protected void getStateForPlacementProxy(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir) {
         if (cir.getReturnValue() != null) {
             cir.setReturnValue(cir.getReturnValue().setValue(CampfireBlock.LIT, false));
             cir.cancel();
@@ -40,7 +41,7 @@ public abstract class CampfireBlockMixin extends ContainerBlock {
 
     //overrides animateTick method and has access to the original method
     @Intrinsic(displace = true)
-    public void id$animateTick(@Nonnull BlockState stateIn, World worldIn, BlockPos pos, @Nonnull Random rand) {
+    public void id$animateTick(@Nonnull BlockState stateIn, Level worldIn, BlockPos pos, @Nonnull Random rand) {
         int particleFactor = 1;
         if (worldIn.isRainingAt(pos.above())) {
             if (worldIn.getBlockState(pos).getBlock() == Blocks.SOUL_CAMPFIRE) {
