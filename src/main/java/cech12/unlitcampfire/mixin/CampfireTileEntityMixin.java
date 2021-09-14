@@ -105,7 +105,7 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
     }
 
     @Inject(at = @At("RETURN"), method = "cookTick")
-    protected void cookTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
+    private static void cookTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
         CampfireTileEntityMixin mixinEntity = (CampfireTileEntityMixin) (BlockEntity) blockEntity;
         if (level != null) {
             if (state.getValue(CampfireBlock.LIT)) {
@@ -142,11 +142,11 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
     }
 
     @Inject(at = @At("RETURN"), method = "particleTick")
-    protected void particleTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
+    private static void particleTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
         CampfireTileEntityMixin mixinEntity = (CampfireTileEntityMixin) (BlockEntity) blockEntity;
         //during rain the campfire has more particles (if activated)
         int particleFactor = mixinEntity.getParticleFactorDuringRain();
-        if (level != null && level.isClientSide && particleFactor > 1) {
+        if (level != null && level.isClientSide && particleFactor > 1 && level.isRainingAt(pos.above())) {
             for (int i = 0; i < particleFactor - 1; i++) {
                 CampfireBlock.makeParticles(level, pos, state.getValue(CampfireBlock.SIGNAL_FIRE), false);
             }

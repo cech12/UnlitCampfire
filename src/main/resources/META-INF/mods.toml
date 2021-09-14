@@ -15,7 +15,7 @@ license="The MIT License (MIT)"
 [[dependencies.unlitcampfire]]
     modId="forge"
     mandatory=true
-    versionRange="[37.0.46,)"
+    versionRange="[37.0.59,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.unlitcampfire]]
