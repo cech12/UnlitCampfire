@@ -161,13 +161,10 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "save", cancellable = true)
-    protected void saveProxy(CompoundTag compound, CallbackInfoReturnable<CompoundTag> cir) {
-        CompoundTag nbt = cir.getReturnValue();
-        if (nbt != null) {
-            nbt.putInt("CampfireLitTime", this.litTime);
-            cir.setReturnValue(nbt);
-            cir.cancel();
+    @Inject(at = @At("RETURN"), method = "saveAdditional")
+    protected void saveAdditionalProxy(CompoundTag compound, CallbackInfo info) {
+        if (compound != null) {
+            compound.putInt("CampfireLitTime", this.litTime);
         }
     }
 
