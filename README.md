@@ -10,6 +10,6 @@ Placing a lit campfire is a hot task. Do something good for your hands and insta
 
 This is a **Minecraft Forge** mod and sets the **default state of a campfire to unlit**.
 
-![Campfire Placing](https://raw.githubusercontent.com/cech12/UnlitCampfire/1.16/material/campfire_placing.gif)
+![Campfire Placing](material/campfire_placing.gif)
 
 This mod is configurable. All config options can be found in the wiki: https://github.com/cech12/UnlitCampfire/wiki
