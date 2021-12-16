@@ -15,12 +15,12 @@ license="The MIT License (MIT)"
 [[dependencies.unlitcampfire]]
     modId="forge"
     mandatory=true
-    versionRange="[31.2.44,)"
+    versionRange="[31.2.57,32)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.unlitcampfire]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2,)"
+    versionRange="[1.15.2,1.16)"
     ordering="NONE"
     side="BOTH"
