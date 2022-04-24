@@ -3,6 +3,7 @@
 name: CI/CD
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "*" ]
     tags: ["1.18*"]
