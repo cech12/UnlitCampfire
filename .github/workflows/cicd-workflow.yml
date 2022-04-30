@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [ "*" ]
-    tags: ["1.18*"]
+    tags: ["forge-1.18*"]
   pull_request:
     branches: [ "*" ]
 
@@ -40,5 +40,6 @@ jobs:
     uses: cech12/MinecraftModActions/.github/workflows/publish-curseforge.yml@main
     with:
       java-version: 17
+      tag-prefix: 'forge-'
     secrets:
       curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
