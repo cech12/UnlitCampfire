@@ -31,7 +31,7 @@ jobs:
       java-version: 17
       mod-name: Unlit Campfire
       mod-id: unlitcampfire
-      tag-prefix: 'forge-'
+      version-prefix: 'forge-'
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
   publish-curseforge:
