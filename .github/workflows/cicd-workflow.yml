@@ -31,6 +31,7 @@ jobs:
       java-version: 17
       mod-name: Unlit Campfire
       mod-id: unlitcampfire
+      tag-prefix: 'forge-'
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
   publish-curseforge:
@@ -40,6 +41,5 @@ jobs:
     uses: cech12/MinecraftModActions/.github/workflows/publish-curseforge.yml@main
     with:
       java-version: 17
-      tag-prefix: 'forge-'
     secrets:
       curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
