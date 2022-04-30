@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CampfireBlockEntity.class)
 public abstract class CampfireTileEntityMixin extends BlockEntity {
@@ -101,6 +100,7 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
                 this.dropAllContainingItems();
             }
             this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(CampfireBlock.LIT, false));
+            this.litTime = 0;
         }
     }
 
