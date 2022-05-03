@@ -1,6 +1,6 @@
 # Unlit Campfire
 
-[![Curseforge](http://cf.way2muchnoise.eu/full_422984_downloads(0D0D0D-F16436-fff-010101-fff).svg)](https://www.curseforge.com/minecraft/mc-mods/unlit-campfire)
+[![Curseforge](http://cf.way2muchnoise.eu/full_417553_downloads(0D0D0D-F16436-fff-010101-fff).svg)](https://www.curseforge.com/minecraft/mc-mods/unlit-campfire)
 [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_422984_all(0D0D0D-F16436-fff-010101).svg)](https://www.curseforge.com/minecraft/mc-mods/unlit-campfire/files)
 [![CI/CD](https://github.com/cech12/UnlitCampfire/actions/workflows/cicd-workflow.yml/badge.svg)](https://github.com/cech12/UnlitCampfire/actions/workflows/cicd-workflow.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/cech12/unlitcampfire/badge)](https://www.codefactor.io/repository/github/cech12/unlitcampfire)
