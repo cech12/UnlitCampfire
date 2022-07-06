@@ -1,6 +1,7 @@
 package cech12.unlitcampfire.mixin;
 
 import cech12.unlitcampfire.config.ServerConfig;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -17,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
 @Mixin(CampfireBlock.class)
 public abstract class CampfireBlockMixin extends BaseEntityBlock {
@@ -41,7 +41,7 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock {
 
     //overrides animateTick method and has access to the original method
     @Intrinsic(displace = true)
-    public void id$animateTick(@Nonnull BlockState stateIn, Level worldIn, BlockPos pos, @Nonnull Random rand) {
+    public void id$animateTick(@Nonnull BlockState stateIn, Level worldIn, BlockPos pos, @Nonnull RandomSource rand) {
         int particleFactor = 1;
         if (worldIn.isRainingAt(pos.above())) {
             if (worldIn.getBlockState(pos).getBlock() == Blocks.SOUL_CAMPFIRE) {

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [ "*" ]
-    tags: ["forge-1.18*"]
+    tags: ["forge-1.19*"]
   pull_request:
     branches: [ "*" ]
 
