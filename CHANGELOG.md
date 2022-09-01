@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.18.1-1.5.1.0] - 2022-09-01
+### Changed
+- max limit increased of following configurations: campfireLitTime, campfireRainUnlitTime, soulCampfireLitTime, soulCampfireRainUnlitTime #17 (thanks to serialtasted for the report)
+
 ## [1.18.1-1.5.0.0] - 2022-04-30
 ### Changed
 - Update mod to Forge 1.18.1-39.0.0 (fix Log4J security issue)
