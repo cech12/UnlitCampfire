@@ -1,6 +1,8 @@
 package cech12.unlitcampfire;
 
+import cech12.unlitcampfire.compat.TOPCompat;
 import cech12.unlitcampfire.config.ServerConfig;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -15,6 +17,11 @@ public class UnlitCampfireMod {
         //Config
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SERVER_CONFIG);
         ServerConfig.loadConfig(ServerConfig.SERVER_CONFIG, FMLPaths.GAMEDIR.get().resolve(FMLConfig.defaultConfigPath()).resolve(MOD_ID + "-server.toml"));
+
+        //The One Probe registration.
+        if (ModList.get().isLoaded("theoneprobe")) {
+            TOPCompat.register();
+        }
     }
 
 }

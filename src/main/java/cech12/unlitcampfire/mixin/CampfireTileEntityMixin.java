@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CampfireBlockEntity.class)
 public abstract class CampfireTileEntityMixin extends BlockEntity {
@@ -163,6 +164,14 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
 
     @Inject(at = @At("RETURN"), method = "saveAdditional")
     protected void saveAdditionalProxy(CompoundTag compound, CallbackInfo info) {
+        if (compound != null) {
+            compound.putInt("CampfireLitTime", this.litTime);
+        }
+    }
+
+    @Inject(at = @At("RETURN"), method = "getUpdateTag")
+    protected void getUpdateTagProxy(CallbackInfoReturnable<CompoundTag> info) {
+        CompoundTag compound = info.getReturnValue();
         if (compound != null) {
             compound.putInt("CampfireLitTime", this.litTime);
         }

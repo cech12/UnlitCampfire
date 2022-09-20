@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.19-1.6.2.0] - 2022-09-20
+### Added
+- The One Probe support - Show lit time of campfires
+
+### Changed
+- Updated mod to Forge 1.19-41.0.96
+
 ## [1.19-1.6.1.0] - 2022-09-01
 ### Changed
 - max limit increased of following configurations: campfireLitTime, campfireRainUnlitTime, soulCampfireLitTime, soulCampfireRainUnlitTime #17 (thanks to serialtasted for the report)

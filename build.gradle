@@ -157,6 +157,9 @@ repositories {
         //for mixin
         url = 'https://repo.spongepowered.org/maven'
     }
+    maven { // TOP
+        url "https://maven.k-4u.nl"
+    }
 }
 
 mixin {
@@ -171,6 +174,8 @@ dependencies {
 
     // Mixin annotation processor - generates the refmap
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
+
+    implementation fg.deobf("mcjty.theoneprobe:theoneprobe:$top_version") {transitive = false}
 }
 
 // This block of code expands all the gradle properties in the specified resource targets.
