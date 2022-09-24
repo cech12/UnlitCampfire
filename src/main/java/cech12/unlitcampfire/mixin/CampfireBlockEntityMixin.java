@@ -1,6 +1,7 @@
 package cech12.unlitcampfire.mixin;
 
 import cech12.unlitcampfire.config.ServerConfig;
+import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -17,14 +18,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CampfireBlockEntity.class)
-public abstract class CampfireTileEntityMixin extends BlockEntity {
+public abstract class CampfireBlockEntityMixin extends BlockEntity implements ICampfireBlockEntityMixin {
 
     private Boolean isSoulCampfire;
 
     private int litTime = 0;
     private int rainTime = 0;
 
-    public CampfireTileEntityMixin(BlockPos pos, BlockState state) {
+    public CampfireBlockEntityMixin(BlockPos pos, BlockState state) {
         super(BlockEntityType.CAMPFIRE, pos, state);
     }
 
@@ -105,9 +106,23 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
         }
     }
 
+    @Override
+    public int getLitTime() {
+        return this.litTime;
+    }
+
+    @Override
+    public boolean addLitTime(int litTimeToAdd) {
+        if (this.litTime <= 0) {
+            return false;
+        }
+        this.litTime = this.litTime - litTimeToAdd;
+        return true;
+    }
+
     @Inject(at = @At("RETURN"), method = "cookTick")
     private static void cookTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
-        CampfireTileEntityMixin mixinEntity = (CampfireTileEntityMixin) (BlockEntity) blockEntity;
+        CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
         if (level != null) {
             if (state.getValue(CampfireBlock.LIT)) {
                 //if lit time is active
@@ -144,7 +159,7 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
 
     @Inject(at = @At("RETURN"), method = "particleTick")
     private static void particleTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
-        CampfireTileEntityMixin mixinEntity = (CampfireTileEntityMixin) (BlockEntity) blockEntity;
+        CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
         //during rain the campfire has more particles (if activated)
         int particleFactor = mixinEntity.getParticleFactorDuringRain();
         if (level != null && level.isClientSide && particleFactor > 1 && level.isRainingAt(pos.above())) {

@@ -5,7 +5,7 @@
   "refmap": "unlitcampfire.refmap.json",
   "mixins": [
     "CampfireBlockMixin",
-    "CampfireTileEntityMixin"
+    "CampfireBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

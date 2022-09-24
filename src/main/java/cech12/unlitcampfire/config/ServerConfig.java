@@ -14,12 +14,14 @@ public class ServerConfig {
     public static final ForgeConfigSpec.IntValue CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
+    public static final ForgeConfigSpec.BooleanValue CAMPFIRE_ADDING_BURNABLES;
 
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_LIT_TIME;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_UNLIT_TIME;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
+    public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_ADDING_BURNABLES;
 
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -47,6 +49,10 @@ public class ServerConfig {
                 .comment("Whether a campfire should be destroyed when it goes out by itself.")
                 .define("campfireBreaksWhenUnlitByTime", false);
 
+        CAMPFIRE_ADDING_BURNABLES = builder
+                .comment("Whether the lit time of a campfire can be extended with combustible/burnable items.")
+                .define("campfireAddingBurnables", true);
+
         //soul campfire
         SOUL_CAMPFIRE_LIT_TIME = builder
                 .comment("The time (ticks) a soul campfire burns until it goes out by itself. (2000 ticks default; 0 means it burns forever)")
@@ -67,6 +73,10 @@ public class ServerConfig {
         SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME = builder
                 .comment("Whether a soul campfire should be destroyed when it goes out by itself.")
                 .define("soulCampfireBreaksWhenUnlitByTime", false);
+
+        SOUL_CAMPFIRE_ADDING_BURNABLES = builder
+                .comment("Whether the lit time of a soul campfire can be extended with combustible/burnable items.")
+                .define("soulCampfireAddingBurnables", true);
 
         builder.pop();
 
