@@ -15,6 +15,7 @@ public class ServerConfig {
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_ADDING_BURNABLES;
+    public static final ForgeConfigSpec.BooleanValue CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
 
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_LIT_TIME;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_UNLIT_TIME;
@@ -22,6 +23,7 @@ public class ServerConfig {
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_ADDING_BURNABLES;
+    public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
 
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -50,8 +52,12 @@ public class ServerConfig {
                 .define("campfireBreaksWhenUnlitByTime", false);
 
         CAMPFIRE_ADDING_BURNABLES = builder
-                .comment("Whether the lit time of a campfire can be extended with combustible/burnable items.")
+                .comment("Whether the lit time of a campfire could be extended with combustible/burnable items.")
                 .define("campfireAddingBurnables", true);
+
+        CAMPFIRE_AFFECTED_BY_SLEEP_TIME = builder
+                .comment("Whether the lit time of a campfire should be affected by the sleep time.")
+                .define("campfireAffectedBySleepTime", false);
 
         //soul campfire
         SOUL_CAMPFIRE_LIT_TIME = builder
@@ -75,8 +81,12 @@ public class ServerConfig {
                 .define("soulCampfireBreaksWhenUnlitByTime", false);
 
         SOUL_CAMPFIRE_ADDING_BURNABLES = builder
-                .comment("Whether the lit time of a soul campfire can be extended with combustible/burnable items.")
+                .comment("Whether the lit time of a soul campfire could be extended with combustible/burnable items.")
                 .define("soulCampfireAddingBurnables", true);
+
+        SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME = builder
+                .comment("Whether the lit time of a campfire should be affected by the sleep time.")
+                .define("soulCampfireAffectedBySleepTime", false);
 
         builder.pop();
 

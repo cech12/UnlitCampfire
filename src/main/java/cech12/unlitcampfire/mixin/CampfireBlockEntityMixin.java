@@ -1,5 +1,6 @@
 package cech12.unlitcampfire.mixin;
 
+import cech12.unlitcampfire.UnlitCampfireMod;
 import cech12.unlitcampfire.config.ServerConfig;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import net.minecraft.core.BlockPos;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -20,6 +22,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(CampfireBlockEntity.class)
 public abstract class CampfireBlockEntityMixin extends BlockEntity implements ICampfireBlockEntityMixin {
 
+    @Shadow protected abstract void markUpdated();
+
     private Boolean isSoulCampfire;
 
     private int litTime = 0;
@@ -27,9 +31,11 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
 
     public CampfireBlockEntityMixin(BlockPos pos, BlockState state) {
         super(BlockEntityType.CAMPFIRE, pos, state);
+        UnlitCampfireMod.addCampfire(this);
     }
 
-    private boolean isSoulCampfire() {
+    @Override
+    public boolean isSoulCampfire() {
         if (isSoulCampfire == null) {
             if (this.level != null) {
                 isSoulCampfire = this.level.getBlockState(this.worldPosition).getBlock() == Blocks.SOUL_CAMPFIRE;
@@ -113,10 +119,27 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
 
     @Override
     public boolean addLitTime(int litTimeToAdd) {
-        if (this.litTime <= 0) {
+        if (litTimeToAdd < 0) {
+            return removeLitTime(-litTimeToAdd);
+        }
+        if (this.litTime <= 0 || !this.getBlockState().getValue(CampfireBlock.LIT)) {
             return false;
         }
         this.litTime = this.litTime - litTimeToAdd;
+        this.markUpdated();
+        return true;
+    }
+
+    @Override
+    public boolean removeLitTime(int litTimeToRemove) {
+        if (litTimeToRemove < 0) {
+            return addLitTime(-litTimeToRemove);
+        }
+        if (this.litTime >= this.getMaxLitTime() || !this.getBlockState().getValue(CampfireBlock.LIT)) {
+            return false;
+        }
+        this.litTime = this.litTime + litTimeToRemove;
+        this.markUpdated();
         return true;
     }
 
@@ -182,6 +205,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
         if (compound != null) {
             compound.putInt("CampfireLitTime", this.litTime);
         }
+        UnlitCampfireMod.addCampfire(this); //remember server side block entities
     }
 
     @Inject(at = @At("RETURN"), method = "getUpdateTag")
