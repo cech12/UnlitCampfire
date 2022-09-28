@@ -160,6 +160,11 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                         }
                         return; //fixes destroying while raining
                     }
+                    //refresh client side once per second if burnables can be added to campfire
+                    if (mixinEntity.litTime % 20 == 1 && (mixinEntity.isSoulCampfire() ?
+                            ServerConfig.SOUL_CAMPFIRE_ADDING_BURNABLES.get() : ServerConfig.CAMPFIRE_ADDING_BURNABLES.get())) {
+                        mixinEntity.markUpdated();
+                    }
                 }
                 if (level.isRainingAt(pos.above())) {
                     //if rain should unlit a campfire and it is raining there
