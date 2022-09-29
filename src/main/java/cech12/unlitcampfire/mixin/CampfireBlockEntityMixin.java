@@ -3,6 +3,7 @@ package cech12.unlitcampfire.mixin;
 import cech12.unlitcampfire.UnlitCampfireMod;
 import cech12.unlitcampfire.config.ServerConfig;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
+import cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -47,10 +48,11 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     }
 
     private int getMaxLitTime() {
-        if (isSoulCampfire()) {
-            return ServerConfig.SOUL_CAMPFIRE_LIT_TIME.get();
-        }
-        return ServerConfig.CAMPFIRE_LIT_TIME.get();
+        return ((ICampfireBlockMixin) this.getBlockState().getBlock()).getMaxLitTime(this.getBlockState());
+    }
+
+    private boolean burnsInfinite() {
+        return ((ICampfireBlockMixin) this.getBlockState().getBlock()).burnsInfinite(this.getBlockState());
     }
 
     private boolean dropsItemsWhenUnlitByTimeOrRain() {
@@ -119,6 +121,9 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
 
     @Override
     public boolean addLitTime(int litTimeToAdd) {
+        if (this.burnsInfinite()) {
+            return false;
+        }
         if (litTimeToAdd < 0) {
             return removeLitTime(-litTimeToAdd);
         }
@@ -132,6 +137,9 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
 
     @Override
     public boolean removeLitTime(int litTimeToRemove) {
+        if (this.burnsInfinite()) {
+            return false;
+        }
         if (litTimeToRemove < 0) {
             return addLitTime(-litTimeToRemove);
         }
@@ -147,37 +155,31 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     private static void cookTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
         CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
         if (level != null) {
-            if (state.getValue(CampfireBlock.LIT)) {
-                //if lit time is active
-                int maxLitTime = mixinEntity.getMaxLitTime();
-                if (maxLitTime > 0) {
-                    mixinEntity.litTime++;
-                    if (mixinEntity.litTime >= maxLitTime) {
-                        if (mixinEntity.breaksWhenUnlitByTime()) {
-                            mixinEntity.destroyCampfire();
-                        } else {
-                            mixinEntity.unlitCampfire();
-                        }
-                        return; //fixes destroying while raining
-                    }
-                    //refresh client side once per second if burnables can be added to campfire
-                    if (mixinEntity.litTime % 20 == 1 && (mixinEntity.isSoulCampfire() ?
-                            ServerConfig.SOUL_CAMPFIRE_ADDING_BURNABLES.get() : ServerConfig.CAMPFIRE_ADDING_BURNABLES.get())) {
-                        mixinEntity.markUpdated();
-                    }
-                }
-                if (level.isRainingAt(pos.above())) {
-                    //if rain should unlit a campfire and it is raining there
-                    int rainUnlitTime = mixinEntity.getRainUnlitTime();
-                    if (rainUnlitTime >= 0) {
-                        mixinEntity.rainTime++;
-                        if (mixinEntity.rainTime >= rainUnlitTime) {
-                            mixinEntity.rainTime = 0;
-                            mixinEntity.unlitCampfire();
-                        }
+            if (state.getValue(CampfireBlock.LIT) && !mixinEntity.burnsInfinite()) {
+                mixinEntity.litTime++;
+                if (mixinEntity.litTime >= mixinEntity.getMaxLitTime()) {
+                    if (mixinEntity.breaksWhenUnlitByTime()) {
+                        mixinEntity.destroyCampfire();
                     } else {
-                        mixinEntity.rainTime = 0;
+                        mixinEntity.unlitCampfire();
                     }
+                    return; //fixes destroying while raining
+                }
+                //refresh client side once per second if burnables can be added to campfire
+                if (mixinEntity.litTime % 20 == 1 && (mixinEntity.isSoulCampfire() ?
+                        ServerConfig.SOUL_CAMPFIRE_ADDING_BURNABLES.get() : ServerConfig.CAMPFIRE_ADDING_BURNABLES.get())) {
+                    mixinEntity.markUpdated();
+                }
+                //if rain should unlit a campfire, and it is raining there
+                int rainUnlitTime = mixinEntity.getRainUnlitTime();
+                if (rainUnlitTime >= 0 && level.isRainingAt(pos.above())) {
+                    mixinEntity.rainTime++;
+                    if (mixinEntity.rainTime >= rainUnlitTime) {
+                        mixinEntity.rainTime = 0;
+                        mixinEntity.unlitCampfire();
+                    }
+                } else {
+                    mixinEntity.rainTime = 0;
                 }
             } else {
                 mixinEntity.litTime = 0;

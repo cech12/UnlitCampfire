@@ -1,8 +1,8 @@
 package cech12.unlitcampfire.compat;
 
 import cech12.unlitcampfire.UnlitCampfireMod;
-import cech12.unlitcampfire.config.ServerConfig;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
+import cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import mcjty.theoneprobe.api.CompoundText;
 import mcjty.theoneprobe.api.IIconStyle;
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -16,7 +16,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,22 +45,21 @@ public class TOPCompat {
                 @Override
                 public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, Player player, Level level, BlockState blockState, IProbeHitData iProbeHitData) {
                     BlockEntity blockEntity = level.getBlockEntity(iProbeHitData.getPos());
-                    if (!(blockEntity instanceof ICampfireBlockEntityMixin)) {
+                    if (!(blockEntity instanceof ICampfireBlockEntityMixin campfireBlockEntity) || !(blockState.getBlock() instanceof ICampfireBlockMixin campfireBlock)) {
                         return;
                     }
-                    int maxLitTime = (blockState.getBlock() == Blocks.SOUL_CAMPFIRE) ? ServerConfig.SOUL_CAMPFIRE_LIT_TIME.get() : ServerConfig.CAMPFIRE_LIT_TIME.get();
-                    if (maxLitTime <= 0) {
+                    if (campfireBlock.burnsInfinite(blockState)) {
                         return;
                     }
                     if (blockState.getValue(CampfireBlock.LIT)) {
-                        final int litTime = ((ICampfireBlockEntityMixin) blockEntity).getLitTime();
+                        final int litTime = campfireBlockEntity.getLitTime();
                         iProbeInfo.horizontal()
                                 .icon(FIRE_ICON, 0, (int) (level.getGameTime() % 8 * 16), FIRE_STYLE.getWidth(), FIRE_STYLE.getHeight(), FIRE_STYLE)
                                 .text(CompoundText.create()
                                         .label("unlitcampfire:lit")
                                         .text(": ")
                                         .style(TextStyleClass.INFO)
-                                        .text(Component.translatable("unlitcampfire:n_ticks", maxLitTime - litTime))
+                                        .text(Component.translatable("unlitcampfire:n_ticks", campfireBlock.getMaxLitTime(blockState) - litTime))
                                 );
                     }
                 }

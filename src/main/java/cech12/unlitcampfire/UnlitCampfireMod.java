@@ -3,6 +3,7 @@ package cech12.unlitcampfire;
 import cech12.unlitcampfire.compat.TOPCompat;
 import cech12.unlitcampfire.config.ServerConfig;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
+import cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -52,6 +53,7 @@ public class UnlitCampfireMod {
         CAMPFIRES.removeIf(BlockEntity::isRemoved);
         CAMPFIRES.stream()
                 .filter(campfire -> campfire.getBlockState().getValue(CampfireBlock.LIT))
+                .filter(campfire -> !campfire.getBlockState().getValue(ICampfireBlockMixin.INFINITE))
                 .filter(campfire -> campfire instanceof ICampfireBlockEntityMixin)
                 .map(campfire -> (ICampfireBlockEntityMixin) campfire)
                 .filter(campfire -> campfire.isSoulCampfire() ? ServerConfig.SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME.get() : ServerConfig.CAMPFIRE_AFFECTED_BY_SLEEP_TIME.get())

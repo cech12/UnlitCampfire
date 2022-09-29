@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 - Combustible/Burnable items can be added to (soul) campfire to extend the burning time (configurable) (thanks to elexblue84 for the idea) #6
 - Option to make the lit time of (soul) campfires be affected by sleep time (default deactivated) (thanks to Toast-Bucket for the idea) #16
+- Added item tag "unlitcampfire:makes_campfire_infinite", which defines items that can make lit campfires burn infinite (default: magma cream)
+
+### Fixed
+- rain timer reset was not reliable
 
 ## [1.19-1.6.2.0] - 2022-09-20
 ### Added
