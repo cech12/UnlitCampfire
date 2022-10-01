@@ -49,17 +49,16 @@ public class TOPCompat {
                         return;
                     }
                     if (campfireBlock.burnsInfinite(blockState)) {
-                        return;
-                    }
-                    if (blockState.getValue(CampfireBlock.LIT)) {
+                        iProbeInfo.horizontal().text(CompoundText.create().label("top.unlitcampfire.infinite"));
+                    } else if (blockState.getValue(CampfireBlock.LIT)) {
                         final int litTime = campfireBlockEntity.getLitTime();
                         iProbeInfo.horizontal()
                                 .icon(FIRE_ICON, 0, (int) (level.getGameTime() % 8 * 16), FIRE_STYLE.getWidth(), FIRE_STYLE.getHeight(), FIRE_STYLE)
                                 .text(CompoundText.create()
-                                        .label("unlitcampfire:lit")
+                                        .label("top.unlitcampfire.lit")
                                         .text(": ")
                                         .style(TextStyleClass.INFO)
-                                        .text(Component.translatable("unlitcampfire:n_ticks", campfireBlock.getMaxLitTime(blockState) - litTime))
+                                        .text(Component.translatable("top.unlitcampfire.n_ticks", campfireBlock.getMaxLitTime(blockState) - litTime))
                                 );
                     }
                 }

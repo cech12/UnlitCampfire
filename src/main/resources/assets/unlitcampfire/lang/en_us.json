@@ -1,4 +1,5 @@
 {
-  "unlitcampfire:n_ticks": "%d ticks",
-  "unlitcampfire:lit": "Lit"
+  "top.unlitcampfire.infinite": "Infinite",
+  "top.unlitcampfire.lit": "Lit",
+  "top.unlitcampfire.n_ticks": "%d ticks"
 }

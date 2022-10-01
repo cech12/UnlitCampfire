@@ -3,11 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
-## [1.19-1.7.0.0] - 2022-??-??
+## [1.19-1.7.0.0] - 2022-10-01
 ### Added
 - Combustible/Burnable items can be added to (soul) campfire to extend the burning time (configurable) (thanks to elexblue84 for the idea) #6
-- Option to make the lit time of (soul) campfires be affected by sleep time (default deactivated) (thanks to Toast-Bucket for the idea) #16
-- Added item tag "unlitcampfire:makes_campfire_infinite", which defines items that can make lit campfires burn infinite (default: magma cream)
+- Option to make the lit time of (soul) campfires be affected by sleep time (default: deactivated) (thanks to Toast-Bucket for the idea) #16
+- Item tag "unlitcampfire:makes_campfire_infinite", which defines items that can make lit campfires burn infinitely (default: magma cream)
+- Option to let generated (soul) campfires burn infinitely (default: true) (thanks to Legomastar for the idea) #12
 
 ### Fixed
 - rain timer reset was not reliable
