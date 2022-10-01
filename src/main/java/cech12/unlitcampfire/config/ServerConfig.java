@@ -124,7 +124,7 @@ public class ServerConfig {
                 .setValue(ICampfireBlockMixin.INFINITE, litInfinitely));
     }
 
-    private static void loadConfig(ModConfigEvent configEvent) {
+    private static void loadChangedConfigData(ModConfigEvent configEvent) {
         if (!configEvent.getConfig().getModId().equals(UnlitCampfireMod.MOD_ID)) {
             return;
         }
@@ -136,12 +136,12 @@ public class ServerConfig {
 
     @SubscribeEvent
     public static void onLoad(final ModConfigEvent.Loading configEvent) {
-        loadConfig(configEvent);
+        loadChangedConfigData(configEvent);
     }
 
     @SubscribeEvent
     public static void onChange(final ModConfigEvent.Reloading configEvent) {
-        loadConfig(configEvent);
+        loadChangedConfigData(configEvent);
     }
 
 }
