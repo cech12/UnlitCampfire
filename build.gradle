@@ -81,9 +81,6 @@ minecraft {
             // Add mixin config to runtime
             args '-mixin.config=' + project.getProperty('mod_id') + '.mixins.json'
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
             mods {
                 "${mod_id}" {
                     source sourceSets.main
@@ -156,7 +153,13 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' } //TODO this should not be needed
+    maven {
+        //for mixin
+        url = 'https://repo.spongepowered.org/maven'
+    }
+    maven { // TOP
+        url "https://maven.k-4u.nl"
+    }
 }
 
 mixin {
@@ -171,7 +174,8 @@ dependencies {
 
     // Mixin annotation processor - generates the refmap
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
-    implementation "org.spongepowered:mixin:${mixin_version}" //TODO this should not be needed
+
+    implementation fg.deobf("mcjty.theoneprobe:theoneprobe:$top_version") {transitive = false}
 }
 
 // This block of code expands all the gradle properties in the specified resource targets.

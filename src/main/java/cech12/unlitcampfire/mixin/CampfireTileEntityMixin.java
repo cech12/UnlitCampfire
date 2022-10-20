@@ -1,6 +1,9 @@
 package cech12.unlitcampfire.mixin;
 
+import cech12.unlitcampfire.UnlitCampfireMod;
 import cech12.unlitcampfire.config.ServerConfig;
+import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
+import cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -11,12 +14,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CampfireBlockEntity.class)
-public abstract class CampfireTileEntityMixin extends BlockEntity {
+public abstract class CampfireTileEntityMixin extends BlockEntity implements ICampfireBlockEntityMixin {
+
+    @Shadow protected abstract void markUpdated();
 
     private Boolean isSoulCampfire;
 
@@ -25,9 +32,11 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
 
     public CampfireTileEntityMixin(BlockPos pos, BlockState state) {
         super(BlockEntityType.CAMPFIRE, pos, state);
+        UnlitCampfireMod.addCampfire(this);
     }
 
-    private boolean isSoulCampfire() {
+    @Override
+    public boolean isSoulCampfire() {
         if (isSoulCampfire == null) {
             if (this.level != null) {
                 isSoulCampfire = this.level.getBlockState(this.worldPosition).getBlock() == Blocks.SOUL_CAMPFIRE;
@@ -39,10 +48,11 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
     }
 
     private int getMaxLitTime() {
-        if (isSoulCampfire()) {
-            return ServerConfig.SOUL_CAMPFIRE_LIT_TIME.get();
-        }
-        return ServerConfig.CAMPFIRE_LIT_TIME.get();
+        return ((ICampfireBlockMixin) this.getBlockState().getBlock()).getMaxLitTime(this.getBlockState());
+    }
+
+    private boolean burnsInfinite() {
+        return ((ICampfireBlockMixin) this.getBlockState().getBlock()).burnsInfinite(this.getBlockState());
     }
 
     private boolean dropsItemsWhenUnlitByTimeOrRain() {
@@ -104,36 +114,72 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
         }
     }
 
+    @Override
+    public int getLitTime() {
+        return this.litTime;
+    }
+
+    @Override
+    public boolean addLitTime(int litTimeToAdd) {
+        if (this.burnsInfinite()) {
+            return false;
+        }
+        if (litTimeToAdd < 0) {
+            return removeLitTime(-litTimeToAdd);
+        }
+        if (this.litTime <= 0 || !this.getBlockState().getValue(CampfireBlock.LIT)) {
+            return false;
+        }
+        this.litTime = this.litTime - litTimeToAdd;
+        this.markUpdated();
+        return true;
+    }
+
+    @Override
+    public boolean removeLitTime(int litTimeToRemove) {
+        if (this.burnsInfinite()) {
+            return false;
+        }
+        if (litTimeToRemove < 0) {
+            return addLitTime(-litTimeToRemove);
+        }
+        if (this.litTime >= this.getMaxLitTime() || !this.getBlockState().getValue(CampfireBlock.LIT)) {
+            return false;
+        }
+        this.litTime = this.litTime + litTimeToRemove;
+        this.markUpdated();
+        return true;
+    }
+
     @Inject(at = @At("RETURN"), method = "cookTick")
     private static void cookTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
         CampfireTileEntityMixin mixinEntity = (CampfireTileEntityMixin) (BlockEntity) blockEntity;
         if (level != null) {
-            if (state.getValue(CampfireBlock.LIT)) {
-                //if lit time is active
-                int maxLitTime = mixinEntity.getMaxLitTime();
-                if (maxLitTime > 0) {
-                    mixinEntity.litTime++;
-                    if (mixinEntity.litTime >= maxLitTime) {
-                        if (mixinEntity.breaksWhenUnlitByTime()) {
-                            mixinEntity.destroyCampfire();
-                        } else {
-                            mixinEntity.unlitCampfire();
-                        }
-                        return; //fixes destroying while raining
-                    }
-                }
-                if (level.isRainingAt(pos.above())) {
-                    //if rain should unlit a campfire and it is raining there
-                    int rainUnlitTime = mixinEntity.getRainUnlitTime();
-                    if (rainUnlitTime >= 0) {
-                        mixinEntity.rainTime++;
-                        if (mixinEntity.rainTime >= rainUnlitTime) {
-                            mixinEntity.rainTime = 0;
-                            mixinEntity.unlitCampfire();
-                        }
+            if (state.getValue(CampfireBlock.LIT) && !mixinEntity.burnsInfinite()) {
+                mixinEntity.litTime++;
+                if (mixinEntity.litTime >= mixinEntity.getMaxLitTime()) {
+                    if (mixinEntity.breaksWhenUnlitByTime()) {
+                        mixinEntity.destroyCampfire();
                     } else {
-                        mixinEntity.rainTime = 0;
+                        mixinEntity.unlitCampfire();
                     }
+                    return; //fixes destroying while raining
+                }
+                //refresh client side once per second if burnables can be added to campfire
+                if (mixinEntity.litTime % 20 == 1 && (mixinEntity.isSoulCampfire() ?
+                        ServerConfig.SOUL_CAMPFIRE_ADDING_BURNABLES.get() : ServerConfig.CAMPFIRE_ADDING_BURNABLES.get())) {
+                    mixinEntity.markUpdated();
+                }
+                //if rain should unlit a campfire, and it is raining there
+                int rainUnlitTime = mixinEntity.getRainUnlitTime();
+                if (rainUnlitTime >= 0 && level.isRainingAt(pos.above())) {
+                    mixinEntity.rainTime++;
+                    if (mixinEntity.rainTime >= rainUnlitTime) {
+                        mixinEntity.rainTime = 0;
+                        mixinEntity.unlitCampfire();
+                    }
+                } else {
+                    mixinEntity.rainTime = 0;
                 }
             } else {
                 mixinEntity.litTime = 0;
@@ -163,6 +209,15 @@ public abstract class CampfireTileEntityMixin extends BlockEntity {
 
     @Inject(at = @At("RETURN"), method = "saveAdditional")
     protected void saveAdditionalProxy(CompoundTag compound, CallbackInfo info) {
+        if (compound != null) {
+            compound.putInt("CampfireLitTime", this.litTime);
+        }
+        UnlitCampfireMod.addCampfire(this); //remember server side block entities
+    }
+
+    @Inject(at = @At("RETURN"), method = "getUpdateTag")
+    protected void getUpdateTagProxy(CallbackInfoReturnable<CompoundTag> info) {
+        CompoundTag compound = info.getReturnValue();
         if (compound != null) {
             compound.putInt("CampfireLitTime", this.litTime);
         }

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[39,)"
+loaderVersion="[40,)"
 issueTrackerURL="https://github.com/cech12/UnlitCampfire/issues"
 license="The MIT License (MIT)"
 [[mods]]
@@ -15,12 +15,18 @@ license="The MIT License (MIT)"
 [[dependencies.unlitcampfire]]
     modId="forge"
     mandatory=true
-    versionRange="[39.0.0,)"
+    versionRange="[40.1.0,41)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.unlitcampfire]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,)"
+    versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.unlitcampfire]]
+   modId="theoneprobe"
+   mandatory=false
+   versionRange="[1.18-5.1.2,)"
+   ordering="NONE"
+   side="BOTH"
