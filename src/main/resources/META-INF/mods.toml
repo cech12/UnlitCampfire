@@ -28,5 +28,6 @@ license="The MIT License (MIT)"
    modId="theoneprobe"
    mandatory=false
    versionRange="[1.19-6.2.0,)"
+   referralUrl="https://www.curseforge.com/minecraft/mc-mods/the-one-probe"
    ordering="NONE"
    side="BOTH"
