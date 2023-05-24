@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.19-1.7.1.0] - 2023-05-24
+### Added
+- Added support for Jade mod (thanks to hipsterjazzbo for your PR) #22
+
+### Changed
+- Overhauled The One Probe support 
+
+### Removed
+- pt_br and pt_pt translation because all texts were changed (new translations are welcome)
+
 ## [1.19-1.7.0.1] - 2023-02-05
 ### Added
 - Added pt_br and pt_pt translation #21 (thanks to sanduicheirainox)
