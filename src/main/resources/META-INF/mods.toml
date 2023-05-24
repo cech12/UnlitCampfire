@@ -31,3 +31,10 @@ license="The MIT License (MIT)"
    referralUrl="https://www.curseforge.com/minecraft/mc-mods/the-one-probe"
    ordering="NONE"
    side="BOTH"
+[[dependencies.unlitcampfire]]
+   modId="jade"
+   mandatory=false
+   versionRange="[7.7.1,)"
+   referralUrl="https://www.curseforge.com/minecraft/mc-mods/jade"
+   ordering="NONE"
+   side="BOTH"
