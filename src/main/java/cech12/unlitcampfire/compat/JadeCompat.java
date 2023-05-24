@@ -12,7 +12,14 @@ import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import snownee.jade.api.*;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.IBlockComponentProvider;
+import snownee.jade.api.IServerDataProvider;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.IWailaClientRegistration;
+import snownee.jade.api.IWailaCommonRegistration;
+import snownee.jade.api.IWailaPlugin;
+import snownee.jade.api.WailaPlugin;
 import snownee.jade.api.config.IPluginConfig;
 
 @WailaPlugin()
@@ -32,9 +39,9 @@ public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServe
         CompoundTag serverData = accessor.getServerData();
 
         if (serverData.getBoolean("BurnsInfinite")) {
-            tooltip.add(Component.translatable("jade.unlitcampfire.infinite"));
+            tooltip.add(Component.translatable("hud.unlitcampfire.infinite"));
         } else if (serverData.contains("LitTime")) {
-            tooltip.add(Component.translatable("jade.unlitcampfire.n_seconds", getSecondsLeft(serverData)));
+            tooltip.add(Component.translatable("hud.unlitcampfire.n_seconds", getSecondsLeft(serverData)));
         }
     }
 

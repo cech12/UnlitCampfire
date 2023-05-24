@@ -1,8 +1,0 @@
-{
-  "top.unlitcampfire.infinite": "Infinito",
-  "top.unlitcampfire.lit": "Acesa",
-  "top.unlitcampfire.n_ticks": "%d ticks",
-  "config.jade.plugin_unlitcampfire.campfireinfo": "Show remaining burn time",
-  "jade.unlitcampfire.n_seconds": "Burn time: %ds",
-  "jade.unlitcampfire.infinite": "Burns forever"
-}
