@@ -45,6 +45,7 @@ jobs:
       game-versions: |
         1.18.2
       release-type: release
+      version-prefix: 'forge-'
     secrets:
       curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
   publish-modrinth:
@@ -58,6 +59,7 @@ jobs:
       game-versions: |
         1.18.2
       release-type: release
+      version-prefix: 'forge-'
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
       modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
