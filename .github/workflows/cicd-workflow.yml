@@ -47,6 +47,7 @@ jobs:
       release-type: release
       version-prefix: 'forge-'
     secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
       curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
   publish-modrinth:
     needs: publish-github
