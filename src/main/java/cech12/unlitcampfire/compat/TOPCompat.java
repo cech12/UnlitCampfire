@@ -1,5 +1,5 @@
 package cech12.unlitcampfire.compat;
-
+/*
 import cech12.unlitcampfire.UnlitCampfireMod;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
@@ -56,3 +56,4 @@ public class TOPCompat {
         }
     }
 }
+ */

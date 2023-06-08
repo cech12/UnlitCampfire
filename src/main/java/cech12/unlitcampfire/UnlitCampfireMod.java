@@ -1,6 +1,5 @@
 package cech12.unlitcampfire;
 
-import cech12.unlitcampfire.compat.TOPCompat;
 import cech12.unlitcampfire.config.ServerConfig;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
@@ -33,9 +32,9 @@ public class UnlitCampfireMod {
         ServerConfig.loadConfig(ServerConfig.SERVER_CONFIG, FMLPaths.GAMEDIR.get().resolve(FMLConfig.defaultConfigPath()).resolve(MOD_ID + "-server.toml"));
 
         //The One Probe registration.
-        if (ModList.get().isLoaded("theoneprobe")) {
-            TOPCompat.register();
-        }
+        //if (ModList.get().isLoaded("theoneprobe")) {
+            //TOPCompat.register();
+        //}
     }
 
     public static void addCampfire(BlockEntity blockEntity) {
