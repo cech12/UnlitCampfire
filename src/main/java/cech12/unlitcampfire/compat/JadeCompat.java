@@ -1,15 +1,12 @@
 package cech12.unlitcampfire.compat;
-/*
+
 import cech12.unlitcampfire.UnlitCampfireMod;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import snownee.jade.api.BlockAccessor;
@@ -23,7 +20,7 @@ import snownee.jade.api.WailaPlugin;
 import snownee.jade.api.config.IPluginConfig;
 
 @WailaPlugin()
-public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     @Override
     public void register(IWailaCommonRegistration registration) {
         registration.registerBlockDataProvider(this, CampfireBlockEntity.class);
@@ -50,10 +47,10 @@ public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServe
     }
 
     @Override
-    public void appendServerData(CompoundTag data, ServerPlayer player, Level world, BlockEntity blockEntity, boolean showDetails) {
-        BlockState blockState = blockEntity.getBlockState();
+    public void appendServerData(CompoundTag data, BlockAccessor blockAccessor) {
+        BlockState blockState = blockAccessor.getBlockState();
 
-        if (blockEntity instanceof ICampfireBlockEntityMixin campfireBlockEntity && blockState.getBlock() instanceof ICampfireBlockMixin campfireBlock) {
+        if (blockAccessor.getBlockEntity() instanceof ICampfireBlockEntityMixin campfireBlockEntity && blockState.getBlock() instanceof ICampfireBlockMixin campfireBlock) {
             data.putBoolean("BurnsInfinite", campfireBlock.burnsInfinite(blockState));
             data.putInt("MaxLitTime", campfireBlock.getMaxLitTime(blockState));
 
@@ -68,4 +65,3 @@ public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServe
         return new ResourceLocation(UnlitCampfireMod.MOD_ID, "campfireinfo");
     }
 }
- */

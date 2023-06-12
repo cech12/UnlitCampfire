@@ -177,10 +177,10 @@ dependencies {
     // Mixin annotation processor - generates the refmap
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
-    //implementation fg.deobf("mcjty.theoneprobe:theoneprobe:${top_version}") {transitive = false}
+    implementation fg.deobf("mcjty.theoneprobe:theoneprobe:${top_version}") {transitive = false}
 
-    //compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
-    //runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+    compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
 }
 
 // This block of code expands all the gradle properties in the specified resource targets.

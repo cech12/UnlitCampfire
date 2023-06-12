@@ -27,14 +27,14 @@ license="The MIT License (MIT)"
 [[dependencies.unlitcampfire]]
    modId="theoneprobe"
    mandatory=false
-   versionRange="[1.19-6.2.0,)"
+   versionRange="[1.20.0-9.0.0,)"
    referralUrl="https://www.curseforge.com/minecraft/mc-mods/the-one-probe"
    ordering="NONE"
    side="BOTH"
 [[dependencies.unlitcampfire]]
    modId="jade"
    mandatory=false
-   versionRange="[7.7.1,)"
+   versionRange="[11.0.3,)"
    referralUrl="https://www.curseforge.com/minecraft/mc-mods/jade"
    ordering="NONE"
    side="BOTH"

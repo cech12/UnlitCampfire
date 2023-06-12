@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.20-1.8.1.0] - 2023-06-12
+### Changed
+- re-add Jade (1.20-11.0.3) support #24
+- re-add The One Probe (1.20.0-9.0.0) support #24
+
 ## [1.20-1.8.0.0] - 2023-06-08
 ### Changed
 - Updated mod to Forge 1.20-46.0.1 #23
