@@ -1,6 +1,8 @@
 {
    "pack": {
-      "pack_format": 13,
-      "description": "Removes the fire of the campfire icons."
+      "pack_format": 15,
+      "description": {
+         "text": "Removes the fire of the campfire icons."
+      }
    }
 }
