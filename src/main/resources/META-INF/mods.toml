@@ -1,40 +1,37 @@
 modLoader="javafml"
-loaderVersion="[46,)"
-issueTrackerURL="https://github.com/cech12/UnlitCampfire/issues"
-license="The MIT License (MIT)"
+loaderVersion="${loader_version_range}"
+issueTrackerURL="${mod_issue_tracker}"
+license="${mod_license}"
 [[mods]]
-    modId="unlitcampfire"
-    version="${file.jarVersion}"
-    displayName="Unlit Campfire"
-    displayURL="https://github.com/cech12/UnlitCampfire"
-    logoFile="logo.png"
-    authors="Cech12"
-    description='''
-    A mod were placed Campfires are unlit.
-    '''
-[[dependencies.unlitcampfire]]
+    modId="${mod_id}"
+    version="${minecraft_version}-${mod_version}"
+    displayName="${mod_name}"
+    displayURL="${mod_url}"
+    authors="${mod_authors}"
+    description='''${mod_description}'''
+[[dependencies.${mod_id}]]
     modId="forge"
     mandatory=true
-    versionRange="[46.0.1,)"
+    versionRange="${forge_version_range}"
     ordering="NONE"
     side="BOTH"
-[[dependencies.unlitcampfire]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20,)"
+    versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
-[[dependencies.unlitcampfire]]
+[[dependencies.${mod_id}]]
    modId="theoneprobe"
    mandatory=false
-   versionRange="[1.20.0-9.0.0,)"
+   versionRange="${top_version_range}"
    referralUrl="https://www.curseforge.com/minecraft/mc-mods/the-one-probe"
    ordering="NONE"
    side="BOTH"
-[[dependencies.unlitcampfire]]
+[[dependencies.${mod_id}]]
    modId="jade"
    mandatory=false
-   versionRange="[11.0.3,)"
+   versionRange="${jade_version_range}"
    referralUrl="https://www.curseforge.com/minecraft/mc-mods/jade"
    ordering="NONE"
    side="BOTH"
