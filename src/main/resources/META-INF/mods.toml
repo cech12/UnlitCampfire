@@ -7,6 +7,7 @@ license="${mod_license}"
     version="${minecraft_version}-${mod_version}"
     displayName="${mod_name}"
     displayURL="${mod_url}"
+    logoFile="logo.png"
     authors="${mod_authors}"
     description='''${mod_description}'''
 [[dependencies.${mod_id}]]
