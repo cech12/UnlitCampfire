@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.20.1-1.9.0.0] - 2023-08-09
+### Changed
+- changed Forge to NeoForge 1.20.1-47.1.54 (compatible with Forge 47.1.0)
+- updated compat with Jade to 1.20.1-11.4.3
+- updated compat with The One Probe to 1.20.1-10.0.1
+
 ## [1.20-1.8.1.0] - 2023-06-12
 ### Changed
 - re-add Jade (1.20-11.0.3) support #24
