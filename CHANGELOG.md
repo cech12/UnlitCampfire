@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.19.4-1.7.2.0] - 2023-08-19
+### Changed
+- updated mod to Forge 1.19.4-45.1.0
+- updated compat with The One Probe to 1.19.4-8.0.0
+- updated compat with Jade to 1.19.4-10.3.0
+
+### Fixed
+- fixed crash when adding burnables to campfire since 1.19.3 (thanks to Izre for the report) #25
+
 ## [1.19-1.7.1.0] - 2023-05-24
 ### Added
 - Added support for Jade mod (thanks to hipsterjazzbo for your PR) #22
