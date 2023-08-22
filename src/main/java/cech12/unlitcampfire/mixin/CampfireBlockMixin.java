@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -89,6 +90,10 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
         } else {
             //when configuration forbids to extend the burn time
             if (!this.canAddBurnables(state)) {
+                return;
+            }
+            //when shovel item is used, do nothing, to avoid using (wooden) shovel as burning material (issue #27)
+            if (stack.getItem() instanceof ShovelItem) {
                 return;
             }
             //when interaction item has no burn time, do nothing

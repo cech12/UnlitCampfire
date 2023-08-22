@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.19.4-1.7.2.1] - 2023-08-22
+### Fixed
+- wooden shovel was used as burnable instead of extinguishing the campfire (thanks to brass_mccrafty for the report) #27
+- resetting the burn and rain timer was incorrect when campfire was extinguished by shovel, water bucket or water splash potion
+
 ## [1.19.4-1.7.2.0] - 2023-08-19
 ### Changed
 - updated mod to Forge 1.19.4-45.1.0

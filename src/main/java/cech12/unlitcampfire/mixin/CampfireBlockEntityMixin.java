@@ -25,6 +25,8 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
 
     @Shadow protected abstract void markUpdated();
 
+    @Shadow public abstract void dowse();
+
     private Boolean isSoulCampfire;
 
     private int litTime = 0;
@@ -108,9 +110,10 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
             this.playUnlitSound();
             if (this.dropsItemsWhenUnlitByTimeOrRain()) {
                 this.dropAllContainingItems();
+            } else {
+                this.dowse();
             }
             this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(CampfireBlock.LIT, false));
-            this.litTime = 0;
         }
     }
 
@@ -175,7 +178,6 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                 if (rainUnlitTime >= 0 && level.isRainingAt(pos.above())) {
                     mixinEntity.rainTime++;
                     if (mixinEntity.rainTime >= rainUnlitTime) {
-                        mixinEntity.rainTime = 0;
                         mixinEntity.unlitCampfire();
                     }
                 } else {
@@ -221,6 +223,14 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
         if (compound != null) {
             compound.putInt("CampfireLitTime", this.litTime);
         }
+    }
+
+    @Inject(at = @At("RETURN"), method = "dowse")
+    protected void dowseProxy(CallbackInfo info) {
+        //is called by multiple sources such as shovel, water potion, water bucket extinguishing
+        this.litTime = 0;
+        this.rainTime = 0;
+        this.markUpdated();
     }
 
 }
