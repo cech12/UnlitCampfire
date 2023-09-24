@@ -44,6 +44,7 @@ jobs:
       curseforge-id: 417553
       game-versions: |
         1.20.1
+        1.20.2
       release-type: release
       loaders: |
         neoforge
@@ -62,6 +63,7 @@ jobs:
       modrinth-id: yENm0xnb
       game-versions: |
         1.20.1
+        1.20.2
       release-type: release
       loaders: |
         neoforge
