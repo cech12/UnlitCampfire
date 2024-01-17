@@ -3,10 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.20.4-2.1.0.0] - 2024-01-17
+### Changed
+- Update to Minecraft 1.20.4 (Forge 49.0.19, Neoforge 20.4.69-beta)
+- updated compat with Jade to 1.20.4-13.2.1+
+
 ## [1.20.2-2.0.0.0] - 2024-01-17
 ### Changed
 - Move to Multiloader mod template to support Forge and Neoforge
 - Update to Minecraft 1.20.2 (Forge 48.1.0, Neoforge 20.2.86)
+- updated compat with Jade to 1.20.2-12.3.0+
 - temporary deactivate The One Probe support until the mod is ported to 1.20.2
 
 ## [1.20.1-1.9.0.1] - 2023-08-22
