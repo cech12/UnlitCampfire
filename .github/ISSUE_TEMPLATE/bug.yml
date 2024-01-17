@@ -20,15 +20,16 @@ body:
       label: Mod Loader
       description: What mod loader were you using?
       options:
-        - Forge
         - Fabric
+        - Forge
+        - NeoForge
     validations:
       required: true
   - type: input
     id: modLoaderVersion
     attributes:
       label: Mod Loader Version
-      description: What version of Forge / Fabric were you using?
+      description: What mod loader version were you using?
   - type: input
     id: modVersion
     attributes:
