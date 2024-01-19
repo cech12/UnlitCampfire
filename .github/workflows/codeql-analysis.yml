@@ -8,6 +8,6 @@ on:
 jobs:
   analyze:
     name: Analyze
-    uses: de.cech12/MinecraftModActions/.github/workflows/codeql-analysis.yml@main
+    uses: cech12/MinecraftModActions/.github/workflows/codeql-analysis.yml@main
     with:
       java-version: 17

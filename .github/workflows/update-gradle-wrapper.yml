@@ -8,7 +8,7 @@ on:
 jobs:
   analyze:
     name: Update Gradle Wrapper
-    uses: de.cech12/MinecraftModActions/.github/workflows/update-gradle-wrapper.yml@main
+    uses: cech12/MinecraftModActions/.github/workflows/update-gradle-wrapper.yml@main
     with:
       java-version: 17
     secrets:
