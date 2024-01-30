@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.20.1-1.9.0.2] - 2024-01-30
+### Fixed
+- Naturally generated campfires could crash the game #31 (thanks to hanweiyyds for the report)
+
 ## [1.20.1-1.9.0.1] - 2023-08-22
 ### Fixed
 - wooden shovel was used as burnable instead of extinguishing the campfire (thanks to brass_mccrafty for the report) #27

@@ -48,6 +48,7 @@ jobs:
       loaders: |
         neoforge
         forge
+      title-prefix: 'forge-'
       version-prefix: 'forge-'
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -66,6 +67,7 @@ jobs:
       loaders: |
         neoforge
         forge
+      title-prefix: 'forge-'
       version-prefix: 'forge-'
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}

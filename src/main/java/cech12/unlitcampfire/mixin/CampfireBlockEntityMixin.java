@@ -230,7 +230,9 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
         //is called by multiple sources such as shovel, water potion, water bucket extinguishing
         this.litTime = 0;
         this.rainTime = 0;
-        this.markUpdated();
+        if (this.level != null) {
+            this.markUpdated();
+        }
     }
 
 }
