@@ -45,6 +45,7 @@ jobs:
       game-versions: |
         1.19.4
       release-type: release
+      title-prefix: 'forge-'
       version-prefix: 'forge-'
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -60,6 +61,7 @@ jobs:
       game-versions: |
         1.19.4
       release-type: release
+      title-prefix: 'forge-'
       version-prefix: 'forge-'
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
