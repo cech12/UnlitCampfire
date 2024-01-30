@@ -30,6 +30,8 @@ body:
     attributes:
       label: Mod Loader Version
       description: What mod loader version were you using?
+    validations:
+      required: true
   - type: input
     id: modVersion
     attributes:
