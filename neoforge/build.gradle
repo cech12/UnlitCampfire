@@ -35,12 +35,20 @@ runs {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+repositories {
+    maven { // TOP
+        url "https://maven.k-4u.nl"
+    }
+}
+
 dependencies {
     implementation "net.neoforged:neoforge:${neoforge_version}"
     compileOnly project(":common")
 
     compileOnly "curse.maven:jade-api-324717:${jade_neoforge_api_id}"
     runtimeOnly "curse.maven:jade-324717:${jade_neoforge_id}"
+
+    implementation("mcjty.theoneprobe:theoneprobe:$top_version") {transitive = false}
 }
 
 // NeoGradle compiles the game, but we don't want to add our common code to the game's code

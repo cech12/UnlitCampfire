@@ -3,7 +3,6 @@ package de.cech12.unlitcampfire;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.event.level.SleepFinishedTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod(ForgeUnlitCampfireMod.MOD_ID)
@@ -14,11 +13,6 @@ public class ForgeUnlitCampfireMod {
 
     public ForgeUnlitCampfireMod() {
         CommonLoader.init();
-
-        //The One Probe registration.
-        if (ModList.get().isLoaded("theoneprobe")) {
-            //TOPCompat.register();
-        }
     }
 
     @SubscribeEvent

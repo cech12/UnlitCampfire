@@ -1,6 +1,6 @@
 package de.cech12.unlitcampfire.compat;
-/*
-import de.cech12.unlitcampfire.UnlitCampfireMod;
+
+import de.cech12.unlitcampfire.Constants;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import mcjty.theoneprobe.api.CompoundText;
@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fml.InterModComms;
+import net.neoforged.fml.InterModComms;
 
 import java.util.function.Function;
 
@@ -33,7 +33,7 @@ public class TOPCompat {
 
                 @Override
                 public ResourceLocation getID() {
-                    return new ResourceLocation(UnlitCampfireMod.MOD_ID, "campfireinfo");
+                    return new ResourceLocation(Constants.MOD_ID, "campfireinfo");
                 }
 
                 @Override
@@ -42,12 +42,12 @@ public class TOPCompat {
                     if (!(blockEntity instanceof ICampfireBlockEntityMixin campfireBlockEntity) || !(blockState.getBlock() instanceof ICampfireBlockMixin campfireBlock)) {
                         return;
                     }
-                    if (campfireBlock.burnsInfinite(blockState)) {
+                    if (campfireBlock.unlitCampfire$burnsInfinite(blockState)) {
                         iProbeInfo.horizontal().text(CompoundText.create().label("hud.unlitcampfire.infinite"));
                     } else {
                         iProbeInfo.horizontal().text(CompoundText.create().label(Component.translatable(
                                 "hud.unlitcampfire.n_seconds",
-                                (campfireBlock.getMaxLitTime(blockState) - campfireBlockEntity.getLitTime()) / 20
+                                (campfireBlock.unlitCampfire$getMaxLitTime(blockState) - campfireBlockEntity.unlitCampfire$getLitTime()) / 20
                         )));
                     }
                 }
@@ -56,4 +56,3 @@ public class TOPCompat {
         }
     }
 }
- */
