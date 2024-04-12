@@ -7,11 +7,9 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 
-@Mod(NeoForgeUnlitCampfireMod.MOD_ID)
+@Mod(Constants.MOD_ID)
 @Mod.EventBusSubscriber
 public class NeoForgeUnlitCampfireMod {
-    public static final String MOD_ID = "unlitcampfire";
-
 
     public NeoForgeUnlitCampfireMod() {
         CommonLoader.init();

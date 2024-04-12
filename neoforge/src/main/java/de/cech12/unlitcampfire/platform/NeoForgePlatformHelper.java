@@ -4,16 +4,15 @@ import de.cech12.unlitcampfire.platform.services.IPlatformHelper;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
-import net.neoforged.neoforge.common.CommonHooks;
 
 /**
- * The platform service implementation for Forge.
+ * The platform service implementation for NeoForge.
  */
 public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public String getPlatformName() {
-        return "Forge";
+        return "NeoForge";
     }
 
     @Override
@@ -28,7 +27,7 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public int getBurnTimeOf(ItemStack stack) {
-        return CommonHooks.getBurnTime(stack, null);
+        return stack.getBurnTime(null);
     }
 
     @Override

@@ -3,7 +3,6 @@ package de.cech12.unlitcampfire.platform;
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import de.cech12.unlitcampfire.Constants;
-import de.cech12.unlitcampfire.ForgeUnlitCampfireMod;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import de.cech12.unlitcampfire.platform.services.IConfigHelper;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +22,7 @@ import java.nio.file.Path;
 /**
  * The config service implementation for Forge.
  */
-@Mod.EventBusSubscriber(modid = ForgeUnlitCampfireMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ForgeConfigHelper implements IConfigHelper {
 
     private static final ForgeConfigSpec SERVER_CONFIG;
@@ -209,7 +208,7 @@ public class ForgeConfigHelper implements IConfigHelper {
     }
 
     private static void loadChangedConfigData(ModConfigEvent configEvent) {
-        if (!configEvent.getConfig().getModId().equals(ForgeUnlitCampfireMod.MOD_ID)) {
+        if (!configEvent.getConfig().getModId().equals(Constants.MOD_ID)) {
             return;
         }
         boolean campfireSpawn = configEvent.getConfig().getConfigData().get(GENERATED_CAMPFIRE_IS_LIT_INFINITELY.getPath());

@@ -1,6 +1,6 @@
 package de.cech12.unlitcampfire.compat;
 
-import de.cech12.unlitcampfire.ForgeUnlitCampfireMod;
+import de.cech12.unlitcampfire.Constants;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import net.minecraft.nbt.CompoundTag;
@@ -62,6 +62,6 @@ public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServe
 
     @Override
     public ResourceLocation getUid() {
-        return new ResourceLocation(ForgeUnlitCampfireMod.MOD_ID, "campfireinfo");
+        return new ResourceLocation(Constants.MOD_ID, "campfireinfo");
     }
 }

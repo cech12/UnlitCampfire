@@ -5,11 +5,9 @@ import net.minecraftforge.event.level.SleepFinishedTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod(ForgeUnlitCampfireMod.MOD_ID)
+@Mod(Constants.MOD_ID)
 @Mod.EventBusSubscriber
 public class ForgeUnlitCampfireMod {
-    public static final String MOD_ID = "unlitcampfire";
-
 
     public ForgeUnlitCampfireMod() {
         CommonLoader.init();
