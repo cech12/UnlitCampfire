@@ -11,7 +11,7 @@
 
 Placing a lit campfire is a hot task. Do something good for your hands and install this mod, because then you won't burn your hands when you place a campfire.
 
-This is a **Minecraft Forge** mod and sets the **default state of a campfire to unlit**.
+This is a Minecraft mod (Forge, NeoForge, Fabric, Quilt) and sets the **default state of a campfire to unlit**.
 
 ![Campfire Placing](material/campfire_placing.gif)
 
