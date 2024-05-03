@@ -5,6 +5,7 @@ import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import de.cech12.unlitcampfire.platform.Services;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
@@ -182,16 +183,15 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
         }
     }
 
-
-    @Inject(at = @At("RETURN"), method = "load")
-    protected void loadProxy(CompoundTag nbtIn, CallbackInfo info) {
-        if (nbtIn.contains("CampfireLitTime")) {
-            this.unlitCampfire$litTime = nbtIn.getInt("CampfireLitTime");
+    @Inject(at = @At("RETURN"), method = "loadAdditional")
+    protected void loadAdditionalProxy(CompoundTag compound, HolderLookup.Provider holder, CallbackInfo info) {
+        if (compound.contains("CampfireLitTime")) {
+            this.unlitCampfire$litTime = compound.getInt("CampfireLitTime");
         }
     }
 
     @Inject(at = @At("RETURN"), method = "saveAdditional")
-    protected void saveAdditionalProxy(CompoundTag compound, CallbackInfo info) {
+    protected void saveAdditionalProxy(CompoundTag compound, HolderLookup.Provider holder, CallbackInfo info) {
         if (compound != null) {
             compound.putInt("CampfireLitTime", this.unlitCampfire$litTime);
         }

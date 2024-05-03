@@ -22,10 +22,3 @@ mandatory=true
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
-[[dependencies.${mod_id}]]
-modId="jade"
-mandatory=false
-versionRange="${jade_forge_version_range}"
-referralUrl="https://www.curseforge.com/minecraft/mc-mods/jade"
-ordering="NONE"
-side="BOTH"

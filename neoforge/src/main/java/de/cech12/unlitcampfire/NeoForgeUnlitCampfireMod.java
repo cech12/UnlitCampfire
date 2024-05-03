@@ -3,15 +3,17 @@ package de.cech12.unlitcampfire;
 import de.cech12.unlitcampfire.compat.TOPCompat;
 import net.minecraft.world.level.LevelAccessor;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 
 @Mod(Constants.MOD_ID)
-@Mod.EventBusSubscriber
+@EventBusSubscriber
 public class NeoForgeUnlitCampfireMod {
 
-    public NeoForgeUnlitCampfireMod() {
+    public NeoForgeUnlitCampfireMod(ModContainer modContainer) {
         CommonLoader.init();
 
         //The One Probe registration.

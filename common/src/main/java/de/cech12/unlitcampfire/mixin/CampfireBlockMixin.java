@@ -6,7 +6,7 @@ import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import de.cech12.unlitcampfire.platform.Services;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
@@ -71,8 +71,8 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "use", cancellable = true)
-    protected void useProxy(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
+    @Inject(at = @At("RETURN"), method = "useItemOn", cancellable = true)
+    protected void useProxy(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<ItemInteractionResult> cir) {
         //when previous interaction was successful, do nothing
         if (cir.getReturnValue().consumesAction()) {
             return;
@@ -82,10 +82,9 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
             return;
         }
         //when infinity item is used - set campfire to infinite
-        ItemStack stack = player.getItemInHand(hand);
         if (stack.is(ModTags.Items.MAKES_CAMPFIRE_INFINITE)) {
             level.setBlock(pos, state.setValue(ICampfireBlockMixin.INFINITE, true), 3);
-            cir.setReturnValue(InteractionResult.sidedSuccess(!level.isClientSide));
+            cir.setReturnValue(ItemInteractionResult.sidedSuccess(!level.isClientSide));
             cir.cancel();
         } else {
             //when configuration forbids to extend the burn time
@@ -105,7 +104,7 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
             BlockEntity blockentity = level.getBlockEntity(pos);
             if (blockentity instanceof ICampfireBlockEntityMixin campfireBlockEntityMixin
                     && campfireBlockEntityMixin.unlitCampfire$addLitTime(burnTime)) {
-                cir.setReturnValue(InteractionResult.sidedSuccess(!level.isClientSide));
+                cir.setReturnValue(ItemInteractionResult.sidedSuccess(!level.isClientSide));
                 cir.cancel();
             }
         }

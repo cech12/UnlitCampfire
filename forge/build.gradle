@@ -64,8 +64,11 @@ dependencies {
     compileOnly project(":common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
-    compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_forge_api_id}")
-    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_forge_id}")
+    //compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_forge_api_id}")
+    //runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_forge_id}")
+
+    //temporary necessary:
+    implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
 }
 
 tasks.withType(JavaCompile).configureEach {
