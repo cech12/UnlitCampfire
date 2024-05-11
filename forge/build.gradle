@@ -1,7 +1,7 @@
 plugins {
     id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
 }
 base {
@@ -15,6 +15,7 @@ mixin {
 
 minecraft {
     mappings channel: 'official', version: minecraft_version
+    reobf = false
 
     copyIdeResources = true //Calls processResources when in dev
 
@@ -85,7 +86,7 @@ processResources {
     from project(":common").sourceSets.main.resources
 }
 
-jar.finalizedBy('reobfJar')
+//jar.finalizedBy('reobfJar')
 
 publishing {
     publications {

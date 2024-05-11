@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.20.6-2.4.0.1] - 2024-05-12
+### Fixed
+- Forge does not crash at startup any longer
+- fixed untranslated item tag warning in logs (Fabric/Quilt)
+
+### Known issues
+- Mixin issues in Forge at world loading (Fabric, Quilt & NeoForge are working great!)
+
 ## [1.20.6-2.4.0.0] - 2024-05-03
 ### Changed
 - Updated to Minecraft 1.20.6 (Fabric 0.97.8+1.20.6, Neoforge 20.6.22-beta, Forge 50.0.4)

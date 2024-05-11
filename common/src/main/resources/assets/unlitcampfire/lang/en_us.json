@@ -1,4 +1,6 @@
 {
+  "tag.item.unlitcampfire.makes_campfire_infinite": "Makes Campfire Infinite",
+
   "hud.unlitcampfire.n_seconds": "Burn time: %ds",
   "hud.unlitcampfire.infinite": "Burns forever",
   "config.jade.plugin_unlitcampfire.campfireinfo": "Show remaining burn time",
