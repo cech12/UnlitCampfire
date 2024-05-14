@@ -12,6 +12,7 @@ mixin {
     config("${mod_id}.mixins.json")
     //config("${mod_id}.forge.mixins.json")
 }
+jar.manifest.attributes.putIfAbsent('MixinConfigs', "${mod_id}.mixins.json")
 
 minecraft {
     mappings channel: 'official', version: minecraft_version
@@ -85,8 +86,6 @@ tasks.withType(JavaCompile).configureEach {
 processResources {
     from project(":common").sourceSets.main.resources
 }
-
-//jar.finalizedBy('reobfJar')
 
 publishing {
     publications {
