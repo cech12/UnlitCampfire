@@ -15,9 +15,23 @@ This is a Minecraft mod (Forge, NeoForge, Fabric, Quilt) and sets the **default 
 
 ![Campfire Placing](material/campfire_placing.gif)
 
+This mod is configurable. All config options can be found in the wiki: https://github.com/cech12/UnlitCampfire/wiki
+
+## Dependencies
+
 The Fabric / Quilt version needs the following mods:
 
 - Fabric API ([Github](https://github.com/FabricMC/fabric), [Curseforge](https://www.curseforge.com/minecraft/mc-mods/fabric-api), [Modrinth](https://modrinth.com/mod/fabric-api))
 - Cloth Config API ([Github](https://github.com/shedaniel/cloth-config), [Curseforge](https://www.curseforge.com/minecraft/mc-mods/cloth-config), [Modrinth](https://modrinth.com/mod/cloth-config))
 
-This mod is configurable. All config options can be found in the wiki: https://github.com/cech12/UnlitCampfire/wiki
+## Compatibility
+
+### Lithium (Fabric)
+
+Lithium is optimizing campfires in such a way that it does not tick, when no item is on the campfire. There is a Lithium config option to disable this optimization.
+You only need to add the following line into the `lithium.properties` config file:
+```
+mixin.world.block_entity_ticking=false
+```
+https://github.com/CaffeineMC/lithium-fabric/wiki/Configuration-File#mixinworldblock_entity_ticking
+
