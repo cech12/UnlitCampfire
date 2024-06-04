@@ -45,8 +45,7 @@ dependencies {
     implementation "net.neoforged:neoforge:${neoforge_version}"
     compileOnly project(":common")
 
-    //compileOnly "curse.maven:jade-api-324717:${jade_neoforge_api_id}"
-    //runtimeOnly "curse.maven:jade-324717:${jade_neoforge_id}"
+    implementation "curse.maven:jade-324717:${jade_neoforge_id}"
 
     implementation("mcjty.theoneprobe:theoneprobe:$top_version") {transitive = false}
 }

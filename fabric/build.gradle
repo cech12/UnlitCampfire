@@ -24,8 +24,7 @@ dependencies {
     }
     modImplementation("com.terraformersmc:modmenu:${mod_menu_version}")
 
-    compileOnly "curse.maven:jade-api-324717:${jade_fabric_api_id}"
-    modLocalRuntime "curse.maven:jade-324717:${jade_fabric_id}"
+    modImplementation "curse.maven:jade-324717:${jade_fabric_id}"
 
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     compileOnly project(":common")

@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.20.6-2.5.0.0] - 2024-06-04
+### Changed
+- updated NeoForge to 20.6.75-beta to support Jade
+- updated Jade support (Fabric 14.2.4)
+- re-added Jade support for NeoForge (NeoForge 14.2.3)
+
 ## [1.20.6-2.4.0.2] - 2024-05-14
 ### Fixed
 - known issue fixed: Crash in Forge during world loading/creation (Thanks to Sweek9 for the report) #35

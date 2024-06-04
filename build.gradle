@@ -78,7 +78,6 @@ subprojects {
                 "mod_issue_tracker": mod_issue_tracker,
                 "mod_description": project.description,
                 "jade_fabric_version": jade_fabric_version,
-                "jade_forge_version_range": jade_forge_version_range,
                 "jade_neoforge_version_range": jade_neoforge_version_range,
                 "top_version_range": top_version_range
         ]
