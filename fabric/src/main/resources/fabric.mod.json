@@ -30,6 +30,11 @@
     "${mod_id}.mixins.json",
     "${mod_id}.fabric.mixins.json"
   ],
+  "custom": {
+    "lithium:options": {
+      "world.block_entity_ticking.sleeping.campfire": false
+    }
+  },
   "depends": {
     "java": ">=${java_version}",
     "minecraft": ">=${minecraft_version}",
