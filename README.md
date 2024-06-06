@@ -28,10 +28,4 @@ The Fabric / Quilt version needs the following mods:
 
 ### Lithium (Fabric)
 
-Lithium is optimizing campfires in such a way that it does not tick, when no item is on the campfire. There is a Lithium config option to disable this optimization.
-You only need to add the following line into the `lithium.properties` config file:
-```
-mixin.world.block_entity_ticking=false
-```
-https://github.com/CaffeineMC/lithium-fabric/wiki/Configuration-File#mixinworldblock_entity_ticking
-
+Since 1.20.4-2.3.0.1 and 1.20.6-2.5.0.1 this mod is compatible with Lithium. For earlier versions please see the wiki: https://github.com/cech12/UnlitCampfire/wiki
