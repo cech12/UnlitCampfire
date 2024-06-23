@@ -33,7 +33,7 @@ public class TOPCompat {
 
                 @Override
                 public ResourceLocation getID() {
-                    return new ResourceLocation(Constants.MOD_ID, "campfireinfo");
+                    return Constants.id("campfireinfo");
                 }
 
                 @Override

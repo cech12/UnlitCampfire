@@ -5,6 +5,7 @@ import net.minecraftforge.event.level.SleepFinishedTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+@SuppressWarnings("unused")
 @Mod(Constants.MOD_ID)
 @Mod.EventBusSubscriber
 public class ForgeUnlitCampfireMod {

@@ -9,6 +9,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 
+@SuppressWarnings("unused")
 @Mod(Constants.MOD_ID)
 @EventBusSubscriber
 public class NeoForgeUnlitCampfireMod {

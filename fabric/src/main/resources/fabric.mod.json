@@ -17,13 +17,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "${group}.FabricUnlitCampfireMod"
+      "de.cech12.unlitcampfire.FabricUnlitCampfireMod"
     ],
     "modmenu": [
-      "${group}.compat.ModMenuCompat"
+      "de.cech12.unlitcampfire.compat.ModMenuCompat"
     ],
     "jade": [
-      "${group}.compat.JadeCompat"
+      "de.cech12.unlitcampfire.compat.JadeCompat"
     ]
   },
   "mixins": [
@@ -42,7 +42,7 @@
     "fabric-api": ">=${fabric_version}",
     "cloth-config": ">=${cloth_config_version}"
   },
-  "recommends": {
+  "suggests": {
     "jade": ">=${jade_fabric_version}",
     "modmenu": ">=${mod_menu_version}"
   }

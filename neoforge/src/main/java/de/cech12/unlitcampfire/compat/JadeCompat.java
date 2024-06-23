@@ -19,6 +19,7 @@ import snownee.jade.api.IWailaPlugin;
 import snownee.jade.api.WailaPlugin;
 import snownee.jade.api.config.IPluginConfig;
 
+@SuppressWarnings("unused")
 @WailaPlugin()
 public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     @Override
@@ -62,6 +63,6 @@ public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServe
 
     @Override
     public ResourceLocation getUid() {
-        return new ResourceLocation(Constants.MOD_ID, "campfireinfo");
+        return Constants.id("campfireinfo");
     }
 }

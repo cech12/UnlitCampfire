@@ -62,6 +62,6 @@ public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServe
 
     @Override
     public ResourceLocation getUid() {
-        return new ResourceLocation(Constants.MOD_ID, "campfireinfo");
+        return Constants.id("campfireinfo");
     }
 }
