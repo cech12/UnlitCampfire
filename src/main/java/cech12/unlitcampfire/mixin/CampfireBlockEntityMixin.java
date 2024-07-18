@@ -157,8 +157,8 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     @Inject(at = @At("RETURN"), method = "cookTick")
     private static void cookTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
         CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
-        if (level != null) {
-            if (state.getValue(CampfireBlock.LIT) && !mixinEntity.burnsInfinite()) {
+        if (level != null && mixinEntity != null && state.getValue(CampfireBlock.LIT)) {
+            if (!mixinEntity.burnsInfinite()) {
                 mixinEntity.litTime++;
                 if (mixinEntity.litTime >= mixinEntity.getMaxLitTime()) {
                     if (mixinEntity.breaksWhenUnlitByTime()) {
@@ -173,18 +173,18 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                         ServerConfig.SOUL_CAMPFIRE_ADDING_BURNABLES.get() : ServerConfig.CAMPFIRE_ADDING_BURNABLES.get())) {
                     mixinEntity.markUpdated();
                 }
-                //if rain should unlit a campfire, and it is raining there
-                int rainUnlitTime = mixinEntity.getRainUnlitTime();
-                if (rainUnlitTime >= 0 && level.isRainingAt(pos.above())) {
-                    mixinEntity.rainTime++;
-                    if (mixinEntity.rainTime >= rainUnlitTime) {
-                        mixinEntity.unlitCampfire();
-                    }
-                } else {
-                    mixinEntity.rainTime = 0;
-                }
             } else {
                 mixinEntity.litTime = 0;
+            }
+            //if rain should unlit a campfire, and it is raining there
+            int rainUnlitTime = mixinEntity.getRainUnlitTime();
+            if (rainUnlitTime >= 0 && level.isRainingAt(pos.above())) {
+                mixinEntity.rainTime++;
+                if (mixinEntity.rainTime >= rainUnlitTime) {
+                    mixinEntity.unlitCampfire();
+                }
+            } else {
+                mixinEntity.rainTime = 0;
             }
         }
     }
