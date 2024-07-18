@@ -6,14 +6,14 @@ import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import de.cech12.unlitcampfire.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.CampfireBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -140,8 +140,8 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     @Inject(at = @At("RETURN"), method = "cookTick")
     private static void cookTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
         CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
-        if (level != null) {
-            if (state.getValue(CampfireBlock.LIT) && !mixinEntity.unlitCampfire$burnsInfinite()) {
+        if (level != null && mixinEntity != null && state.getValue(CampfireBlock.LIT)) {
+            if (!mixinEntity.unlitCampfire$burnsInfinite()) {
                 mixinEntity.unlitCampfire$litTime++;
                 if (mixinEntity.unlitCampfire$litTime >= mixinEntity.unlitCampfire$getMaxLitTime()) {
                     if (Services.CONFIG.isBreakingWhenUnlitByTime(mixinEntity.unlitCampfire$isSoulCampfire())) {
@@ -155,18 +155,18 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                 if (mixinEntity.unlitCampfire$litTime % 20 == 1 && Services.CONFIG.canAddBurnables(mixinEntity.unlitCampfire$isSoulCampfire())) {
                     mixinEntity.markUpdated();
                 }
-                //if rain should unlit a campfire, and it is raining there
-                int rainUnlitTime = Services.CONFIG.getRainUnlitTime(mixinEntity.unlitCampfire$isSoulCampfire());
-                if (rainUnlitTime >= 0 && level.isRainingAt(pos.above())) {
-                    mixinEntity.unlitCampfire$rainTime++;
-                    if (mixinEntity.unlitCampfire$rainTime >= rainUnlitTime) {
-                        mixinEntity.unlitCampfire$unlitCampfire();
-                    }
-                } else {
-                    mixinEntity.unlitCampfire$rainTime = 0;
-                }
             } else {
                 mixinEntity.unlitCampfire$litTime = 0;
+            }
+            //if rain should unlit a campfire, and it is raining there
+            int rainUnlitTime = Services.CONFIG.getRainUnlitTime(mixinEntity.unlitCampfire$isSoulCampfire());
+            if (rainUnlitTime >= 0 && level.isRainingAt(pos.above())) {
+                mixinEntity.unlitCampfire$rainTime++;
+                if (mixinEntity.unlitCampfire$rainTime >= rainUnlitTime) {
+                    mixinEntity.unlitCampfire$unlitCampfire();
+                }
+            } else {
+                mixinEntity.unlitCampfire$rainTime = 0;
             }
         }
     }
