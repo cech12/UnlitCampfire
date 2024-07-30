@@ -5,7 +5,7 @@
 [![Modrinth](https://img.shields.io/modrinth/dt/yENm0xnb?label=Modrinth&logo=modrinth)](https://modrinth.com/mod/unlit-campfire)
 [![CI/CD](https://github.com/cech12/UnlitCampfire/actions/workflows/cicd-workflow.yml/badge.svg)](https://github.com/cech12/UnlitCampfire/actions/workflows/cicd-workflow.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/cech12/unlitcampfire/badge)](https://www.codefactor.io/repository/github/cech12/unlitcampfire)
-[![gitlocalized ](https://gitlocalize.com/repo/8146/whole_project/badge.svg)](https://gitlocalize.com/repo/8146/?utm_source=badge)
+[![gitlocalized ](https://gitlocalize.com/repo/9800/whole_project/badge.svg)](https://gitlocalize.com/repo/9800/?utm_source=badge)
 [![License](https://img.shields.io/github/license/cech12/UnlitCampfire)](http://opensource.org/licenses/MIT)
 [![](https://img.shields.io/discord/752506676719910963.svg?style=flat&color=informational&logo=discord&label=Discord)](https://discord.gg/gRUFH5t)
 
