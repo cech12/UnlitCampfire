@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.21-3.1.1.1] - 2024-09-04
+### Fixed
+- the lower light level of the (soul) campfire was not removed when burnables were added
+
 ## [1.21-3.1.1.0] - 2024-09-04
 ### Added
 - new behaviour that a (soul) campfire decreases the light level for the last 30 seconds (configurable, can be deactivated) (all loaders) (thanks to Acenthus for the idea) #38
