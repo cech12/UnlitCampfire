@@ -22,6 +22,7 @@ public class NeoForgeConfigHelper implements IConfigHelper {
     private static final ModConfigSpec SERVER_CONFIG;
 
     public static final ModConfigSpec.IntValue CAMPFIRE_LIT_TIME;
+    public static final ModConfigSpec.IntValue CAMPFIRE_RUN_OUT_INDICATOR_TIME;
     public static final ModConfigSpec.IntValue CAMPFIRE_RAIN_UNLIT_TIME;
     public static final ModConfigSpec.IntValue CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ModConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
@@ -32,6 +33,7 @@ public class NeoForgeConfigHelper implements IConfigHelper {
     public static final ModConfigSpec.BooleanValue GENERATED_CAMPFIRE_IS_LIT_INFINITELY;
 
     public static final ModConfigSpec.IntValue SOUL_CAMPFIRE_LIT_TIME;
+    public static final ModConfigSpec.IntValue SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME;
     public static final ModConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_UNLIT_TIME;
     public static final ModConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ModConfigSpec.BooleanValue SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
@@ -49,6 +51,10 @@ public class NeoForgeConfigHelper implements IConfigHelper {
         CAMPFIRE_LIT_TIME = builder
                 .comment(CAMPFIRE_LIT_TIME_DESCRIPTION)
                 .defineInRange("campfireLitTime", CAMPFIRE_LIT_TIME_DEFAULT, CAMPFIRE_LIT_TIME_MIN, CAMPFIRE_LIT_TIME_MAX);
+
+        CAMPFIRE_RUN_OUT_INDICATOR_TIME = builder
+                .comment(CAMPFIRE_RUN_OUT_INDICATOR_TIME_DESCRIPTION)
+                .defineInRange("campfireRunOutIndicatorTime", CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT, CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN, CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX);
 
         CAMPFIRE_RAIN_UNLIT_TIME = builder
                 .comment(CAMPFIRE_RAIN_UNLIT_TIME_DESCRIPTION)
@@ -85,6 +91,10 @@ public class NeoForgeConfigHelper implements IConfigHelper {
         SOUL_CAMPFIRE_LIT_TIME = builder
                 .comment(SOUL_CAMPFIRE_LIT_TIME_DESCRIPTION)
                 .defineInRange("soulCampfireLitTime", SOUL_CAMPFIRE_LIT_TIME_DEFAULT, SOUL_CAMPFIRE_LIT_TIME_MIN, SOUL_CAMPFIRE_LIT_TIME_MAX);
+
+        SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME = builder
+                .comment(SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DESCRIPTION)
+                .defineInRange("soulCampfireRunOutIndicatorTime", SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT, SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN, SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX);
 
         SOUL_CAMPFIRE_RAIN_UNLIT_TIME = builder
                 .comment(SOUL_CAMPFIRE_RAIN_UNLIT_TIME_DESCRIPTION)
@@ -134,6 +144,15 @@ public class NeoForgeConfigHelper implements IConfigHelper {
             return isSoulCampfire ? SOUL_CAMPFIRE_LIT_TIME.get() : CAMPFIRE_LIT_TIME.get();
         } catch (IllegalStateException ex) {
             return isSoulCampfire ? SOUL_CAMPFIRE_LIT_TIME_DEFAULT : CAMPFIRE_LIT_TIME_DEFAULT;
+        }
+    }
+
+    @Override
+    public int getRunOutIndicatorTime(boolean isSoulCampfire) {
+        try {
+            return isSoulCampfire ? SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.get() : CAMPFIRE_RUN_OUT_INDICATOR_TIME.get();
+        } catch (IllegalStateException ex) {
+            return isSoulCampfire ? SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT : CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT;
         }
     }
 
