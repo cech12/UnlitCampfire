@@ -19,20 +19,24 @@ public class ServerConfig {
     public static ForgeConfigSpec SERVER_CONFIG;
 
     public static final ForgeConfigSpec.IntValue CAMPFIRE_LIT_TIME;
+    public static final ForgeConfigSpec.IntValue CAMPFIRE_RUN_OUT_INDICATOR_TIME;
     public static final ForgeConfigSpec.IntValue CAMPFIRE_RAIN_UNLIT_TIME;
     public static final ForgeConfigSpec.IntValue CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_ADDING_BURNABLES;
+    public static final ForgeConfigSpec.IntValue CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ForgeConfigSpec.BooleanValue GENERATED_CAMPFIRE_IS_LIT_INFINITELY;
 
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_LIT_TIME;
+    public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_UNLIT_TIME;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_ADDING_BURNABLES;
+    public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ForgeConfigSpec.BooleanValue GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY;
 
@@ -45,6 +49,10 @@ public class ServerConfig {
         CAMPFIRE_LIT_TIME = builder
                 .comment("The time (ticks) a campfire burns until it goes out by itself. (2000 ticks default; 0 means it burns forever)")
                 .defineInRange("campfireLitTime", 2000, 0, 2000000);
+
+        CAMPFIRE_RUN_OUT_INDICATOR_TIME = builder
+                .comment("The light level of a campfire decreases when the remaining time (ticks) is lower than this configured value. (600 ticks default; 0 deactivates this behaviour)")
+                .defineInRange("campfireRunOutIndicatorTime", 600, 0, 2000000);
 
         CAMPFIRE_RAIN_UNLIT_TIME = builder
                 .comment("The time (ticks) a campfire burns until it goes out during rain. (160 ticks [default]; 0: it goes out immediately; -1: it burns during rain).")
@@ -66,6 +74,10 @@ public class ServerConfig {
                 .comment("Whether the lit time of a campfire could be extended with combustible/burnable items.")
                 .define("campfireAddingBurnables", true);
 
+        CAMPFIRE_MAX_LIT_TIME_EXTENSION = builder
+                .comment("The time (ticks) a campfire can be filled up additionally until adding burnables is not possible. (is added to the configured lit time) (2000 ticks default)")
+                .defineInRange("campfireMaxLitTimeExtension", 2000, 1, 2000000);
+
         CAMPFIRE_AFFECTED_BY_SLEEP_TIME = builder
                 .comment("Whether the lit time of a campfire should be affected by the sleep time.")
                 .define("campfireAffectedBySleepTime", false);
@@ -78,6 +90,10 @@ public class ServerConfig {
         SOUL_CAMPFIRE_LIT_TIME = builder
                 .comment("The time (ticks) a soul campfire burns until it goes out by itself. (2000 ticks default; 0 means it burns forever)")
                 .defineInRange("soulCampfireLitTime", 2000, 0, 2000000);
+
+        SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME = builder
+                .comment("The light level of a soul campfire decreases when the remaining time (ticks) is lower than this configured value. (600 ticks default; 0 deactivates this behaviour)")
+                .defineInRange("soulCampfireRunOutIndicatorTime", 600, 0, 2000000);
 
         SOUL_CAMPFIRE_RAIN_UNLIT_TIME = builder
                 .comment("The time (ticks) a soul campfire burns until it goes out during rain. (0: it goes out immediately; -1: it burns during rain [default]).")
@@ -98,6 +114,10 @@ public class ServerConfig {
         SOUL_CAMPFIRE_ADDING_BURNABLES = builder
                 .comment("Whether the lit time of a soul campfire could be extended with combustible/burnable items.")
                 .define("soulCampfireAddingBurnables", true);
+
+        SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION = builder
+                .comment("The time (ticks) a soul campfire can be filled up additionally until adding burnables is not possible. (is added to the configured lit time) (2000 ticks default)")
+                .defineInRange("soulCampfireMaxLitTimeExtension", 2000, 1, 2000000);
 
         SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME = builder
                 .comment("Whether the lit time of a campfire should be affected by the sleep time.")

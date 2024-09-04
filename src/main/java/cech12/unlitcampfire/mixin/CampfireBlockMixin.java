@@ -4,22 +4,22 @@ import cech12.unlitcampfire.ModTags;
 import cech12.unlitcampfire.config.ServerConfig;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.ForgeHooks;
@@ -40,8 +40,18 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
     }
 
     @Override
+    public int unlitCampfire$getMaxLitTimeExtension(BlockState state) {
+        return state.getBlock() == Blocks.SOUL_CAMPFIRE ? ServerConfig.SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION.get() : ServerConfig.CAMPFIRE_MAX_LIT_TIME_EXTENSION.get();
+    }
+
+    @Override
     public int getMaxLitTime(BlockState state) {
         return state.getBlock() == Blocks.SOUL_CAMPFIRE ? ServerConfig.SOUL_CAMPFIRE_LIT_TIME.get() : ServerConfig.CAMPFIRE_LIT_TIME.get();
+    }
+
+    @Override
+    public int unlitCampfire$getRunsOutIndicatorTime(BlockState state) {
+        return state.getBlock() == Blocks.SOUL_CAMPFIRE ? ServerConfig.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.get() : ServerConfig.CAMPFIRE_RUN_OUT_INDICATOR_TIME.get();
     }
 
     @Override
@@ -59,6 +69,7 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(CampfireBlock.LIT, false)
                 .setValue(ICampfireBlockMixin.INFINITE, false)
+                .setValue(ICampfireBlockMixin.RUNS_OUT, false)
         );
     }
 
@@ -67,6 +78,7 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
         if (cir.getReturnValue() != null) {
             cir.setReturnValue(cir.getReturnValue().setValue(CampfireBlock.LIT, false));
             cir.setReturnValue(cir.getReturnValue().setValue(ICampfireBlockMixin.INFINITE, false));
+            cir.setReturnValue(cir.getReturnValue().setValue(ICampfireBlockMixin.RUNS_OUT, false));
             cir.cancel();
         }
     }
@@ -122,7 +134,7 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
 
     @Inject(at = @At("RETURN"), method = "createBlockStateDefinition")
     protected void createBlockStateDefinitionProxy(StateDefinition.Builder<Block, BlockState> stateBuilder, CallbackInfo info) {
-        stateBuilder.add(INFINITE);
+        stateBuilder.add(INFINITE, RUNS_OUT);
     }
 
     //overrides animateTick method and has access to the original method

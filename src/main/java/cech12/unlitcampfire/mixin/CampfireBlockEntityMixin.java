@@ -5,16 +5,17 @@ import cech12.unlitcampfire.config.ServerConfig;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.CampfireBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -51,6 +52,16 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
 
     private int getMaxLitTime() {
         return ((ICampfireBlockMixin) this.getBlockState().getBlock()).getMaxLitTime(this.getBlockState());
+    }
+
+    @Unique
+    private int unlitCampfire$getMaxLitTimeExtension() {
+        return ((ICampfireBlockMixin) this.getBlockState().getBlock()).unlitCampfire$getMaxLitTimeExtension(this.getBlockState());
+    }
+
+    @Unique
+    private int unlitCampfire$getRunsOutIndicator() {
+        return ((ICampfireBlockMixin) this.getBlockState().getBlock()).unlitCampfire$getRunsOutIndicatorTime(this.getBlockState());
     }
 
     private boolean burnsInfinite() {
@@ -114,6 +125,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                 this.dowse();
             }
             this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(CampfireBlock.LIT, false));
+            this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ICampfireBlockMixin.RUNS_OUT, false));
         }
     }
 
@@ -130,7 +142,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
         if (litTimeToAdd < 0) {
             return removeLitTime(-litTimeToAdd);
         }
-        if (this.litTime <= 0 || !this.getBlockState().getValue(CampfireBlock.LIT)) {
+        if (this.litTime <= -this.unlitCampfire$getMaxLitTimeExtension() || !this.getBlockState().getValue(CampfireBlock.LIT)) {
             return false;
         }
         this.litTime = this.litTime - litTimeToAdd;
@@ -167,6 +179,12 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                         mixinEntity.unlitCampfire();
                     }
                     return; //fixes destroying while raining
+                }
+                //update "runs out" flag
+                boolean runOutIndicatorReached = mixinEntity.litTime >= (mixinEntity.getMaxLitTime() - mixinEntity.unlitCampfire$getRunsOutIndicator());
+                boolean isRunOutActive = state.getValue(ICampfireBlockMixin.RUNS_OUT);
+                if ((runOutIndicatorReached && !isRunOutActive) || (!runOutIndicatorReached && isRunOutActive)) {
+                    level.setBlockAndUpdate(pos, state.setValue(ICampfireBlockMixin.RUNS_OUT, !isRunOutActive));
                 }
                 //refresh client side once per second if burnables can be added to campfire
                 if (mixinEntity.litTime % 20 == 1 && (mixinEntity.isSoulCampfire() ?
