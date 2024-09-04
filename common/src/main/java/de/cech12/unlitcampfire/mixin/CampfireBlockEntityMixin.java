@@ -162,8 +162,10 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                     return; //fixes destroying while raining
                 }
                 //update "runs out" flag
-                if (!state.getValue(ICampfireBlockMixin.RUNS_OUT) && mixinEntity.unlitCampfire$litTime >= (mixinEntity.unlitCampfire$getMaxLitTime() - mixinEntity.unlitCampfire$getRunsOutIndicator())) {
-                    level.setBlockAndUpdate(pos, state.setValue(ICampfireBlockMixin.RUNS_OUT, true));
+                boolean runOutIndicatorReached = mixinEntity.unlitCampfire$litTime >= (mixinEntity.unlitCampfire$getMaxLitTime() - mixinEntity.unlitCampfire$getRunsOutIndicator());
+                boolean isRunOutActive = state.getValue(ICampfireBlockMixin.RUNS_OUT);
+                if ((runOutIndicatorReached && !isRunOutActive) || (!runOutIndicatorReached && isRunOutActive)) {
+                    level.setBlockAndUpdate(pos, state.setValue(ICampfireBlockMixin.RUNS_OUT, !isRunOutActive));
                 }
                 //refresh client side once per second if burnables can be added to campfire
                 if (mixinEntity.unlitCampfire$litTime % 20 == 1 && Services.CONFIG.canAddBurnables(mixinEntity.unlitCampfire$isSoulCampfire())) {
