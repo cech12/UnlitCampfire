@@ -24,6 +24,9 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
         @ConfigEntry.BoundedDiscrete(min = CAMPFIRE_LIT_TIME_MIN, max = CAMPFIRE_LIT_TIME_MAX)
         public int CAMPFIRE_LIT_TIME = CAMPFIRE_LIT_TIME_DEFAULT;
 
+        @ConfigEntry.Gui.Tooltip(count = 7)
+        public int CAMPFIRE_RUN_OUT_INDICATOR_TIME = CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT;
+
         @ConfigEntry.Gui.Tooltip(count = 6)
         @ConfigEntry.BoundedDiscrete(min = CAMPFIRE_RAIN_UNLIT_TIME_MIN, max = CAMPFIRE_RAIN_UNLIT_TIME_MAX)
         public int CAMPFIRE_RAIN_UNLIT_TIME = CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT;
@@ -62,6 +65,9 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
         @ConfigEntry.Gui.Tooltip(count = 5)
         @ConfigEntry.BoundedDiscrete(min = SOUL_CAMPFIRE_LIT_TIME_MIN, max = SOUL_CAMPFIRE_LIT_TIME_MAX)
         public int SOUL_CAMPFIRE_LIT_TIME = SOUL_CAMPFIRE_LIT_TIME_DEFAULT;
+
+        @ConfigEntry.Gui.Tooltip(count = 7)
+        public int SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME = SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT;
 
         @ConfigEntry.Gui.Tooltip(count = 6)
         @ConfigEntry.BoundedDiscrete(min = SOUL_CAMPFIRE_RAIN_UNLIT_TIME_MIN, max = SOUL_CAMPFIRE_RAIN_UNLIT_TIME_MAX)
@@ -105,6 +111,14 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
     public int getLitTime(boolean isSoulCampfire) {
         FabricConfigHelper config = getConfig();
         return isSoulCampfire ? config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME : config.CAMPFIRE.CAMPFIRE_LIT_TIME;
+    }
+
+    @Override
+    public int getRunOutIndicatorTime(boolean isSoulCampfire) {
+        FabricConfigHelper config = getConfig();
+        return isSoulCampfire ?
+                Math.clamp(config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME, SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN, SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX) :
+                Math.clamp(config.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME, CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN, CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX);
     }
 
     @Override

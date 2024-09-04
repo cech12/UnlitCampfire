@@ -18,6 +18,15 @@
   "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_LIT_TIME.@Tooltip[3]": "§7§oDefault: 2000",
   "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_LIT_TIME.@Tooltip[4]": "§7§o0: infinite duration",
 
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME": "Campfire Run Out Indicator Time (ticks)",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[0]": "§6§lCampfire Run Out Indicator Time",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[1]": "The light level of a campfire decreases",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[2]": "when the remaining time (ticks) is lower",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[3]": "than this configured value.",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[4]": "§7§o0: deactivates this behaviour",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[5]": "§7§oMin: 0; Max: 2000000",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[6]": "§7§oDefault: 600",
+
   "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RAIN_UNLIT_TIME": "Campfire Rain Unlit Time (ticks)",
   "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RAIN_UNLIT_TIME.@Tooltip[0]": "§6§lCampfire Rain Unlit Time",
   "text.autoconfig.unlitcampfire.option.CAMPFIRE.CAMPFIRE_RAIN_UNLIT_TIME.@Tooltip[1]": "The time (ticks) a campfire burns until it",
@@ -73,6 +82,15 @@
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME.@Tooltip[2]": "it goes out by itself.",
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME.@Tooltip[3]": "§7§oDefault: 2000",
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_LIT_TIME.@Tooltip[4]": "§7§o0: infinite duration",
+
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME": "Soul Campfire Run Out Indicator Time (ticks)",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[0]": "§6§lSoul Campfire Run Out Indicator Time",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[1]": "The light level of a soul campfire decreases",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[2]": "when the remaining time (ticks) is lower",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[3]": "than this configured value.",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[4]": "§7§o0: deactivates this behaviour",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[5]": "§7§oMin: 0; Max: 2000000",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.@Tooltip[6]": "§7§oDefault: 600",
 
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RAIN_UNLIT_TIME": "Soul Campfire Rain Unlit Time (ticks)",
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RAIN_UNLIT_TIME.@Tooltip[0]": "§6§lSoul Campfire Rain Unlit Time",
