@@ -27,6 +27,7 @@ public class NeoForgeConfigHelper implements IConfigHelper {
     public static final ModConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ModConfigSpec.BooleanValue CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ModConfigSpec.BooleanValue CAMPFIRE_ADDING_BURNABLES;
+    public static final ModConfigSpec.IntValue CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ModConfigSpec.BooleanValue CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ModConfigSpec.BooleanValue GENERATED_CAMPFIRE_IS_LIT_INFINITELY;
 
@@ -36,6 +37,7 @@ public class NeoForgeConfigHelper implements IConfigHelper {
     public static final ModConfigSpec.BooleanValue SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ModConfigSpec.BooleanValue SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ModConfigSpec.BooleanValue SOUL_CAMPFIRE_ADDING_BURNABLES;
+    public static final ModConfigSpec.IntValue SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ModConfigSpec.BooleanValue SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ModConfigSpec.BooleanValue GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY;
 
@@ -68,6 +70,10 @@ public class NeoForgeConfigHelper implements IConfigHelper {
                 .comment(CAMPFIRE_ADDING_BURNABLES_DESCRIPTION)
                 .define("campfireAddingBurnables", CAMPFIRE_ADDING_BURNABLES_DEFAULT);
 
+        CAMPFIRE_MAX_LIT_TIME_EXTENSION = builder
+                .comment(CAMPFIRE_MAX_LIT_TIME_EXTENSION_DESCRIPTION)
+                .defineInRange("campfireMaxLitTimeExtension", CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT, CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN, CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX);
+
         CAMPFIRE_AFFECTED_BY_SLEEP_TIME = builder
                 .comment(CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DESCRIPTION)
                 .define("campfireAffectedBySleepTime", CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DEFAULT);
@@ -99,6 +105,10 @@ public class NeoForgeConfigHelper implements IConfigHelper {
         SOUL_CAMPFIRE_ADDING_BURNABLES = builder
                 .comment(SOUL_CAMPFIRE_ADDING_BURNABLES_DESCRIPTION)
                 .define("soulCampfireAddingBurnables", SOUL_CAMPFIRE_ADDING_BURNABLES_DEFAULT);
+
+        SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION = builder
+                .comment(SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DESCRIPTION)
+                .defineInRange("soulCampfireMaxLitTimeExtension", SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT, SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN, SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX);
 
         SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME = builder
                 .comment(SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DESCRIPTION)
@@ -169,6 +179,15 @@ public class NeoForgeConfigHelper implements IConfigHelper {
             return isSoulCampfire ? SOUL_CAMPFIRE_ADDING_BURNABLES.get() : CAMPFIRE_ADDING_BURNABLES.get();
         } catch (IllegalStateException ex) {
             return isSoulCampfire ? SOUL_CAMPFIRE_ADDING_BURNABLES_DEFAULT : CAMPFIRE_ADDING_BURNABLES_DEFAULT;
+        }
+    }
+
+    @Override
+    public int getMaxLitTimeExtension(boolean isSoulCampfire) {
+        try {
+            return isSoulCampfire ? SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION.get() : CAMPFIRE_MAX_LIT_TIME_EXTENSION.get();
+        } catch (IllegalStateException ex) {
+            return isSoulCampfire ? SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT : CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT;
         }
     }
 

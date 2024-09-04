@@ -60,6 +60,11 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     }
 
     @Unique
+    private int unlitCampfire$getMaxLitTimeExtension() {
+        return ((ICampfireBlockMixin) this.getBlockState().getBlock()).unlitCampfire$getMaxLitTimeExtension(this.getBlockState());
+    }
+
+    @Unique
     private boolean unlitCampfire$burnsInfinite() {
         return ((ICampfireBlockMixin) this.getBlockState().getBlock()).unlitCampfire$burnsInfinite(this.getBlockState());
     }
@@ -113,7 +118,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
         if (litTimeToAdd < 0) {
             return unlitCampfire$removeLitTime(-litTimeToAdd);
         }
-        if (this.unlitCampfire$litTime <= 0 || !this.getBlockState().getValue(CampfireBlock.LIT)) {
+        if (this.unlitCampfire$litTime <= -this.unlitCampfire$getMaxLitTimeExtension() || !this.getBlockState().getValue(CampfireBlock.LIT)) {
             return false;
         }
         this.unlitCampfire$litTime = this.unlitCampfire$litTime - litTimeToAdd;

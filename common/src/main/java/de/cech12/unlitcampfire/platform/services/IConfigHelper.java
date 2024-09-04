@@ -29,6 +29,11 @@ public interface IConfigHelper {
     boolean CAMPFIRE_ADDING_BURNABLES_DEFAULT = true;
     String CAMPFIRE_ADDING_BURNABLES_DESCRIPTION = "Whether the lit time of a campfire could be extended with combustible/burnable items.";
 
+    int CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT = 2000;
+    String CAMPFIRE_MAX_LIT_TIME_EXTENSION_DESCRIPTION = "The time (ticks) a campfire can be filled up additionally until adding burnables is not possible. (is added to the configured lit time) (" + CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT + " ticks default)";
+    int CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN = 1;
+    int CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX = 2000000;
+
     boolean CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DEFAULT = false;
     String CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DESCRIPTION = "Whether the lit time of a campfire should be affected by the sleep time.";
 
@@ -58,6 +63,11 @@ public interface IConfigHelper {
 
     boolean SOUL_CAMPFIRE_ADDING_BURNABLES_DEFAULT = true;
     String SOUL_CAMPFIRE_ADDING_BURNABLES_DESCRIPTION = "Whether the lit time of a soul campfire could be extended with combustible/burnable items.";
+
+    int SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT = 2000;
+    String SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DESCRIPTION = "The time (ticks) a soul campfire can be filled up additionally until adding burnables is not possible. (is added to the configured lit time) (" + SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT + " ticks default)";
+    int SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN = 1;
+    int SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX = 2000000;
 
     boolean SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DEFAULT = false;
     String SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DESCRIPTION = "Whether the lit time of a soul campfire should be affected by the sleep time.";
@@ -117,6 +127,14 @@ public interface IConfigHelper {
      * @return configured "adding burnables" value
      */
     boolean canAddBurnables(boolean isSoulCampfire);
+
+    /**
+     * Gets the configured max lit time extension value.
+     *
+     * @param isSoulCampfire parameter which indicates if the campfire or soul campfire value should be returned
+     * @return configured lit time value
+     */
+    int getMaxLitTimeExtension(boolean isSoulCampfire);
 
     /**
      * Gets the configured "affected by sleep time" value.

@@ -9,6 +9,8 @@ public interface ICampfireBlockMixin {
 
     int unlitCampfire$getMaxLitTime(BlockState state);
 
+    int unlitCampfire$getMaxLitTimeExtension(BlockState state);
+
     boolean unlitCampfire$burnsInfinite(BlockState state);
 
 }
