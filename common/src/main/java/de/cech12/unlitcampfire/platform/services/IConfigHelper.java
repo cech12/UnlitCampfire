@@ -10,6 +10,11 @@ public interface IConfigHelper {
     int CAMPFIRE_LIT_TIME_MIN = 0;
     int CAMPFIRE_LIT_TIME_MAX = 2000000;
 
+    int CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT = 600;
+    String CAMPFIRE_RUN_OUT_INDICATOR_TIME_DESCRIPTION = "The light level of a campfire decreases when the remaining time (ticks) is lower than this configured value. (" + CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT + " ticks default; 0 deactivates this behaviour)";
+    int CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN = 0;
+    int CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX = 2000000;
+
     int CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT = 160;
     String CAMPFIRE_RAIN_UNLIT_TIME_DESCRIPTION = "The time (ticks) a campfire burns until it goes out during rain. (" + CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT + " ticks [default]; 0: it goes out immediately; -1: it burns during rain).";
     int CAMPFIRE_RAIN_UNLIT_TIME_MIN = -1;
@@ -44,6 +49,11 @@ public interface IConfigHelper {
     String SOUL_CAMPFIRE_LIT_TIME_DESCRIPTION = "The time (ticks) a soul campfire burns until it goes out by itself. (" + SOUL_CAMPFIRE_LIT_TIME_DEFAULT + " ticks default; 0 means it burns forever)";
     int SOUL_CAMPFIRE_LIT_TIME_MIN = 0;
     int SOUL_CAMPFIRE_LIT_TIME_MAX = 2000000;
+
+    int SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT = 600;
+    String SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DESCRIPTION = "The light level of a soul campfire decreases when the remaining time (ticks) is lower than this configured value. (" + SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT + " ticks default; 0 deactivates this behaviour)";
+    int SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN = 0;
+    int SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX = 2000000;
 
     int SOUL_CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT = -1;
     String SOUL_CAMPFIRE_RAIN_UNLIT_TIME_DESCRIPTION = "The time (ticks) a soul campfire burns until it goes out during rain. (" + SOUL_CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT + " ticks [default]; 0: it goes out immediately; -1: it burns during rain).";
@@ -95,6 +105,14 @@ public interface IConfigHelper {
      * @return configured rain unlit time value
      */
     int getRainUnlitTime(boolean isSoulCampfire);
+
+    /**
+     * Gets the configured "runs out" indicator time value.
+     *
+     * @param isSoulCampfire parameter which indicates if the campfire or soul campfire value should be returned
+     * @return configured "runs out" indicator time value
+     */
+    int getRunOutIndicatorTime(boolean isSoulCampfire);
 
     /**
      * Gets the configured rain particle factor value.

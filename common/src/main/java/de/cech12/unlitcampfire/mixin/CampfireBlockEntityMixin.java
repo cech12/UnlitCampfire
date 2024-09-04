@@ -64,6 +64,11 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     }
 
     @Unique
+    private int unlitCampfire$getRunsOutIndicator() {
+        return ((ICampfireBlockMixin) this.getBlockState().getBlock()).unlitCampfire$getRunsOutIndicatorTime(this.getBlockState());
+    }
+
+    @Unique
     private boolean unlitCampfire$burnsInfinite() {
         return ((ICampfireBlockMixin) this.getBlockState().getBlock()).unlitCampfire$burnsInfinite(this.getBlockState());
     }
@@ -101,6 +106,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                 this.dowse();
             }
             this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(CampfireBlock.LIT, false));
+            this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ICampfireBlockMixin.RUNS_OUT, false));
         }
     }
 
@@ -154,6 +160,10 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                         mixinEntity.unlitCampfire$unlitCampfire();
                     }
                     return; //fixes destroying while raining
+                }
+                //update "runs out" flag
+                if (!state.getValue(ICampfireBlockMixin.RUNS_OUT) && mixinEntity.unlitCampfire$litTime >= (mixinEntity.unlitCampfire$getMaxLitTime() - mixinEntity.unlitCampfire$getRunsOutIndicator())) {
+                    level.setBlockAndUpdate(pos, state.setValue(ICampfireBlockMixin.RUNS_OUT, true));
                 }
                 //refresh client side once per second if burnables can be added to campfire
                 if (mixinEntity.unlitCampfire$litTime % 20 == 1 && Services.CONFIG.canAddBurnables(mixinEntity.unlitCampfire$isSoulCampfire())) {

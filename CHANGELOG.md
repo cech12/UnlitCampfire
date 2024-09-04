@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [1.20.4-2.3.1.0] - 2024-09-14
 ### Added
+- new behaviour that a (soul) campfire decreases the light level for the last 30 seconds (configurable, can be deactivated) (all loaders) (thanks to Acenthus for the idea) #38
 - new configuration options "campfireMaxLitTimeExtension" and "soulCampfireMaxLitTimeExtension" to extend the burn time beyond the normal burn time when adding burnables (all loaders) (thanks to Fer0x453 for the idea) #42
 
 ## [1.20.4-2.3.0.2] - 2024-07-18
