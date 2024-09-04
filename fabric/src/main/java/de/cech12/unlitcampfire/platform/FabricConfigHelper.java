@@ -41,6 +41,9 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
         @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean CAMPFIRE_ADDING_BURNABLES = CAMPFIRE_ADDING_BURNABLES_DEFAULT;
 
+        @ConfigEntry.Gui.Tooltip(count = 6)
+        public int CAMPFIRE_MAX_LIT_TIME = CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT;
+
         @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean CAMPFIRE_AFFECTED_BY_SLEEP_TIME = CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DEFAULT;
 
@@ -76,6 +79,9 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
 
         @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean SOUL_CAMPFIRE_ADDING_BURNABLES = SOUL_CAMPFIRE_ADDING_BURNABLES_DEFAULT;
+
+        @ConfigEntry.Gui.Tooltip(count = 6)
+        public int SOUL_CAMPFIRE_MAX_LIT_TIME = SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT;
 
         @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME = SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DEFAULT;
@@ -129,6 +135,14 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
     public boolean canAddBurnables(boolean isSoulCampfire) {
         FabricConfigHelper config = getConfig();
         return isSoulCampfire ? config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_ADDING_BURNABLES : config.CAMPFIRE.CAMPFIRE_ADDING_BURNABLES;
+    }
+
+    @Override
+    public int getMaxLitTimeExtension(boolean isSoulCampfire) {
+        FabricConfigHelper config = getConfig();
+        return isSoulCampfire ?
+                Math.clamp(config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_MAX_LIT_TIME, SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN, SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX) :
+                Math.clamp(config.CAMPFIRE.CAMPFIRE_MAX_LIT_TIME, CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN, CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX);
     }
 
     @Override
