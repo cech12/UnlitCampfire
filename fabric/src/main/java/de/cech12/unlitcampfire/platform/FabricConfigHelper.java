@@ -117,8 +117,8 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
     public int getRunOutIndicatorTime(boolean isSoulCampfire) {
         FabricConfigHelper config = getConfig();
         return isSoulCampfire ?
-                Math.clamp(config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME, SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN, SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX) :
-                Math.clamp(config.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME, CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN, CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX);
+                Math.max(SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN, Math.min(SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX, config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME)) :
+                Math.max(CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN, Math.min(CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX, config.CAMPFIRE.CAMPFIRE_RUN_OUT_INDICATOR_TIME));
     }
 
     @Override
@@ -155,8 +155,8 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
     public int getMaxLitTimeExtension(boolean isSoulCampfire) {
         FabricConfigHelper config = getConfig();
         return isSoulCampfire ?
-                Math.clamp(config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_MAX_LIT_TIME, SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN, SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX) :
-                Math.clamp(config.CAMPFIRE.CAMPFIRE_MAX_LIT_TIME, CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN, CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX);
+                Math.max(SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN, Math.min(SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX, config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_MAX_LIT_TIME)) :
+                Math.max(CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN, Math.min(CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX, config.CAMPFIRE.CAMPFIRE_MAX_LIT_TIME));
     }
 
     @Override
