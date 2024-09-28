@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.20.6-2.5.1.1] - 2024-09-28
+### Fixed
+- incompatibility with Canary block ticking optimization (deactivated via canary.overrides.properties) (thanks to CapoFantasma97 for the report) #46
+
 ## [1.20.6-2.5.1.0] - 2024-09-14
 ### Added
 - new behaviour that a (soul) campfire decreases the light level for the last 30 seconds (configurable, can be deactivated) (all loaders) (thanks to Acenthus for the idea) #38
