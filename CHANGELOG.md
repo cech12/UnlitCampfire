@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.21-3.1.1.3] - 2024-11-03
+### Fixed
+- incompatibility with Lithium 0.14.0-beta (thanks to Kloytz for the report) #49
+
 ## [1.21-3.1.1.2] - 2024-09-28
 ### Fixed
 - incompatibility with Canary block ticking optimization (deactivated via canary.overrides.properties) (thanks to CapoFantasma97 for the report) #46
