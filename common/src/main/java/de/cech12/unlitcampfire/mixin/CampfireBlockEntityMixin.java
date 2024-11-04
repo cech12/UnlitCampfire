@@ -7,6 +7,10 @@ import de.cech12.unlitcampfire.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
@@ -149,7 +153,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     }
 
     @Inject(at = @At("RETURN"), method = "cookTick")
-    private static void cookTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
+    private static void cookTickProxy(ServerLevel level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> cachedRecipe, CallbackInfo info) {
         CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
         if (level != null && mixinEntity != null && state.getValue(CampfireBlock.LIT)) {
             if (!mixinEntity.unlitCampfire$burnsInfinite()) {

@@ -1,9 +1,9 @@
 package de.cech12.unlitcampfire.platform;
 
 import de.cech12.unlitcampfire.platform.services.IPlatformHelper;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 /**
  * The platform service implementation for Fabric.
@@ -26,9 +26,8 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public int getBurnTimeOf(ItemStack stack) {
-        Integer burnTime = FuelRegistry.INSTANCE.get(stack.getItem());
-        return burnTime != null ? burnTime : 0;
+    public int getBurnTimeOf(Level level, ItemStack stack) {
+        return level.fuelValues().burnDuration(stack);
     }
 
     @Override

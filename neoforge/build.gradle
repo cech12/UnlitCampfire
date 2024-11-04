@@ -1,7 +1,7 @@
 plugins {
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.145'
+    id 'net.neoforged.gradle.userdev' version '7.0.165'
     id 'java-library'
 }
 base {
@@ -47,7 +47,7 @@ dependencies {
 
     implementation "curse.maven:jade-324717:${jade_neoforge_id}"
 
-    implementation("mcjty.theoneprobe:theoneprobe:$top_version") {transitive = false}
+    //implementation("mcjty.theoneprobe:theoneprobe:$top_version") {transitive = false}
 }
 
 // NeoGradle compiles the game, but we don't want to add our common code to the game's code

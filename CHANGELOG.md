@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.21.3-3.2.0.0] - 2024-11-04
+### Changed
+- updated to Minecraft 1.21.3 (Fabric 0.107.0+1.21.3, Neoforge 21.3.10-beta, Forge 53.0.7)
+- updated Cloth Config support (16.0.141) (Fabric/Quilt)
+- updated ModMenu support (12.0.0-beta.1) (Fabric/Quilt)
+- updated Jade support (16.0.4) (Fabric/Quilt/NeoForge)
+- temporary removed The One Probe support until it is ported to 1.21.3 (Neoforge)
+
 ## [1.21-3.1.1.4] - 2024-11-03
 ### Fixed
 - incompatibility with NeoForge version of Lithium 0.14.0-beta
