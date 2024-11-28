@@ -26,7 +26,9 @@ public abstract class BlockStateBaseMixin {
 
     @Inject(at = @At("RETURN"), method = "<init>*")
     protected void initProxy(Block block, ImmutableMap<Property<?>, Comparable<?>> ref, MapCodec<BlockState> codec, CallbackInfo callbackInfo) {
-        if (block instanceof CampfireBlock && this.asState().getValue(CampfireBlock.LIT) && this.asState().getValue(ICampfireBlockMixin.RUNS_OUT)) {
+        BlockState state = this.asState();
+        if (block instanceof CampfireBlock && state.getValue(CampfireBlock.LIT)
+                && state.hasProperty(ICampfireBlockMixin.RUNS_OUT) && state.getValue(ICampfireBlockMixin.RUNS_OUT)) {
             lightEmission = lightEmission * 2 / 3;
         }
     }

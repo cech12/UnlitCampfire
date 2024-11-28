@@ -66,11 +66,14 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
 
     @Inject(at = @At("RETURN"), method = "<init>*")
     protected void initProxy(boolean spawnParticles, int fireDamage, BlockBehaviour.Properties properties, CallbackInfo info) {
-        this.registerDefaultState(this.defaultBlockState()
-                .setValue(CampfireBlock.LIT, false)
-                .setValue(ICampfireBlockMixin.INFINITE, false)
-                .setValue(ICampfireBlockMixin.RUNS_OUT, false)
-        );
+        BlockState defaultState = this.defaultBlockState().setValue(CampfireBlock.LIT, false);
+        if (defaultState.hasProperty(ICampfireBlockMixin.INFINITE)) {
+            defaultState.setValue(ICampfireBlockMixin.INFINITE, false);
+        }
+        if (defaultState.hasProperty(ICampfireBlockMixin.RUNS_OUT)) {
+            defaultState.setValue(ICampfireBlockMixin.RUNS_OUT, false);
+        }
+        this.registerDefaultState(defaultState);
     }
 
     @Inject(at = @At("RETURN"), method = "getStateForPlacement", cancellable = true)
