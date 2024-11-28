@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.21-3.1.1.5] - 2024-11-28
+### Fixed
+- incompatibility with Poisonous Potato Update mod which resulted in a startup crash (thanks to CraftyZombie for the report) #50
+
 ## [1.21-3.1.1.4] - 2024-11-03
 ### Fixed
 - incompatibility with NeoForge version of Lithium 0.14.0-beta
