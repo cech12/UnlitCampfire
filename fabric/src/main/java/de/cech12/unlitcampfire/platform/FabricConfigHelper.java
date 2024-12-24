@@ -41,7 +41,7 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
         @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean CAMPFIRE_ADDING_BURNABLES = CAMPFIRE_ADDING_BURNABLES_DEFAULT;
 
-        @ConfigEntry.Gui.Tooltip(count = 6)
+        @ConfigEntry.Gui.Tooltip(count = 5)
         public int CAMPFIRE_MAX_LIT_TIME = CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT;
 
         @ConfigEntry.Gui.Tooltip(count = 4)
@@ -80,7 +80,7 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
         @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean SOUL_CAMPFIRE_ADDING_BURNABLES = SOUL_CAMPFIRE_ADDING_BURNABLES_DEFAULT;
 
-        @ConfigEntry.Gui.Tooltip(count = 6)
+        @ConfigEntry.Gui.Tooltip(count = 5)
         public int SOUL_CAMPFIRE_MAX_LIT_TIME = SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT;
 
         @ConfigEntry.Gui.Tooltip(count = 4)
