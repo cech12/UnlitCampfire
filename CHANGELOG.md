@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.21.3-3.2.0.4] - 2025-01-26
+### Fixed
+- fixed Fabric build
+
 ## [1.21.3-3.2.0.3] - 2024-12-24
 ### Fixed
 - (no changes) second try to upload Fabric to CurseForge and Modrinth.
