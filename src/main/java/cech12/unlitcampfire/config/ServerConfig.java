@@ -28,6 +28,7 @@ public class ServerConfig {
     public static final ForgeConfigSpec.IntValue CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ForgeConfigSpec.BooleanValue GENERATED_CAMPFIRE_IS_LIT_INFINITELY;
+    public static final ForgeConfigSpec.BooleanValue INFINITE_CAMPFIRE_IGNORES_RAIN;
 
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_LIT_TIME;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME;
@@ -39,6 +40,7 @@ public class ServerConfig {
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ForgeConfigSpec.BooleanValue GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY;
+    public static final ForgeConfigSpec.BooleanValue INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN;
 
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -85,6 +87,10 @@ public class ServerConfig {
         GENERATED_CAMPFIRE_IS_LIT_INFINITELY = builder
                 .comment("Whether generated campfires should be lit infinitely.")
                 .define("generatedCampfireIsLitInfinitely", true);
+        
+        INFINITE_CAMPFIRE_IGNORES_RAIN = builder
+                .comment("Whether infinite campfires should stay lit in rain.")
+                .define("infiniteCampfireIgnoresRain", true);
 
         //soul campfire
         SOUL_CAMPFIRE_LIT_TIME = builder
@@ -126,6 +132,10 @@ public class ServerConfig {
         GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY = builder
                 .comment("Whether generated soul campfires should be lit infinitely.")
                 .define("generatedSoulCampfireIsLitInfinitely", true);
+
+        INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN = builder
+                .comment("Whether infinite soul campfires should stay lit in rain.")
+                .define("infiniteSoulCampfireIgnoresRain", true);
 
         builder.pop();
 
