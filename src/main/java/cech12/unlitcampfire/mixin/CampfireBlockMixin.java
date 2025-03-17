@@ -81,7 +81,7 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
         if (cir.getReturnValue() != null) {
             cir.setReturnValue(cir.getReturnValue()
                     .setValue(CampfireBlock.LIT, false)
-                    .setValue(ICampfireBlockMixin.INFINITE, context.getPlayer() == null) //TODO is that an issue?
+                    .setValue(ICampfireBlockMixin.INFINITE, false)
                     .setValue(ICampfireBlockMixin.RUNS_OUT, false)
             );
             cir.cancel();
