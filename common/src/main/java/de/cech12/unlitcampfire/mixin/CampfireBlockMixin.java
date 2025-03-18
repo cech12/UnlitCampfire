@@ -79,10 +79,11 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
     @Inject(at = @At("RETURN"), method = "getStateForPlacement", cancellable = true)
     protected void getStateForPlacementProxy(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir) {
         if (cir.getReturnValue() != null) {
-            cir.setReturnValue(cir.getReturnValue().setValue(CampfireBlock.LIT, false));
-            cir.setReturnValue(cir.getReturnValue().setValue(ICampfireBlockMixin.INFINITE, false));
-            cir.setReturnValue(cir.getReturnValue().setValue(ICampfireBlockMixin.RUNS_OUT, false));
-            cir.cancel();
+            cir.setReturnValue(cir.getReturnValue()
+                    .setValue(CampfireBlock.LIT, false)
+                    .setValue(ICampfireBlockMixin.INFINITE, false)
+                    .setValue(ICampfireBlockMixin.RUNS_OUT, false)
+            );
         }
     }
 

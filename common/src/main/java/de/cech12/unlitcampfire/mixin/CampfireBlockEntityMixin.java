@@ -177,7 +177,8 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
             }
             //if rain should unlit a campfire, and it is raining there
             int rainUnlitTime = Services.CONFIG.getRainUnlitTime(mixinEntity.unlitCampfire$isSoulCampfire());
-            if (rainUnlitTime >= 0 && level.isRainingAt(pos.above())) {
+            boolean shouldUnlitByRain = rainUnlitTime >= 0 && (!mixinEntity.unlitCampfire$burnsInfinite() || !Services.CONFIG.isInfiniteCampfireIgnoringRain(mixinEntity.unlitCampfire$isSoulCampfire()));
+            if (shouldUnlitByRain && level.isRainingAt(pos.above())) {
                 mixinEntity.unlitCampfire$rainTime++;
                 if (mixinEntity.unlitCampfire$rainTime >= rainUnlitTime) {
                     mixinEntity.unlitCampfire$unlitCampfire();
