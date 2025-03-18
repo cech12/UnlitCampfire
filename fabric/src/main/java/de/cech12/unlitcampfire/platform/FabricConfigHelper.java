@@ -50,6 +50,9 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
         @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean GENERATED_CAMPFIRE_IS_LIT_INFINITELY = GENERATED_CAMPFIRE_IS_LIT_INFINITELY_DEFAULT;
 
+        @ConfigEntry.Gui.Tooltip(count = 4)
+        public boolean INFINITE_CAMPFIRE_IGNORES_RAIN = INFINITE_CAMPFIRE_IGNORES_RAIN_DEFAULT;
+
         private Campfire() {}
     }
 
@@ -88,6 +91,9 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
 
         @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY = GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY_DEFAULT;
+
+        @ConfigEntry.Gui.Tooltip(count = 4)
+        public boolean INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN = INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN_DEFAULT;
 
         private SoulCampfire() {}
     }
@@ -169,6 +175,12 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
     public boolean isGeneratedCampfireLitInfinitely(boolean isSoulCampfire) {
         FabricConfigHelper config = getConfig();
         return isSoulCampfire ? config.SOUL_CAMPFIRE.GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY : config.CAMPFIRE.GENERATED_CAMPFIRE_IS_LIT_INFINITELY;
+    }
+
+    @Override
+    public boolean isInfiniteCampfireIgnoringRain(boolean isSoulCampfire) {
+        FabricConfigHelper config = getConfig();
+        return isSoulCampfire ? config.SOUL_CAMPFIRE.INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN : config.CAMPFIRE.INFINITE_CAMPFIRE_IGNORES_RAIN;
     }
 
 }

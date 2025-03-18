@@ -82,6 +82,12 @@
   "text.autoconfig.unlitcampfire.option.CAMPFIRE.GENERATED_CAMPFIRE_IS_LIT_INFINITELY.@Tooltip[2]": "infinitely.",
   "text.autoconfig.unlitcampfire.option.CAMPFIRE.GENERATED_CAMPFIRE_IS_LIT_INFINITELY.@Tooltip[3]": "§7§oDefault: true",
 
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.INFINITE_CAMPFIRE_IGNORES_RAIN": "Infinite Campfire ignores rain",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.INFINITE_CAMPFIRE_IGNORES_RAIN.@Tooltip[0]": "§6§lInfinite Campfire ignores rain",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.INFINITE_CAMPFIRE_IGNORES_RAIN.@Tooltip[1]": "Whether infinite campfires should stay",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.INFINITE_CAMPFIRE_IGNORES_RAIN.@Tooltip[2]": "lit in rain.",
+  "text.autoconfig.unlitcampfire.option.CAMPFIRE.INFINITE_CAMPFIRE_IGNORES_RAIN.@Tooltip[3]": "§7§oDefault: true",
+
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE": "Soul Campfire",
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.@Tooltip[0]": "§6§lSoul Campfire",
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.@Tooltip[1]": "Configures the soul campfire behavior.",
@@ -155,5 +161,11 @@
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY.@Tooltip[0]": "§6§lInfinite generated Soul Campfire",
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY.@Tooltip[1]": "Whether generated soul campfires should",
   "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY.@Tooltip[2]": "be lit infinitely.",
-  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY.@Tooltip[3]": "§7§oDefault: true"
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY.@Tooltip[3]": "§7§oDefault: true",
+
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN": "Infinite Soul Campfire ignores rain",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN.@Tooltip[0]": "§6§lInfinite Soul Campfire ignores rain",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN.@Tooltip[1]": "Whether infinite soul campfires should",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN.@Tooltip[2]": "stay lit in rain.",
+  "text.autoconfig.unlitcampfire.option.SOUL_CAMPFIRE.INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN.@Tooltip[3]": "§7§oDefault: true"
 }

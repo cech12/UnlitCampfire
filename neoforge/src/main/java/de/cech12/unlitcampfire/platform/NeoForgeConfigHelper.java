@@ -31,6 +31,7 @@ public class NeoForgeConfigHelper implements IConfigHelper {
     public static final ModConfigSpec.IntValue CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ModConfigSpec.BooleanValue CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ModConfigSpec.BooleanValue GENERATED_CAMPFIRE_IS_LIT_INFINITELY;
+    public static final ModConfigSpec.BooleanValue INFINITE_CAMPFIRE_IGNORES_RAIN;
 
     public static final ModConfigSpec.IntValue SOUL_CAMPFIRE_LIT_TIME;
     public static final ModConfigSpec.IntValue SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME;
@@ -42,6 +43,7 @@ public class NeoForgeConfigHelper implements IConfigHelper {
     public static final ModConfigSpec.IntValue SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ModConfigSpec.BooleanValue SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ModConfigSpec.BooleanValue GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY;
+    public static final ModConfigSpec.BooleanValue INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN;
 
     static {
         final ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -88,6 +90,10 @@ public class NeoForgeConfigHelper implements IConfigHelper {
                 .comment(GENERATED_CAMPFIRE_IS_LIT_INFINITELY_DESCRIPTION)
                 .define("generatedCampfireIsLitInfinitely", GENERATED_CAMPFIRE_IS_LIT_INFINITELY_DEFAULT);
 
+        INFINITE_CAMPFIRE_IGNORES_RAIN = builder
+                .comment(INFINITE_CAMPFIRE_IGNORES_RAIN_DESCRIPTION)
+                .define("infiniteCampfireIgnoresRain", INFINITE_CAMPFIRE_IGNORES_RAIN_DEFAULT);
+
         SOUL_CAMPFIRE_LIT_TIME = builder
                 .comment(SOUL_CAMPFIRE_LIT_TIME_DESCRIPTION)
                 .defineInRange("soulCampfireLitTime", SOUL_CAMPFIRE_LIT_TIME_DEFAULT, SOUL_CAMPFIRE_LIT_TIME_MIN, SOUL_CAMPFIRE_LIT_TIME_MAX);
@@ -127,6 +133,10 @@ public class NeoForgeConfigHelper implements IConfigHelper {
         GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY = builder
                 .comment(GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY_DESCRIPTION)
                 .define("generatedSoulCampfireIsLitInfinitely", GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY_DEFAULT);
+
+        INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN = builder
+                .comment(INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN_DESCRIPTION)
+                .define("infiniteSoulCampfireIgnoresRain", INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN_DEFAULT);
 
         builder.pop();
 
@@ -228,6 +238,14 @@ public class NeoForgeConfigHelper implements IConfigHelper {
         }
     }
 
+    @Override
+    public boolean isInfiniteCampfireIgnoringRain(boolean isSoulCampfire) {
+        try {
+            return isSoulCampfire ? INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN.get() : INFINITE_CAMPFIRE_IGNORES_RAIN.get();
+        } catch (IllegalStateException ex) {
+            return isSoulCampfire ? INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN_DEFAULT : INFINITE_CAMPFIRE_IGNORES_RAIN_DEFAULT;
+        }
+    }
 
     private static void setGeneratedCampfireIsLitInfinitely(Block block, boolean litInfinitely) {
         block.registerDefaultState(block.defaultBlockState()

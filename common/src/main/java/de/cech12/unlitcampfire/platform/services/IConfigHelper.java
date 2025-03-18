@@ -45,6 +45,9 @@ public interface IConfigHelper {
     boolean GENERATED_CAMPFIRE_IS_LIT_INFINITELY_DEFAULT = true;
     String GENERATED_CAMPFIRE_IS_LIT_INFINITELY_DESCRIPTION = "Whether generated campfires should be lit infinitely.";
 
+    boolean INFINITE_CAMPFIRE_IGNORES_RAIN_DEFAULT = true;
+    String INFINITE_CAMPFIRE_IGNORES_RAIN_DESCRIPTION = "Whether infinite campfires should stay lit in rain.";
+
     int SOUL_CAMPFIRE_LIT_TIME_DEFAULT = 2000;
     String SOUL_CAMPFIRE_LIT_TIME_DESCRIPTION = "The time (ticks) a soul campfire burns until it goes out by itself. (" + SOUL_CAMPFIRE_LIT_TIME_DEFAULT + " ticks default; 0 means it burns forever)";
     int SOUL_CAMPFIRE_LIT_TIME_MIN = 0;
@@ -84,6 +87,9 @@ public interface IConfigHelper {
 
     boolean GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY_DEFAULT = true;
     String GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY_DESCRIPTION = "Whether generated soul campfires should be lit infinitely.";
+
+    boolean INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN_DEFAULT = true;
+    String INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN_DESCRIPTION = "Whether infinite soul campfires should stay lit in rain.";
 
     /**
      * Initialization method for the Service implementations.
@@ -169,5 +175,13 @@ public interface IConfigHelper {
      * @return configured "generated campfire is lit infinitely" value
      */
     boolean isGeneratedCampfireLitInfinitely(boolean isSoulCampfire);
+
+    /**
+     * Gets the configured "infinite campfire ignores rain" value.
+     *
+     * @param isSoulCampfire parameter which indicates if the campfire or soul campfire value should be returned
+     * @return configured "infinite campfire ignores rain" value
+     */
+    boolean isInfiniteCampfireIgnoringRain(boolean isSoulCampfire);
 
 }
