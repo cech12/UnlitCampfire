@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.20.1-1.9.2.0] - 2025-03-18
+### Added
+- new configuration options "infiniteCampfireIgnoresRain" and "infiniteSoulCampfireIgnoresRain" to let infinite campfires ignore rain (default: true) (thanks to lolson3 for the PR) #58
+
 ## [1.20.1-1.9.1.2] - 2024-09-28
 ### Fixed
 - incompatibility with Poisonous Potato Update mod which resulted in a startup crash (thanks to CraftyZombie for the report) #50
