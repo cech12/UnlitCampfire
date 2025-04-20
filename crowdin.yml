@@ -1,3 +1,29 @@
+project_id_env: CROWDIN_PROJECT_ID
+api_token_env: CROWDIN_PERSONAL_TOKEN
+
+preserve_hierarchy: true
+
 files:
   - source: '*/lang/en_us.json'
-    translation: /%original_path%/%locale_with_underscore%.json
+    translation: '%original_path%/%locale_with_underscore%.json'
+    languages_mapping:
+      locale_with_underscore:
+        de: de_de
+        fr: fr_fr
+        es: es_es
+        it: it_it
+        ja: ja_jp
+        ko: ko_kr
+        pt-BR: pt_br
+        ru: ru_ru
+        zh-CN: zh_cn
+
+translations:
+  export_only_approved: false
+  skip_untranslated_strings: true
+  auto_approve_imported: true
+
+pre-translate:
+  enabled: true
+  use_machine_translation: true
+  auto_approve_option: all
