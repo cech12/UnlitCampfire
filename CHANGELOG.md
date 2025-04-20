@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.21.5-3.3.0.0] - 2025-04-20
+### Changed
+- updated to Minecraft 1.21.5 (Fabric 0.120.0+1.21.5, NeoForge 21.5.47-beta, Forge 55.0.6)
+- updated Cloth Config support (18.0.145) (Fabric/Quilt)
+- updated ModMenu support (14.0.0-rc.2) (Fabric/Quilt)
+- updated Jade support (18.1.0) (Fabric/Quilt/NeoForge)
+
+### Removed
+- campfireDropsItemsWhenUnlitByTimeOrRain and soulCampfireDropsItemsWhenUnlitByTimeOrRain option, because they do not work since MC 1.17 (all loaders)
+
 ## [1.21.3-3.2.1.0] - 2025-03-18
 ### Added
 - new configuration options "infiniteCampfireIgnoresRain" and "infiniteSoulCampfireIgnoresRain" to let infinite campfires ignore rain (default: true) (thanks to lolson3 for the PR) #58

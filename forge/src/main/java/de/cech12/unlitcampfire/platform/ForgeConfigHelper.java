@@ -31,7 +31,6 @@ public class ForgeConfigHelper implements IConfigHelper {
     public static final ForgeConfigSpec.IntValue CAMPFIRE_RUN_OUT_INDICATOR_TIME;
     public static final ForgeConfigSpec.IntValue CAMPFIRE_RAIN_UNLIT_TIME;
     public static final ForgeConfigSpec.IntValue CAMPFIRE_RAIN_PARTICLE_FACTOR;
-    public static final ForgeConfigSpec.BooleanValue CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_ADDING_BURNABLES;
     public static final ForgeConfigSpec.IntValue CAMPFIRE_MAX_LIT_TIME_EXTENSION;
@@ -43,7 +42,6 @@ public class ForgeConfigHelper implements IConfigHelper {
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_UNLIT_TIME;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR;
-    public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_ADDING_BURNABLES;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION;
@@ -71,10 +69,6 @@ public class ForgeConfigHelper implements IConfigHelper {
         CAMPFIRE_RAIN_PARTICLE_FACTOR = builder
                 .comment(CAMPFIRE_RAIN_PARTICLE_FACTOR_DESCRIPTION)
                 .defineInRange("campfireRainParticleFactor", CAMPFIRE_RAIN_PARTICLE_FACTOR_DEFAULT, CAMPFIRE_RAIN_PARTICLE_FACTOR_MIN, CAMPFIRE_RAIN_PARTICLE_FACTOR_MAX);
-
-        CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN = builder
-                .comment(CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DESCRIPTION)
-                .define("campfireDropsItemsWhenUnlitByTimeOrRain", CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DEFAULT);
 
         CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME = builder
                 .comment(CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME_DESCRIPTION)
@@ -115,10 +109,6 @@ public class ForgeConfigHelper implements IConfigHelper {
         SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR = builder
                 .comment(SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_DESCRIPTION)
                 .defineInRange("soulCampfireRainParticleFactor", SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_DEFAULT, SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_MIN, SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_MAX);
-
-        SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN = builder
-                .comment(SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DESCRIPTION)
-                .define("soulCampfireDropsItemsWhenUnlitByTimeOrRain", SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DEFAULT);
 
         SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME = builder
                 .comment(SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME_DESCRIPTION)
@@ -191,15 +181,6 @@ public class ForgeConfigHelper implements IConfigHelper {
             return isSoulCampfire ? SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR.get() : CAMPFIRE_RAIN_PARTICLE_FACTOR.get();
         } catch (IllegalStateException ex) {
             return isSoulCampfire ? SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_DEFAULT : CAMPFIRE_RAIN_PARTICLE_FACTOR_DEFAULT;
-        }
-    }
-
-    @Override
-    public boolean isDroppingItemsWhenUnlitByTimeOrRain(boolean isSoulCampfire) {
-        try {
-            return isSoulCampfire ? SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.get() : CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN.get();
-        } catch (IllegalStateException ex) {
-            return isSoulCampfire ? SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DEFAULT : CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DEFAULT;
         }
     }
 

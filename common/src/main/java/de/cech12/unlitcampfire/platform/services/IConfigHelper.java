@@ -25,9 +25,6 @@ public interface IConfigHelper {
     int CAMPFIRE_RAIN_PARTICLE_FACTOR_MIN = 1;
     int CAMPFIRE_RAIN_PARTICLE_FACTOR_MAX = 10;
 
-    boolean CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DEFAULT = true;
-    String CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DESCRIPTION = "Whether the contained items should be dropped when a campfire goes out by itself or by rain.";
-
     boolean CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME_DEFAULT = false;
     String CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME_DESCRIPTION = "Whether a campfire should be destroyed when it goes out by itself.";
 
@@ -67,9 +64,6 @@ public interface IConfigHelper {
     String SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_DESCRIPTION = "The Factor of particle count of a soul campfire during rain. (2: doubled particles count [default]; 1: same particle count)";
     int SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_MIN = 1;
     int SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_MAX = 10;
-
-    boolean SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DEFAULT = true;
-    String SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DESCRIPTION = "Whether the contained items should be dropped when a soul campfire goes out by itself or by rain.";
 
     boolean SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME_DEFAULT = false;
     String SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME_DESCRIPTION = "Whether a soul campfire should be destroyed when it goes out by itself.";
@@ -127,14 +121,6 @@ public interface IConfigHelper {
      * @return configured rain particle factor value
      */
     int getRainParticleFactor(boolean isSoulCampfire);
-
-    /**
-     * Gets the configured "drops items when unlit by time or rain" value.
-     *
-     * @param isSoulCampfire parameter which indicates if the campfire or soul campfire value should be returned
-     * @return configured "drops items when unlit by time or rain" value
-     */
-    boolean isDroppingItemsWhenUnlitByTimeOrRain(boolean isSoulCampfire);
 
     /**
      * Gets the configured "breaks when unlit by time" value.

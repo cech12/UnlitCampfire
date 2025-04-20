@@ -35,7 +35,7 @@ public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServe
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig pluginConfig) {
         CompoundTag serverData = accessor.getServerData();
 
-        if (serverData.getBoolean("BurnsInfinite")) {
+        if (serverData.getBooleanOr("BurnsInfinite", false)) {
             tooltip.add(Component.translatable("hud.unlitcampfire.infinite"));
         } else if (serverData.contains("LitTime")) {
             tooltip.add(Component.translatable("hud.unlitcampfire.n_seconds", getSecondsLeft(serverData)));
@@ -43,7 +43,7 @@ public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServe
     }
 
     private int getSecondsLeft(CompoundTag serverData) {
-        return (serverData.getInt("MaxLitTime") - serverData.getInt("LitTime")) / 20;
+        return (serverData.getIntOr("MaxLitTime", 0) - serverData.getIntOr("LitTime", 0)) / 20;
     }
 
     @Override

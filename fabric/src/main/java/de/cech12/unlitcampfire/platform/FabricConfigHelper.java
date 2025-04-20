@@ -33,9 +33,6 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
         public int CAMPFIRE_RAIN_PARTICLE_FACTOR = CAMPFIRE_RAIN_PARTICLE_FACTOR_DEFAULT;
 
         @ConfigEntry.Gui.Tooltip(count = 4)
-        public boolean CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN = CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DEFAULT;
-
-        @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME = CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME_DEFAULT;
 
         @ConfigEntry.Gui.Tooltip(count = 4)
@@ -73,9 +70,6 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
 
         @ConfigEntry.Gui.Tooltip(count = 6)
         public int SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR = SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_DEFAULT;
-
-        @ConfigEntry.Gui.Tooltip(count = 4)
-        public boolean SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN = SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN_DEFAULT;
 
         @ConfigEntry.Gui.Tooltip(count = 4)
         public boolean SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME = SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME_DEFAULT;
@@ -137,12 +131,6 @@ public class FabricConfigHelper implements ConfigData, IConfigHelper {
         return isSoulCampfire ?
                 Math.clamp(config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR, SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_MIN, SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_MAX) :
                 Math.clamp(config.CAMPFIRE.CAMPFIRE_RAIN_PARTICLE_FACTOR, CAMPFIRE_RAIN_PARTICLE_FACTOR_MIN, CAMPFIRE_RAIN_PARTICLE_FACTOR_MAX);
-    }
-
-    @Override
-    public boolean isDroppingItemsWhenUnlitByTimeOrRain(boolean isSoulCampfire) {
-        FabricConfigHelper config = getConfig();
-        return isSoulCampfire ? config.SOUL_CAMPFIRE.SOUL_CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN : config.CAMPFIRE.CAMPFIRE_DROPS_ITEMS_WHEN_UNLIT_BY_TIME_OR_RAIN;
     }
 
     @Override

@@ -4,6 +4,12 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
 }
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
 base {
     archivesName = "${mod_id}-forge"
 }
@@ -90,14 +96,14 @@ processResources {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId base.archivesName.get()
+            artifactId = base.archivesName.get()
             from components.java
             fg.component(it)
         }
     }
     repositories {
         maven {
-            url "file://" + System.getenv("local_maven")
+            url = "file://" + System.getenv("local_maven")
         }
     }
 }

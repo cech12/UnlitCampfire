@@ -31,8 +31,6 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
 
     @Shadow protected abstract void markUpdated();
 
-    @Shadow public abstract void dowse();
-
     @Unique
     private Boolean unlitCampfire$isSoulCampfire;
 
@@ -86,17 +84,9 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     }
 
     @Unique
-    private void unlitCampfire$dropAllContainingItems() {
-        if (this.level != null) {
-            CampfireBlock.dowse(null, this.level, this.getBlockPos(), this.getBlockState());
-        }
-    }
-
-    @Unique
     private void unlitCampfire$destroyCampfire() {
         if (this.level != null) {
             this.unlitCampfire$playUnlitSound();
-            this.unlitCampfire$dropAllContainingItems();
             this.level.setBlockAndUpdate(this.getBlockPos(), Blocks.AIR.defaultBlockState());
         }
     }
@@ -105,11 +95,6 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     private void unlitCampfire$unlitCampfire() {
         if (this.level != null) {
             this.unlitCampfire$playUnlitSound();
-            if (Services.CONFIG.isDroppingItemsWhenUnlitByTimeOrRain(unlitCampfire$isSoulCampfire())) {
-                this.unlitCampfire$dropAllContainingItems();
-            } else {
-                this.dowse();
-            }
             this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(CampfireBlock.LIT, false));
             this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ICampfireBlockMixin.RUNS_OUT, false));
         }
@@ -193,6 +178,15 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
         }
     }
 
+    @Inject(at = @At("RETURN"), method = "cooldownTick")
+    private static void cooldownTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
+        CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
+        if (level != null && mixinEntity != null && !state.getValue(CampfireBlock.LIT)) {
+            mixinEntity.unlitCampfire$litTime = 0;
+            mixinEntity.unlitCampfire$rainTime = 0;
+        }
+    }
+
     @Inject(at = @At("RETURN"), method = "particleTick")
     private static void particleTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
         CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
@@ -207,9 +201,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
 
     @Inject(at = @At("RETURN"), method = "loadAdditional")
     protected void loadAdditionalProxy(CompoundTag compound, HolderLookup.Provider holder, CallbackInfo info) {
-        if (compound.contains("CampfireLitTime")) {
-            this.unlitCampfire$litTime = compound.getInt("CampfireLitTime");
-        }
+        compound.getInt("CampfireLitTime").ifPresent(value -> this.unlitCampfire$litTime = value);
     }
 
     @Inject(at = @At("RETURN"), method = "saveAdditional")
@@ -225,16 +217,6 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
         CompoundTag compound = info.getReturnValue();
         if (compound != null) {
             compound.putInt("CampfireLitTime", this.unlitCampfire$litTime);
-        }
-    }
-
-    @Inject(at = @At("RETURN"), method = "dowse")
-    protected void dowseProxy(CallbackInfo info) {
-        //is called by multiple sources such as shovel, water potion, water bucket extinguishing
-        this.unlitCampfire$litTime = 0;
-        this.unlitCampfire$rainTime = 0;
-        if (this.level != null) {
-            this.markUpdated();
         }
     }
 
