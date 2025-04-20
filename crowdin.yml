@@ -8,15 +8,15 @@ files:
     translation: '%original_path%/%locale_with_underscore%.json'
     languages_mapping:
       locale_with_underscore:
-        de: de_de
-        fr: fr_fr
-        es: es_es
-        it: it_it
-        ja: ja_jp
-        ko: ko_kr
-        pt-BR: pt_br
-        ru: ru_ru
-        zh-CN: zh_cn
+        de_DE: de_de
+        fr_FR: fr_fr
+        es_ES: es_es
+        it_IT: it_it
+        ja_JP: ja_jp
+        ko_KR: ko_kr
+        pt_BR: pt_br
+        ru_RU: ru_ru
+        zh_CN: zh_cn
 
 translations:
   export_only_approved: false
