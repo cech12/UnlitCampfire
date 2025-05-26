@@ -93,17 +93,9 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    exclusiveContent {
-        forRepository {
-            maven {
-                //for mixin
-                name = 'Sponge'
-                url = uri('https://repo.spongepowered.org/repository/maven-public')
-            }
-        }
-        filter {
-            includeGroupAndSubgroups("org.spongepowered")
-        }
+    maven {
+        //for mixin
+        url = 'https://repo.spongepowered.org/maven'
     }
     maven { // TOP
         url "https://maven.k-4u.nl"
