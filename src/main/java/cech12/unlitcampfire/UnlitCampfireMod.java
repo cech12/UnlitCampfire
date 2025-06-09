@@ -51,10 +51,10 @@ public class UnlitCampfireMod {
         int sleepTime = (int) ((event.getNewTime() >= level.dayTime()) ? (event.getNewTime() - level.dayTime()) : (24000L - level.dayTime() + event.getNewTime()));
         CAMPFIRES.removeIf(Objects::isNull);
         CAMPFIRES.removeIf(BlockEntity::isRemoved);
+        CAMPFIRES.removeIf((campfire) -> !(campfire instanceof ICampfireBlockEntityMixin));
         CAMPFIRES.stream()
-                .filter(campfire -> campfire.getBlockState().getValue(CampfireBlock.LIT))
-                .filter(campfire -> !campfire.getBlockState().getValue(ICampfireBlockMixin.INFINITE))
-                .filter(campfire -> campfire instanceof ICampfireBlockEntityMixin)
+                .filter(campfire -> campfire.getBlockState().hasProperty(CampfireBlock.LIT) && campfire.getBlockState().getValue(CampfireBlock.LIT))
+                .filter(campfire -> campfire.getBlockState().hasProperty(ICampfireBlockMixin.INFINITE) && !campfire.getBlockState().getValue(ICampfireBlockMixin.INFINITE))
                 .map(campfire -> (ICampfireBlockEntityMixin) campfire)
                 .filter(campfire -> campfire.isSoulCampfire() ? ServerConfig.SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME.get() : ServerConfig.CAMPFIRE_AFFECTED_BY_SLEEP_TIME.get())
                 .forEach(campfire -> campfire.removeLitTime(sleepTime));
