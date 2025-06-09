@@ -35,10 +35,10 @@ public class CommonLoader {
     public static void updateCampfiresAfterSleep(int sleepTime) {
         CAMPFIRES.removeIf(Objects::isNull);
         CAMPFIRES.removeIf(BlockEntity::isRemoved);
+        CAMPFIRES.removeIf(campfire -> !(campfire instanceof ICampfireBlockEntityMixin));
         CAMPFIRES.stream()
-                .filter(campfire -> campfire.getBlockState().getValue(CampfireBlock.LIT))
-                .filter(campfire -> !campfire.getBlockState().getValue(ICampfireBlockMixin.INFINITE))
-                .filter(campfire -> campfire instanceof ICampfireBlockEntityMixin)
+                .filter(campfire -> campfire.getBlockState().hasProperty(CampfireBlock.LIT) && campfire.getBlockState().getValue(CampfireBlock.LIT))
+                .filter(campfire -> campfire.getBlockState().hasProperty(ICampfireBlockMixin.INFINITE) && !campfire.getBlockState().getValue(ICampfireBlockMixin.INFINITE))
                 .map(campfire -> (ICampfireBlockEntityMixin) campfire)
                 .filter(campfire -> Services.CONFIG.isAffectedBySleepTime(campfire.unlitCampfire$isSoulCampfire()))
                 .forEach(campfire -> campfire.unlitCampfire$removeLitTime(sleepTime));

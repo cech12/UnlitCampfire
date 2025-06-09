@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [1.21-3.1.2.1] - 2025-06-09
+### Fixed
+- possible crash caused by incompatibility with Supplementaries mod (thanks to Broom for the report) #63
+
 ## [1.21-3.1.2.0] - 2025-03-18
 ### Added
 - new configuration options "infiniteCampfireIgnoresRain" and "infiniteSoulCampfireIgnoresRain" to let infinite campfires ignore rain (default: true) (thanks to lolson3 for the PR) #58
