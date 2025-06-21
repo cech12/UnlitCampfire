@@ -8,8 +8,9 @@ import de.cech12.unlitcampfire.platform.services.IConfigHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -22,7 +23,7 @@ import java.nio.file.Path;
 /**
  * The config service implementation for Forge.
  */
-@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Constants.MOD_ID, value = Dist.DEDICATED_SERVER , bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ForgeConfigHelper implements IConfigHelper {
 
     private static final ForgeConfigSpec SERVER_CONFIG;

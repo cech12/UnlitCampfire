@@ -2,12 +2,12 @@ package de.cech12.unlitcampfire;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.event.level.SleepFinishedTimeEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @SuppressWarnings("unused")
 @Mod(Constants.MOD_ID)
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = Constants.MOD_ID)
 public class ForgeUnlitCampfireMod {
 
     public ForgeUnlitCampfireMod() {

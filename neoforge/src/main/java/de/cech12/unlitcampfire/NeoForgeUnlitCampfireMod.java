@@ -10,7 +10,7 @@ import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 
 @SuppressWarnings("unused")
 @Mod(Constants.MOD_ID)
-@EventBusSubscriber
+@EventBusSubscriber(modid = Constants.MOD_ID)
 public class NeoForgeUnlitCampfireMod {
 
     public NeoForgeUnlitCampfireMod(ModContainer modContainer) {

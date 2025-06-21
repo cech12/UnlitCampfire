@@ -5,7 +5,6 @@ import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import de.cech12.unlitcampfire.platform.Services;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
@@ -18,6 +17,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -200,14 +201,14 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     }
 
     @Inject(at = @At("RETURN"), method = "loadAdditional")
-    protected void loadAdditionalProxy(CompoundTag compound, HolderLookup.Provider holder, CallbackInfo info) {
-        compound.getInt("CampfireLitTime").ifPresent(value -> this.unlitCampfire$litTime = value);
+    protected void loadAdditionalProxy(ValueInput valueInput, CallbackInfo info) {
+        valueInput.getInt("CampfireLitTime").ifPresent(value -> this.unlitCampfire$litTime = value);
     }
 
     @Inject(at = @At("RETURN"), method = "saveAdditional")
-    protected void saveAdditionalProxy(CompoundTag compound, HolderLookup.Provider holder, CallbackInfo info) {
-        if (compound != null) {
-            compound.putInt("CampfireLitTime", this.unlitCampfire$litTime);
+    protected void saveAdditionalProxy(ValueOutput valueOutput, CallbackInfo info) {
+        if (valueOutput != null) {
+            valueOutput.putInt("CampfireLitTime", this.unlitCampfire$litTime);
         }
         CommonLoader.addCampfire(this); //remember server side block entities
     }

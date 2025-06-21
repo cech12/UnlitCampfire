@@ -23,6 +23,7 @@
       "de.cech12.unlitcampfire.compat.ModMenuCompat"
     ],
     "jade": [
+      "de.cech12.unlitcampfire.client.JadeClientCompat",
       "de.cech12.unlitcampfire.compat.JadeCompat"
     ]
   },

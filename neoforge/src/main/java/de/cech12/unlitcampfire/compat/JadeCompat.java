@@ -4,47 +4,27 @@ import de.cech12.unlitcampfire.Constants;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import snownee.jade.api.BlockAccessor;
-import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
-import snownee.jade.api.ITooltip;
-import snownee.jade.api.IWailaClientRegistration;
 import snownee.jade.api.IWailaCommonRegistration;
 import snownee.jade.api.IWailaPlugin;
 import snownee.jade.api.WailaPlugin;
-import snownee.jade.api.config.IPluginConfig;
 
 @SuppressWarnings("unused")
 @WailaPlugin()
-public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
+public class JadeCompat implements IWailaPlugin, IServerDataProvider<BlockAccessor> {
+
+    @Override
+    public ResourceLocation getUid() {
+        return Constants.id("campfireinfo");
+    }
+
     @Override
     public void register(IWailaCommonRegistration registration) {
         registration.registerBlockDataProvider(this, CampfireBlockEntity.class);
-    }
-
-    @Override
-    public void registerClient(IWailaClientRegistration registration) {
-        registration.registerBlockComponent(this, CampfireBlock.class);
-    }
-
-    @Override
-    public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig pluginConfig) {
-        CompoundTag serverData = accessor.getServerData();
-
-        if (serverData.getBooleanOr("BurnsInfinite", false)) {
-            tooltip.add(Component.translatable("hud.unlitcampfire.infinite"));
-        } else if (serverData.contains("LitTime")) {
-            tooltip.add(Component.translatable("hud.unlitcampfire.n_seconds", getSecondsLeft(serverData)));
-        }
-    }
-
-    private int getSecondsLeft(CompoundTag serverData) {
-        return (serverData.getIntOr("MaxLitTime", 0) - serverData.getIntOr("LitTime", 0)) / 20;
     }
 
     @Override
@@ -61,8 +41,4 @@ public class JadeCompat implements IWailaPlugin, IBlockComponentProvider, IServe
         }
     }
 
-    @Override
-    public ResourceLocation getUid() {
-        return Constants.id("campfireinfo");
-    }
 }

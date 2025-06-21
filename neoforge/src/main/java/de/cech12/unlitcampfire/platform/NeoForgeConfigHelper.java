@@ -16,7 +16,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 /**
  * The config service implementation for NeoForge.
  */
-@EventBusSubscriber(modid = Constants.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Constants.MOD_ID)
 public class NeoForgeConfigHelper implements IConfigHelper {
 
     private static final ModConfigSpec SERVER_CONFIG;
