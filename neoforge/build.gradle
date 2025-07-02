@@ -41,7 +41,7 @@ configurations {
 
 repositories {
     maven { // TOP
-        url "https://maven.k-4u.nl"
+        url = "https://maven.k-4u.nl"
     }
 }
 
