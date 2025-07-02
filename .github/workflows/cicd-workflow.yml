@@ -41,6 +41,7 @@ jobs:
       curseforge-id: 417553
       game-versions: |
         1.21.6
+        1.21.7
       release-type: release
       loaders: |
         forge
@@ -59,6 +60,7 @@ jobs:
       modrinth-id: yENm0xnb
       game-versions: |
         1.21.6
+        1.21.7
       release-type: release
       loaders: |
         forge
@@ -77,6 +79,7 @@ jobs:
       curseforge-id: 417553
       game-versions: |
         1.21.6
+        1.21.7
       release-type: release
       loaders: |
         neoforge
@@ -95,6 +98,7 @@ jobs:
       modrinth-id: yENm0xnb
       game-versions: |
         1.21.6
+        1.21.7
       release-type: release
       loaders: |
         neoforge
@@ -113,6 +117,7 @@ jobs:
       curseforge-id: 417553
       game-versions: |
         1.21.6
+        1.21.7
       release-type: release
       loaders: |
         fabric
@@ -132,6 +137,7 @@ jobs:
       modrinth-id: yENm0xnb
       game-versions: |
         1.21.6
+        1.21.7
       release-type: release
       loaders: |
         fabric
