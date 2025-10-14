@@ -193,7 +193,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
         CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
         //during rain the campfire has more particles (if activated)
         int particleFactor = Services.CONFIG.getRainParticleFactor(mixinEntity.unlitCampfire$isSoulCampfire());
-        if (level != null && level.isClientSide && particleFactor > 1 && level.isRainingAt(pos.above())) {
+        if (level != null && level.isClientSide() && particleFactor > 1 && level.isRainingAt(pos.above())) {
             for (int i = 0; i < particleFactor - 1; i++) {
                 CampfireBlock.makeParticles(level, pos, state.getValue(CampfireBlock.SIGNAL_FIRE), false);
             }

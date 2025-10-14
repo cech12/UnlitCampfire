@@ -27,7 +27,7 @@ public class CommonLoader {
     private CommonLoader() {}
 
     public static void addCampfire(BlockEntity blockEntity) {
-        if (blockEntity != null && blockEntity.getLevel() != null && !blockEntity.getLevel().isClientSide) {
+        if (blockEntity != null && blockEntity.getLevel() != null && !blockEntity.getLevel().isClientSide()) {
             CAMPFIRES.add(blockEntity);
         }
     }
