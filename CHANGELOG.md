@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [1.21.6-3.4.0.1] - 2025-11-11
+### Fixed
+- config overrides of Lithium was not correct in NeoForge
+
 ## [1.21.6-3.4.0.0] - 2025-06-21
 ### Changed
 - updated to Minecraft 1.21.6 (Fabric 0.127.1+1.21.6, NeoForge 21.6.6-beta, Forge 56.0.3)
