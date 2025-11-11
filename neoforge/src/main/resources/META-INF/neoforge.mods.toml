@@ -10,8 +10,8 @@ displayURL="${mod_url}"
 logoFile="logo.png"
 authors="${mod_author}"
 description='''${mod_description}'''
-[mods."lithium:options"]
-"mixin.world.block_entity_ticking.sleeping.campfire" = false
+["lithium:options"]
+"mixin.world.block_entity_ticking.sleeping.campfire"=false
 [[mixins]]
 config = "${mod_id}.mixins.json"
 [[accessTransformers]]
