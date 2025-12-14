@@ -4,7 +4,7 @@ import de.cech12.unlitcampfire.Constants;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import snownee.jade.api.BlockAccessor;
@@ -18,7 +18,7 @@ import snownee.jade.api.WailaPlugin;
 public class JadeCompat implements IWailaPlugin, IServerDataProvider<BlockAccessor> {
 
     @Override
-    public ResourceLocation getUid() {
+    public Identifier getUid() {
         return Constants.id("campfireinfo");
     }
 

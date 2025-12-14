@@ -26,7 +26,7 @@ public class NeoForgeUnlitCampfireMod {
     public static void onSleepFinishTimeEvent(SleepFinishedTimeEvent event) {
         LevelAccessor level = event.getLevel();
         if (level.isClientSide()) return;
-        int sleepTime = (int) ((event.getNewTime() >= level.dayTime()) ? (event.getNewTime() - level.dayTime()) : (24000L - level.dayTime() + event.getNewTime()));
+        int sleepTime = (int) ((event.getNewTime() >= level.getGameTime()) ? (event.getNewTime() - level.getGameTime()) : (24000L - level.getGameTime() + event.getNewTime()));
         CommonLoader.updateCampfiresAfterSleep(sleepTime);
     }
 

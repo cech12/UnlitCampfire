@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,8 +32,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import javax.annotation.Nonnull;
 
 @Mixin(CampfireBlock.class)
 public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICampfireBlockMixin {
@@ -154,7 +153,7 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
 
     //overrides animateTick method and has access to the original method
     @Intrinsic(displace = true)
-    public void id$animateTick(@Nonnull BlockState stateIn, Level worldIn, BlockPos pos, @Nonnull RandomSource rand) {
+    public void id$animateTick(@NotNull BlockState stateIn, Level worldIn, BlockPos pos, @NotNull RandomSource rand) {
         int particleFactor = 1;
         if (worldIn.isRainingAt(pos.above())) {
             particleFactor = Services.CONFIG.getRainParticleFactor(worldIn.getBlockState(pos).getBlock() == Blocks.SOUL_CAMPFIRE);

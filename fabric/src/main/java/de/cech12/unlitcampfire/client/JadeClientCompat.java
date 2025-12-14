@@ -3,7 +3,7 @@ package de.cech12.unlitcampfire.client;
 import de.cech12.unlitcampfire.Constants;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.CampfireBlock;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
@@ -17,7 +17,7 @@ import snownee.jade.api.config.IPluginConfig;
 public class JadeClientCompat implements IWailaPlugin, IBlockComponentProvider  {
 
     @Override
-    public ResourceLocation getUid() {
+    public Identifier getUid() {
         return Constants.id("campfireinfo");
     }
 
