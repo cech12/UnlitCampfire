@@ -2,6 +2,7 @@ package de.cech12.unlitcampfire.platform;
 
 import de.cech12.unlitcampfire.platform.services.IPlatformHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
@@ -32,7 +33,7 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public ItemStack getRemainingStackAfterUsage(ItemStack usedStack) {
+    public ItemStackTemplate getRemainingStackAfterUsage(ItemStack usedStack) {
         return usedStack.getItem().getCraftingRemainder(usedStack);
     }
 

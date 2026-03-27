@@ -36,9 +36,9 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     private Boolean unlitCampfire$isSoulCampfire;
 
     @Unique
-    private int unlitCampfire$litTime = 0;
+    private long unlitCampfire$litTime = 0L;
     @Unique
-    private int unlitCampfire$rainTime = 0;
+    private long unlitCampfire$rainTime = 0L;
 
     public CampfireBlockEntityMixin(BlockPos pos, BlockState state) {
         super(BlockEntityType.CAMPFIRE, pos, state);
@@ -58,17 +58,17 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     }
 
     @Unique
-    private int unlitCampfire$getMaxLitTime() {
+    private long unlitCampfire$getMaxLitTime() {
         return ((ICampfireBlockMixin) this.getBlockState().getBlock()).unlitCampfire$getMaxLitTime(this.getBlockState());
     }
 
     @Unique
-    private int unlitCampfire$getMaxLitTimeExtension() {
+    private long unlitCampfire$getMaxLitTimeExtension() {
         return ((ICampfireBlockMixin) this.getBlockState().getBlock()).unlitCampfire$getMaxLitTimeExtension(this.getBlockState());
     }
 
     @Unique
-    private int unlitCampfire$getRunsOutIndicator() {
+    private long unlitCampfire$getRunsOutIndicator() {
         return ((ICampfireBlockMixin) this.getBlockState().getBlock()).unlitCampfire$getRunsOutIndicatorTime(this.getBlockState());
     }
 
@@ -102,16 +102,16 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     }
 
     @Override
-    public int unlitCampfire$getLitTime() {
+    public long unlitCampfire$getLitTime() {
         return this.unlitCampfire$litTime;
     }
 
     @Override
-    public boolean unlitCampfire$addLitTime(int litTimeToAdd) {
+    public boolean unlitCampfire$addLitTime(long litTimeToAdd) {
         if (this.unlitCampfire$burnsInfinite()) {
             return false;
         }
-        if (litTimeToAdd < 0) {
+        if (litTimeToAdd < 0L) {
             return unlitCampfire$removeLitTime(-litTimeToAdd);
         }
         if (this.unlitCampfire$litTime <= -this.unlitCampfire$getMaxLitTimeExtension() || !this.getBlockState().getValue(CampfireBlock.LIT)) {
@@ -123,11 +123,11 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     }
 
     @Override
-    public boolean unlitCampfire$removeLitTime(int litTimeToRemove) {
+    public boolean unlitCampfire$removeLitTime(long litTimeToRemove) {
         if (this.unlitCampfire$burnsInfinite()) {
             return false;
         }
-        if (litTimeToRemove < 0) {
+        if (litTimeToRemove < 0L) {
             return unlitCampfire$addLitTime(-litTimeToRemove);
         }
         if (this.unlitCampfire$litTime >= this.unlitCampfire$getMaxLitTime() || !this.getBlockState().getValue(CampfireBlock.LIT)) {
@@ -159,22 +159,22 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
                     level.setBlockAndUpdate(pos, state.setValue(ICampfireBlockMixin.RUNS_OUT, !isRunOutActive));
                 }
                 //refresh client side once per second if burnables can be added to campfire
-                if (mixinEntity.unlitCampfire$litTime % 20 == 1 && Services.CONFIG.canAddBurnables(mixinEntity.unlitCampfire$isSoulCampfire())) {
+                if (mixinEntity.unlitCampfire$litTime % 20L == 1L && Services.CONFIG.canAddBurnables(mixinEntity.unlitCampfire$isSoulCampfire())) {
                     mixinEntity.markUpdated();
                 }
             } else {
-                mixinEntity.unlitCampfire$litTime = 0;
+                mixinEntity.unlitCampfire$litTime = 0L;
             }
             //if rain should unlit a campfire, and it is raining there
-            int rainUnlitTime = Services.CONFIG.getRainUnlitTime(mixinEntity.unlitCampfire$isSoulCampfire());
-            boolean shouldUnlitByRain = rainUnlitTime >= 0 && (!mixinEntity.unlitCampfire$burnsInfinite() || !Services.CONFIG.isInfiniteCampfireIgnoringRain(mixinEntity.unlitCampfire$isSoulCampfire()));
+            long rainUnlitTime = Services.CONFIG.getRainUnlitTime(mixinEntity.unlitCampfire$isSoulCampfire());
+            boolean shouldUnlitByRain = rainUnlitTime >= 0L && (!mixinEntity.unlitCampfire$burnsInfinite() || !Services.CONFIG.isInfiniteCampfireIgnoringRain(mixinEntity.unlitCampfire$isSoulCampfire()));
             if (shouldUnlitByRain && level.isRainingAt(pos.above())) {
                 mixinEntity.unlitCampfire$rainTime++;
                 if (mixinEntity.unlitCampfire$rainTime >= rainUnlitTime) {
                     mixinEntity.unlitCampfire$unlitCampfire();
                 }
             } else {
-                mixinEntity.unlitCampfire$rainTime = 0;
+                mixinEntity.unlitCampfire$rainTime = 0L;
             }
         }
     }
@@ -183,8 +183,8 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     private static void cooldownTickProxy(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity, CallbackInfo info) {
         CampfireBlockEntityMixin mixinEntity = (CampfireBlockEntityMixin) (BlockEntity) blockEntity;
         if (level != null && mixinEntity != null && !state.getValue(CampfireBlock.LIT)) {
-            mixinEntity.unlitCampfire$litTime = 0;
-            mixinEntity.unlitCampfire$rainTime = 0;
+            mixinEntity.unlitCampfire$litTime = 0L;
+            mixinEntity.unlitCampfire$rainTime = 0L;
         }
     }
 
@@ -202,13 +202,13 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
 
     @Inject(at = @At("RETURN"), method = "loadAdditional")
     protected void loadAdditionalProxy(ValueInput valueInput, CallbackInfo info) {
-        valueInput.getInt("CampfireLitTime").ifPresent(value -> this.unlitCampfire$litTime = value);
+        valueInput.getLong("CampfireLitTime").ifPresent(value -> this.unlitCampfire$litTime = value);
     }
 
     @Inject(at = @At("RETURN"), method = "saveAdditional")
     protected void saveAdditionalProxy(ValueOutput valueOutput, CallbackInfo info) {
         if (valueOutput != null) {
-            valueOutput.putInt("CampfireLitTime", this.unlitCampfire$litTime);
+            valueOutput.putLong("CampfireLitTime", this.unlitCampfire$litTime);
         }
         CommonLoader.addCampfire(this); //remember server side block entities
     }
@@ -217,7 +217,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     protected void getUpdateTagProxy(CallbackInfoReturnable<CompoundTag> info) {
         CompoundTag compound = info.getReturnValue();
         if (compound != null) {
-            compound.putInt("CampfireLitTime", this.unlitCampfire$litTime);
+            compound.putLong("CampfireLitTime", this.unlitCampfire$litTime);
         }
     }
 

@@ -38,8 +38,8 @@ public class JadeClientCompat implements IWailaPlugin, IBlockComponentProvider {
         }
     }
 
-    private int getSecondsLeft(CompoundTag serverData) {
-        return (serverData.getIntOr("MaxLitTime", 0) - serverData.getIntOr("LitTime", 0)) / 20;
+    private long getSecondsLeft(CompoundTag serverData) {
+        return (serverData.getLongOr("MaxLitTime", 0L) - serverData.getLongOr("LitTime", 0L)) / 20L;
     }
 
 }

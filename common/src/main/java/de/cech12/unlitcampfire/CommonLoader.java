@@ -3,11 +3,11 @@ package de.cech12.unlitcampfire;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import de.cech12.unlitcampfire.platform.Services;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -32,11 +32,10 @@ public class CommonLoader {
         }
     }
 
-    public static void updateCampfiresAfterSleep(int sleepTime) {
-        CAMPFIRES.removeIf(Objects::isNull);
-        CAMPFIRES.removeIf(BlockEntity::isRemoved);
-        CAMPFIRES.removeIf(campfire -> !(campfire instanceof ICampfireBlockEntityMixin));
+    public static void updateCampfiresAfterSleep(LevelAccessor level, long sleepTime) {
+        CAMPFIRES.removeIf(c -> c == null || c.isRemoved() || !(c instanceof ICampfireBlockEntityMixin));
         CAMPFIRES.stream()
+                .filter(campfire -> level == campfire.getLevel())
                 .filter(campfire -> campfire.getBlockState().hasProperty(CampfireBlock.LIT) && campfire.getBlockState().getValue(CampfireBlock.LIT))
                 .filter(campfire -> campfire.getBlockState().hasProperty(ICampfireBlockMixin.INFINITE) && !campfire.getBlockState().getValue(ICampfireBlockMixin.INFINITE))
                 .map(campfire -> (ICampfireBlockEntityMixin) campfire)

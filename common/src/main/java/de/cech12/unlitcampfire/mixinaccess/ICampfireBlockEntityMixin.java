@@ -4,10 +4,10 @@ public interface ICampfireBlockEntityMixin {
 
     boolean unlitCampfire$isSoulCampfire();
 
-    int unlitCampfire$getLitTime();
+    long unlitCampfire$getLitTime();
 
-    boolean unlitCampfire$addLitTime(int litTimeToAdd);
+    boolean unlitCampfire$addLitTime(long litTimeToAdd);
 
-    boolean unlitCampfire$removeLitTime(int litTimeToRemove);
+    boolean unlitCampfire$removeLitTime(long litTimeToRemove);
 
 }

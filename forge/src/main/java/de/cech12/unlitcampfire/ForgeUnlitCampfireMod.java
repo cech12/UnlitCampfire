@@ -2,6 +2,7 @@ package de.cech12.unlitcampfire;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.event.level.SleepFinishedTimeEvent;
+import net.minecraftforge.eventbus.api.listener.Priority;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -14,12 +15,15 @@ public class ForgeUnlitCampfireMod {
         CommonLoader.init();
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = Priority.LOWEST)
     public static void onSleepFinishTimeEvent(SleepFinishedTimeEvent event) {
         LevelAccessor level = event.getLevel();
-        if (level.isClientSide()) return;
-        int sleepTime = (int) ((event.getNewTime() >= level.getGameTime()) ? (event.getNewTime() - level.getGameTime()) : (24000L - level.getGameTime() + event.getNewTime()));
-        CommonLoader.updateCampfiresAfterSleep(sleepTime);
+        if (level.isClientSide() || level.getServer() == null) return;
+        level.dimensionType().defaultClock().ifPresent(clock -> {
+            long currentTime = level.getServer().clockManager().getTotalTicks(clock);
+            long sleepTime = event.getNewTime() - currentTime;
+            CommonLoader.updateCampfiresAfterSleep(level, sleepTime);
+        });
     }
 
 }

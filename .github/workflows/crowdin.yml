@@ -3,7 +3,7 @@ name: Crowdin Sync
 on:
   push:
     branches:
-      - '1.21'
+      - '26.x'
   workflow_dispatch:
 
 jobs:

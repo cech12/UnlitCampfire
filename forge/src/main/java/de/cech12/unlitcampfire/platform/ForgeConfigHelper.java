@@ -28,24 +28,24 @@ public class ForgeConfigHelper implements IConfigHelper {
 
     private static final ForgeConfigSpec SERVER_CONFIG;
 
-    public static final ForgeConfigSpec.IntValue CAMPFIRE_LIT_TIME;
-    public static final ForgeConfigSpec.IntValue CAMPFIRE_RUN_OUT_INDICATOR_TIME;
-    public static final ForgeConfigSpec.IntValue CAMPFIRE_RAIN_UNLIT_TIME;
+    public static final ForgeConfigSpec.LongValue CAMPFIRE_LIT_TIME;
+    public static final ForgeConfigSpec.LongValue CAMPFIRE_RUN_OUT_INDICATOR_TIME;
+    public static final ForgeConfigSpec.LongValue CAMPFIRE_RAIN_UNLIT_TIME;
     public static final ForgeConfigSpec.IntValue CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_ADDING_BURNABLES;
-    public static final ForgeConfigSpec.IntValue CAMPFIRE_MAX_LIT_TIME_EXTENSION;
+    public static final ForgeConfigSpec.LongValue CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ForgeConfigSpec.BooleanValue CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ForgeConfigSpec.BooleanValue GENERATED_CAMPFIRE_IS_LIT_INFINITELY;
     public static final ForgeConfigSpec.BooleanValue INFINITE_CAMPFIRE_IGNORES_RAIN;
 
-    public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_LIT_TIME;
-    public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME;
-    public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_UNLIT_TIME;
+    public static final ForgeConfigSpec.LongValue SOUL_CAMPFIRE_LIT_TIME;
+    public static final ForgeConfigSpec.LongValue SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME;
+    public static final ForgeConfigSpec.LongValue SOUL_CAMPFIRE_RAIN_UNLIT_TIME;
     public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_BREAKS_WHEN_UNLIT_BY_TIME;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_ADDING_BURNABLES;
-    public static final ForgeConfigSpec.IntValue SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION;
+    public static final ForgeConfigSpec.LongValue SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION;
     public static final ForgeConfigSpec.BooleanValue SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME;
     public static final ForgeConfigSpec.BooleanValue GENERATED_SOUL_CAMPFIRE_IS_LIT_INFINITELY;
     public static final ForgeConfigSpec.BooleanValue INFINITE_SOUL_CAMPFIRE_IGNORES_RAIN;
@@ -150,7 +150,7 @@ public class ForgeConfigHelper implements IConfigHelper {
     }
 
     @Override
-    public int getLitTime(boolean isSoulCampfire) {
+    public long getLitTime(boolean isSoulCampfire) {
         try {
             return isSoulCampfire ? SOUL_CAMPFIRE_LIT_TIME.get() : CAMPFIRE_LIT_TIME.get();
         } catch (IllegalStateException ex) {
@@ -159,7 +159,7 @@ public class ForgeConfigHelper implements IConfigHelper {
     }
 
     @Override
-    public int getRunOutIndicatorTime(boolean isSoulCampfire) {
+    public long getRunOutIndicatorTime(boolean isSoulCampfire) {
         try {
             return isSoulCampfire ? SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME.get() : CAMPFIRE_RUN_OUT_INDICATOR_TIME.get();
         } catch (IllegalStateException ex) {
@@ -168,7 +168,7 @@ public class ForgeConfigHelper implements IConfigHelper {
     }
 
     @Override
-    public int getRainUnlitTime(boolean isSoulCampfire) {
+    public long getRainUnlitTime(boolean isSoulCampfire) {
         try {
             return isSoulCampfire ? SOUL_CAMPFIRE_RAIN_UNLIT_TIME.get() : CAMPFIRE_RAIN_UNLIT_TIME.get();
         } catch (IllegalStateException ex) {
@@ -204,7 +204,7 @@ public class ForgeConfigHelper implements IConfigHelper {
     }
 
     @Override
-    public int getMaxLitTimeExtension(boolean isSoulCampfire) {
+    public long getMaxLitTimeExtension(boolean isSoulCampfire) {
         try {
             return isSoulCampfire ? SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION.get() : CAMPFIRE_MAX_LIT_TIME_EXTENSION.get();
         } catch (IllegalStateException ex) {

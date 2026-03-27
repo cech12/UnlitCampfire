@@ -1,6 +1,7 @@
 package de.cech12.unlitcampfire.platform.services;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 
 /**
@@ -54,5 +55,5 @@ public interface IPlatformHelper {
      * @param usedStack used item stack
      * @return remaining item stack after usage
      */
-    ItemStack getRemainingStackAfterUsage(ItemStack usedStack);
+    ItemStackTemplate getRemainingStackAfterUsage(ItemStack usedStack);
 }

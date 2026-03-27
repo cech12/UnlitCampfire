@@ -3,6 +3,7 @@ package de.cech12.unlitcampfire.platform;
 import de.cech12.unlitcampfire.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 
 /**
@@ -31,8 +32,8 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public ItemStack getRemainingStackAfterUsage(ItemStack usedStack) {
-        return usedStack.getRecipeRemainder();
+    public ItemStackTemplate getRemainingStackAfterUsage(ItemStack usedStack) {
+        return usedStack.getCraftingRemainder();
     }
 
 }

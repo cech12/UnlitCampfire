@@ -33,10 +33,10 @@ public class JadeCompat implements IWailaPlugin, IServerDataProvider<BlockAccess
 
         if (blockAccessor.getBlockEntity() instanceof ICampfireBlockEntityMixin campfireBlockEntity && blockState.getBlock() instanceof ICampfireBlockMixin campfireBlock) {
             data.putBoolean("BurnsInfinite", campfireBlock.unlitCampfire$burnsInfinite(blockState));
-            data.putInt("MaxLitTime", campfireBlock.unlitCampfire$getMaxLitTime(blockState));
+            data.putLong("MaxLitTime", campfireBlock.unlitCampfire$getMaxLitTime(blockState));
 
             if (!campfireBlock.unlitCampfire$burnsInfinite(blockState)) {
-                data.putInt("LitTime", campfireBlockEntity.unlitCampfire$getLitTime());
+                data.putLong("LitTime", campfireBlockEntity.unlitCampfire$getLitTime());
             }
         }
     }

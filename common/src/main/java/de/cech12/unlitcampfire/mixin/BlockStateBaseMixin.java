@@ -1,8 +1,6 @@
 package de.cech12.unlitcampfire.mixin;
 
-import com.mojang.serialization.MapCodec;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
-import it.unimi.dsi.fastutil.objects.Reference2ObjectArrayMap;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -25,9 +23,9 @@ public abstract class BlockStateBaseMixin {
     @Shadow @Final private int lightEmission;
 
     @Inject(at = @At("RETURN"), method = "<init>*")
-    protected void initProxy(Block block, Reference2ObjectArrayMap<Property<?>, Comparable<?>> ref, MapCodec<BlockState> codec, CallbackInfo callbackInfo) {
+    protected void initProxy(Block owner, Property<?>[] propertyKeys, Comparable<?>[] propertyValues, CallbackInfo callbackInfo) {
         BlockState state = this.asState();
-        if (block instanceof CampfireBlock && state.getValue(CampfireBlock.LIT)
+        if (owner instanceof CampfireBlock && state.getValue(CampfireBlock.LIT)
                 && state.hasProperty(ICampfireBlockMixin.RUNS_OUT) && state.getValue(ICampfireBlockMixin.RUNS_OUT)) {
             lightEmission = lightEmission * 2 / 3;
         }

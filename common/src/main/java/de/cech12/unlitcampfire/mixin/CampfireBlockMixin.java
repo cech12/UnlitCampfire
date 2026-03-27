@@ -12,6 +12,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -41,17 +42,17 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
     }
 
     @Override
-    public int unlitCampfire$getMaxLitTimeExtension(BlockState state) {
+    public long unlitCampfire$getMaxLitTimeExtension(BlockState state) {
         return Services.CONFIG.getMaxLitTimeExtension(state.getBlock() == Blocks.SOUL_CAMPFIRE);
     }
 
     @Override
-    public int unlitCampfire$getMaxLitTime(BlockState state) {
+    public long unlitCampfire$getMaxLitTime(BlockState state) {
         return Services.CONFIG.getLitTime(state.getBlock() == Blocks.SOUL_CAMPFIRE);
     }
 
     @Override
-    public int unlitCampfire$getRunsOutIndicatorTime(BlockState state) {
+    public long unlitCampfire$getRunsOutIndicatorTime(BlockState state) {
         return Services.CONFIG.getRunOutIndicatorTime(state.getBlock() == Blocks.SOUL_CAMPFIRE);
     }
 
@@ -137,9 +138,9 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
         }
         //consume interaction item
         if (!player.getAbilities().instabuild && cir.getReturnValue().consumesAction()) {
-            ItemStack remainingStack = Services.PLATFORM.getRemainingStackAfterUsage(stack);
-            if (remainingStack != ItemStack.EMPTY) {
-                player.setItemInHand(hand, remainingStack);
+            ItemStackTemplate remainingStack = Services.PLATFORM.getRemainingStackAfterUsage(stack);
+            if (remainingStack != null && remainingStack.count() > 0) {
+                player.setItemInHand(hand, remainingStack.create());
             } else {
                 stack.shrink(1);
             }

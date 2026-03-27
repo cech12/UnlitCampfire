@@ -5,20 +5,20 @@ package de.cech12.unlitcampfire.platform.services;
  */
 public interface IConfigHelper {
 
-    int CAMPFIRE_LIT_TIME_DEFAULT = 2000;
+    long CAMPFIRE_LIT_TIME_DEFAULT = 2000L;
     String CAMPFIRE_LIT_TIME_DESCRIPTION = "The time (ticks) a campfire burns until it goes out by itself. (" + CAMPFIRE_LIT_TIME_DEFAULT + " ticks default; 0 means it burns forever)";
-    int CAMPFIRE_LIT_TIME_MIN = 0;
-    int CAMPFIRE_LIT_TIME_MAX = 2000000;
+    long CAMPFIRE_LIT_TIME_MIN = 0L;
+    long CAMPFIRE_LIT_TIME_MAX = 2000000L;
 
-    int CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT = 600;
+    long CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT = 600L;
     String CAMPFIRE_RUN_OUT_INDICATOR_TIME_DESCRIPTION = "The light level of a campfire decreases when the remaining time (ticks) is lower than this configured value. (" + CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT + " ticks default; 0 deactivates this behaviour)";
-    int CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN = 0;
-    int CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX = 2000000;
+    long CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN = 0L;
+    long CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX = 2000000L;
 
-    int CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT = 160;
+    long CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT = 160L;
     String CAMPFIRE_RAIN_UNLIT_TIME_DESCRIPTION = "The time (ticks) a campfire burns until it goes out during rain. (" + CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT + " ticks [default]; 0: it goes out immediately; -1: it burns during rain).";
-    int CAMPFIRE_RAIN_UNLIT_TIME_MIN = -1;
-    int CAMPFIRE_RAIN_UNLIT_TIME_MAX = 2000000;
+    long CAMPFIRE_RAIN_UNLIT_TIME_MIN = -1L;
+    long CAMPFIRE_RAIN_UNLIT_TIME_MAX = 2000000L;
 
     int CAMPFIRE_RAIN_PARTICLE_FACTOR_DEFAULT = 2;
     String CAMPFIRE_RAIN_PARTICLE_FACTOR_DESCRIPTION = "The Factor of particle count of a campfire during rain. (2: doubled particles count [default]; 1: same particle count)";
@@ -31,10 +31,10 @@ public interface IConfigHelper {
     boolean CAMPFIRE_ADDING_BURNABLES_DEFAULT = true;
     String CAMPFIRE_ADDING_BURNABLES_DESCRIPTION = "Whether the lit time of a campfire could be extended with combustible/burnable items.";
 
-    int CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT = 2000;
+    long CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT = 2000L;
     String CAMPFIRE_MAX_LIT_TIME_EXTENSION_DESCRIPTION = "The time (ticks) a campfire can be filled up additionally until adding burnables is not possible. (is added to the configured lit time) (" + CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT + " ticks default)";
-    int CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN = 1;
-    int CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX = 2000000;
+    long CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN = 1L;
+    long CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX = 2000000L;
 
     boolean CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DEFAULT = false;
     String CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DESCRIPTION = "Whether the lit time of a campfire should be affected by the sleep time.";
@@ -45,20 +45,20 @@ public interface IConfigHelper {
     boolean INFINITE_CAMPFIRE_IGNORES_RAIN_DEFAULT = true;
     String INFINITE_CAMPFIRE_IGNORES_RAIN_DESCRIPTION = "Whether infinite campfires should stay lit in rain.";
 
-    int SOUL_CAMPFIRE_LIT_TIME_DEFAULT = 2000;
+    long SOUL_CAMPFIRE_LIT_TIME_DEFAULT = 2000L;
     String SOUL_CAMPFIRE_LIT_TIME_DESCRIPTION = "The time (ticks) a soul campfire burns until it goes out by itself. (" + SOUL_CAMPFIRE_LIT_TIME_DEFAULT + " ticks default; 0 means it burns forever)";
-    int SOUL_CAMPFIRE_LIT_TIME_MIN = 0;
-    int SOUL_CAMPFIRE_LIT_TIME_MAX = 2000000;
+    long SOUL_CAMPFIRE_LIT_TIME_MIN = 0L;
+    long SOUL_CAMPFIRE_LIT_TIME_MAX = 2000000L;
 
-    int SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT = 600;
+    long SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT = 600L;
     String SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DESCRIPTION = "The light level of a soul campfire decreases when the remaining time (ticks) is lower than this configured value. (" + SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_DEFAULT + " ticks default; 0 deactivates this behaviour)";
-    int SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN = 0;
-    int SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX = 2000000;
+    long SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MIN = 0L;
+    long SOUL_CAMPFIRE_RUN_OUT_INDICATOR_TIME_MAX = 2000000L;
 
-    int SOUL_CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT = -1;
+    long SOUL_CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT = -1L;
     String SOUL_CAMPFIRE_RAIN_UNLIT_TIME_DESCRIPTION = "The time (ticks) a soul campfire burns until it goes out during rain. (" + SOUL_CAMPFIRE_RAIN_UNLIT_TIME_DEFAULT + " ticks [default]; 0: it goes out immediately; -1: it burns during rain).";
-    int SOUL_CAMPFIRE_RAIN_UNLIT_TIME_MIN = -1;
-    int SOUL_CAMPFIRE_RAIN_UNLIT_TIME_MAX = 2000000;
+    long SOUL_CAMPFIRE_RAIN_UNLIT_TIME_MIN = -1L;
+    long SOUL_CAMPFIRE_RAIN_UNLIT_TIME_MAX = 2000000L;
 
     int SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_DEFAULT = 2;
     String SOUL_CAMPFIRE_RAIN_PARTICLE_FACTOR_DESCRIPTION = "The Factor of particle count of a soul campfire during rain. (2: doubled particles count [default]; 1: same particle count)";
@@ -71,10 +71,10 @@ public interface IConfigHelper {
     boolean SOUL_CAMPFIRE_ADDING_BURNABLES_DEFAULT = true;
     String SOUL_CAMPFIRE_ADDING_BURNABLES_DESCRIPTION = "Whether the lit time of a soul campfire could be extended with combustible/burnable items.";
 
-    int SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT = 2000;
+    long SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT = 2000L;
     String SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DESCRIPTION = "The time (ticks) a soul campfire can be filled up additionally until adding burnables is not possible. (is added to the configured lit time) (" + SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_DEFAULT + " ticks default)";
-    int SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN = 1;
-    int SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX = 2000000;
+    long SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MIN = 1L;
+    long SOUL_CAMPFIRE_MAX_LIT_TIME_EXTENSION_MAX = 2000000L;
 
     boolean SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DEFAULT = false;
     String SOUL_CAMPFIRE_AFFECTED_BY_SLEEP_TIME_DESCRIPTION = "Whether the lit time of a soul campfire should be affected by the sleep time.";
@@ -96,7 +96,7 @@ public interface IConfigHelper {
      * @param isSoulCampfire parameter which indicates if the campfire or soul campfire value should be returned
      * @return configured lit time value
      */
-    int getLitTime(boolean isSoulCampfire);
+    long getLitTime(boolean isSoulCampfire);
 
     /**
      * Gets the configured rain unlit time value.
@@ -104,7 +104,7 @@ public interface IConfigHelper {
      * @param isSoulCampfire parameter which indicates if the campfire or soul campfire value should be returned
      * @return configured rain unlit time value
      */
-    int getRainUnlitTime(boolean isSoulCampfire);
+    long getRainUnlitTime(boolean isSoulCampfire);
 
     /**
      * Gets the configured "runs out" indicator time value.
@@ -112,7 +112,7 @@ public interface IConfigHelper {
      * @param isSoulCampfire parameter which indicates if the campfire or soul campfire value should be returned
      * @return configured "runs out" indicator time value
      */
-    int getRunOutIndicatorTime(boolean isSoulCampfire);
+    long getRunOutIndicatorTime(boolean isSoulCampfire);
 
     /**
      * Gets the configured rain particle factor value.
@@ -144,7 +144,7 @@ public interface IConfigHelper {
      * @param isSoulCampfire parameter which indicates if the campfire or soul campfire value should be returned
      * @return configured lit time value
      */
-    int getMaxLitTimeExtension(boolean isSoulCampfire);
+    long getMaxLitTimeExtension(boolean isSoulCampfire);
 
     /**
      * Gets the configured "affected by sleep time" value.

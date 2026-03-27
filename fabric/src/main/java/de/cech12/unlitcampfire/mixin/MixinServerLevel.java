@@ -3,8 +3,12 @@ package de.cech12.unlitcampfire.mixin;
 import de.cech12.unlitcampfire.CommonLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.clock.ClockTimeMarker;
+import net.minecraft.world.clock.ClockTimeMarkers;
+import net.minecraft.world.clock.ServerClockManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.WritableLevelData;
@@ -22,12 +26,20 @@ public abstract class MixinServerLevel extends Level {
         super(writableLevelData, resourceKey, registryAccess, holder, bl, bl2, l, i);
     }
 
-    @Inject(method = "tick(Ljava/util/function/BooleanSupplier;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;setDayTime(J)V"))
+    @Inject(method = "tick(Ljava/util/function/BooleanSupplier;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/clock/ServerClockManager;moveToTimeMarker(Lnet/minecraft/core/Holder;Lnet/minecraft/resources/ResourceKey;)Z"))
     private void tickProxy(BooleanSupplier booleanSupplier, CallbackInfo info) {
-        long dayTime = this.getDayTime();
-        long l = dayTime + 24000L;
-        long newTime = l - l % 24000L;
-        int sleepTime = (int) ((newTime >= dayTime) ? (newTime - dayTime) : (24000L - dayTime + newTime));
-        CommonLoader.updateCampfiresAfterSleep(sleepTime);
+        if (this.getServer() == null) return;
+        ServerClockManager clockManager = this.getServer().clockManager();
+        this.dimensionType().defaultClock().ifPresent(clockHolder -> {
+            this.registryAccess().lookupOrThrow(Registries.TIMELINE).listElements().filter(timeline -> timeline.value().clock().equals(clockHolder)).findFirst().ifPresent(timelineHolder -> {
+                //only the standard "wake_up_from_sleep" marker is supported here
+                ClockTimeMarker wakeUpFromSleepMarker = clockManager.getInstance(clockHolder).timeMarkers.get(ClockTimeMarkers.WAKE_UP_FROM_SLEEP);
+                if (wakeUpFromSleepMarker != null) {
+                    long totalTicks = timelineHolder.value().getTotalTicks(clockManager);
+                    long sleepTicks = wakeUpFromSleepMarker.resolveTimeToMoveTo(totalTicks) - totalTicks;
+                    CommonLoader.updateCampfiresAfterSleep(this, sleepTicks);
+                }
+            });
+        });
     }
 }
