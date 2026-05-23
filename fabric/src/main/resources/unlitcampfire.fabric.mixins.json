@@ -2,7 +2,6 @@
   "required": true,
   "package": "${group}.mixin",
   "compatibilityLevel": "JAVA_${java_version}",
-  "refmap": "${mod_id}.refmap.json",
   "mixins": [
     "MixinServerLevel"
   ],
