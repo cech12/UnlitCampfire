@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [26.2-4.1.0.0] - 2026-06-18
+### Changed
+- updated to Minecraft 26.2 (Fabric 0.152.2+26.2, NeoForge 26.2.0.3-beta, Forge 65.0.0)
+- updated Cloth Config support (26.2.155) (Fabric/Quilt)
+- updated ModMenu support (20.0.0-beta.2) (Fabric/Quilt)
+- updated Jade support (26.2.2) (NeoForge)
+- updated Jade support (26.2.1) (Fabric/Quilt)
+
 ## [26.1-4.0.0.1] - 2026-05-23
 ### Fixed
 - fixed startup warning about missing mixin refmap

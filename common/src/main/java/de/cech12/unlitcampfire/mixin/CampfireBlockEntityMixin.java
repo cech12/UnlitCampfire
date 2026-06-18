@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -41,7 +41,7 @@ public abstract class CampfireBlockEntityMixin extends BlockEntity implements IC
     private long unlitCampfire$rainTime = 0L;
 
     public CampfireBlockEntityMixin(BlockPos pos, BlockState state) {
-        super(BlockEntityType.CAMPFIRE, pos, state);
+        super(BlockEntityTypes.CAMPFIRE, pos, state);
         CommonLoader.addCampfire(this);
     }
 
