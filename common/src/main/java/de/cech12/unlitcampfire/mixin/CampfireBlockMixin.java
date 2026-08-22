@@ -56,34 +56,35 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
 
     @Override
     public boolean unlitCampfire$burnsInfinite(BlockState state) {
-        return state.getValue(ICampfireBlockMixin.INFINITE) || unlitCampfire$getMaxLitTime(state) < 1;
+        return (state.hasProperty(ICampfireBlockMixin.INFINITE) && state.getValue(ICampfireBlockMixin.INFINITE)) || unlitCampfire$getMaxLitTime(state) < 1;
     }
 
     @Unique
     private boolean unlitCampfire$canAddBurnables(BlockState state) {
-        return !state.getValue(ICampfireBlockMixin.INFINITE) && Services.CONFIG.canAddBurnables(state.getBlock() == Blocks.SOUL_CAMPFIRE);
+        return (state.hasProperty(ICampfireBlockMixin.INFINITE) && !state.getValue(ICampfireBlockMixin.INFINITE)) && Services.CONFIG.canAddBurnables(state.getBlock() == Blocks.SOUL_CAMPFIRE);
+    }
+
+    @Unique
+    private BlockState unlitCampfire$createDefaultState(BlockState state) {
+        state.setValue(CampfireBlock.LIT, false);
+        if (state.hasProperty(ICampfireBlockMixin.INFINITE)) {
+            state.setValue(ICampfireBlockMixin.INFINITE, false);
+        }
+        if (state.hasProperty(ICampfireBlockMixin.RUNS_OUT)) {
+            state.setValue(ICampfireBlockMixin.RUNS_OUT, false);
+        }
+        return state;
     }
 
     @Inject(at = @At("RETURN"), method = "<init>*")
     protected void initProxy(boolean spawnParticles, int fireDamage, BlockBehaviour.Properties properties, CallbackInfo info) {
-        BlockState defaultState = this.defaultBlockState().setValue(CampfireBlock.LIT, false);
-        if (defaultState.hasProperty(ICampfireBlockMixin.INFINITE)) {
-            defaultState.setValue(ICampfireBlockMixin.INFINITE, false);
-        }
-        if (defaultState.hasProperty(ICampfireBlockMixin.RUNS_OUT)) {
-            defaultState.setValue(ICampfireBlockMixin.RUNS_OUT, false);
-        }
-        this.registerDefaultState(defaultState);
+        this.registerDefaultState(this.unlitCampfire$createDefaultState(this.defaultBlockState()));
     }
 
     @Inject(at = @At("RETURN"), method = "getStateForPlacement", cancellable = true)
     protected void getStateForPlacementProxy(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir) {
         if (cir.getReturnValue() != null) {
-            cir.setReturnValue(cir.getReturnValue()
-                    .setValue(CampfireBlock.LIT, false)
-                    .setValue(ICampfireBlockMixin.INFINITE, false)
-                    .setValue(ICampfireBlockMixin.RUNS_OUT, false)
-            );
+            cir.setReturnValue(this.unlitCampfire$createDefaultState(cir.getReturnValue()));
         }
     }
 
