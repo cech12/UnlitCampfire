@@ -56,7 +56,7 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
 
     @Override
     public boolean unlitCampfire$burnsInfinite(BlockState state) {
-        return (state.hasProperty(ICampfireBlockMixin.INFINITE) && state.getValue(ICampfireBlockMixin.INFINITE)) || unlitCampfire$getMaxLitTime(state) < 1;
+        return !state.hasProperty(ICampfireBlockMixin.INFINITE) || state.getValue(ICampfireBlockMixin.INFINITE) || unlitCampfire$getMaxLitTime(state) < 1;
     }
 
     @Unique
