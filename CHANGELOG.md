@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [1.21.5-3.3.0.4] - 2026-08-22
+### Fixed
+- wrong burn time in the Jade plugin on other mods campfires
+
 ## [1.21.5-3.3.0.3] - 2026-08-22
 ### Fixed
 - incompatibility with Piglin Proliferation mod which resulted in a crash when placing an Alchemical Fire Pit (thanks to Laozhu132 for the report) #81
