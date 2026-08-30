@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [1.21-3.1.2.5] - 2026-08-30
+### Fixed
+- campfires didn't be placed as unlit (thanks to FL1PDZ for the report) #83
+
 ## [1.21-3.1.2.4] - 2026-08-22
 ### Fixed
 - wrong burn time in the Jade plugin on other mods campfires

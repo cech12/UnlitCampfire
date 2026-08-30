@@ -66,12 +66,12 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
 
     @Unique
     private BlockState unlitCampfire$createDefaultState(BlockState state) {
-        state.setValue(CampfireBlock.LIT, false);
+        state = state.setValue(CampfireBlock.LIT, false);
         if (state.hasProperty(ICampfireBlockMixin.INFINITE)) {
-            state.setValue(ICampfireBlockMixin.INFINITE, false);
+            state = state.setValue(ICampfireBlockMixin.INFINITE, false);
         }
         if (state.hasProperty(ICampfireBlockMixin.RUNS_OUT)) {
-            state.setValue(ICampfireBlockMixin.RUNS_OUT, false);
+            state = state.setValue(ICampfireBlockMixin.RUNS_OUT, false);
         }
         return state;
     }
