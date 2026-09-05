@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [26.2-4.1.1.0] - 2026-09-05
+### Added
+- Re-added The One Probe support
+
+### Changed
+- updated NeoForge to 26.2.0.75
+
 ## [26.2-4.1.0.2] - 2026-08-30
 ### Fixed
 - campfires didn't be placed as unlit (thanks to FL1PDZ for the report) #83
