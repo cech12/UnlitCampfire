@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [26.1.2-4.0.1.0] - 2026-09-05
+### Added
+- Re-added The One Probe support (26.1.2_neo-14.0.0)
+
+### Changed
+- updated to Minecraft 26.1.2 (Fabric 0.155.2+26.1.2, NeoForge 26.1.2.94, Forge 64.1.0)
+- updated ModMenu support (18.0.0) (Fabric/Quilt)
+- updated Jade support (26.1.10) (NeoForge)
+- updated Jade support (26.1.9) (Fabric/Quilt)
+
 ## [26.1-4.0.0.2] - 2026-08-30
 ### Fixed
 - incompatibility with Piglin Proliferation mod which resulted in a crash when placing an Alchemical Fire Pit (thanks to Laozhu132 for the report) #81
