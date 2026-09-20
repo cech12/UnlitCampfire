@@ -10,10 +10,10 @@ repositories {
 }
 
 dependencies {
-    compileOnly "curse.maven:jade-324717:${jade_neoforge_id}"
+    implementation "curse.maven:jade-324717:${jade_neoforge_id}"
 
     //implementation("mcjty.theoneprobe:theoneprobe:$top_version") {transitive = false}
-    implementation "curse.maven:theoneprobe-245211:${top_id}"
+    //implementation "curse.maven:theoneprobe-245211:${top_id}"
 }
 
 neoForge {

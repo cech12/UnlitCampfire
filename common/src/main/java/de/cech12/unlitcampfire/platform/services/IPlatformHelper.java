@@ -2,7 +2,6 @@ package de.cech12.unlitcampfire.platform.services;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.level.Level;
 
 /**
  * Common platform helper service interface.
@@ -39,15 +38,6 @@ public interface IPlatformHelper {
     default String getEnvironmentName() {
         return isDevelopmentEnvironment() ? "development" : "production";
     }
-
-    /**
-     * Gets the burn time of a given item stack
-     *
-     * @param level level
-     * @param stack item stack
-     * @return burn time of the given item stack
-     */
-    int getBurnTimeOf(Level level, ItemStack stack);
 
     /**
      * Gets the item stack that remains after usage of the given item stack.

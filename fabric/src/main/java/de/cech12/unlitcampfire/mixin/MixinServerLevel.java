@@ -26,8 +26,8 @@ public abstract class MixinServerLevel extends Level {
         super(writableLevelData, resourceKey, registryAccess, holder, bl, bl2, l, i);
     }
 
-    @Inject(method = "tick(Ljava/util/function/BooleanSupplier;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/clock/ServerClockManager;moveToTimeMarker(Lnet/minecraft/core/Holder;Lnet/minecraft/resources/ResourceKey;)Z"))
-    private void tickProxy(BooleanSupplier booleanSupplier, CallbackInfo info) {
+    @Inject(method = "tick(Ljava/util/function/BooleanSupplier;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/clock/ServerClockManager;moveToTimeMarker(Lnet/minecraft/core/Holder;Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/world/clock/ServerClockManager$MoveResult;"))
+    private void tickProxy(BooleanSupplier haveTime, CallbackInfo info) {
         if (this.getServer() == null) return;
         ServerClockManager clockManager = this.getServer().clockManager();
         this.dimensionType().defaultClock().ifPresent(clockHolder -> {

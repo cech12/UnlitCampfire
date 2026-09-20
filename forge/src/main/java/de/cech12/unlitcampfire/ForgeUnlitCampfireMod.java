@@ -20,7 +20,7 @@ public class ForgeUnlitCampfireMod {
         LevelAccessor level = event.getLevel();
         if (level.isClientSide() || level.getServer() == null) return;
         level.dimensionType().defaultClock().ifPresent(clock -> {
-            long currentTime = level.getServer().clockManager().getTotalTicks(clock);
+            long currentTime = level.getServer().clockManager().getInstance(clock).totalTicks();
             long sleepTime = event.getNewTime() - currentTime;
             CommonLoader.updateCampfiresAfterSleep(level, sleepTime);
         });

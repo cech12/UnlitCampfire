@@ -5,15 +5,17 @@ import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockEntityMixin;
 import de.cech12.unlitcampfire.mixinaccess.ICampfireBlockMixin;
 import de.cech12.unlitcampfire.platform.Services;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.component.CookingFuel;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -24,7 +26,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ResolvableInt;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,6 +41,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Optional;
 
 @Mixin(CampfireBlock.class)
 public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICampfireBlockMixin {
@@ -116,16 +126,22 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
                 return;
             }
             //when shovel item is used, do nothing, to avoid using (wooden) shovel as burning material (issue #27)
-            if (stack.getItem() instanceof ShovelItem) {
+            if (stack.is(ItemTags.DOUSES_CAMPFIRES)) {
                 return;
             }
-            //when interaction item has no burn time, do nothing
-            int burnTime = Services.PLATFORM.getBurnTimeOf(level, stack);
-            if (burnTime < 1) {
+            if (!stack.has(DataComponents.COOKING_FUEL)) {
                 return;
+            }
+            int burnTime = 0;
+            BlockEntity blockentity = level.getBlockEntity(pos);
+            if (level instanceof ServerLevel serverLevel) {
+                //when interaction item has no burn time, do nothing
+                burnTime = ResolvableInt.getFromItem(stack, DataComponents.COOKING_FUEL, CookingFuel::burnTime, this.unlitCampfire$getLootContext(serverLevel, state, pos, blockentity), 0);
+                if (burnTime < 1) {
+                    return;
+                }
             }
             //subtract items burn time from campfires lit time to let it burn longer
-            BlockEntity blockentity = level.getBlockEntity(pos);
             if (blockentity instanceof ICampfireBlockEntityMixin campfireBlockEntityMixin
                     && campfireBlockEntityMixin.unlitCampfire$addLitTime(burnTime)) {
                 if (level instanceof ServerLevel) {
@@ -163,6 +179,17 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements ICam
         for (int i = 0; i < particleFactor; i++) {
             this.animateTick(stateIn, worldIn, pos, rand);
         }
+    }
+
+    @Unique
+    protected LootContext unlitCampfire$getLootContext(final ServerLevel level, final BlockState state, final BlockPos pos, final BlockEntity blockentity) {
+        return new LootContext.Builder(
+                new LootParams.Builder(level)
+                        .withParameter(LootContextParams.BLOCK_STATE, state)
+                        .withParameter(LootContextParams.BLOCK_ENTITY, blockentity)
+                        .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+                        .create(LootContextParamSets.BLOCK_INTERACT)
+        ).create(Optional.empty());
     }
 
 }

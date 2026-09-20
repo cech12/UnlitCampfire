@@ -3,7 +3,6 @@ package de.cech12.unlitcampfire.platform;
 import de.cech12.unlitcampfire.platform.services.IPlatformHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.level.Level;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 
@@ -25,11 +24,6 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
         return !FMLLoader.getCurrent().isProduction();
-    }
-
-    @Override
-    public int getBurnTimeOf(Level level, ItemStack stack) {
-        return stack.getBurnTime(null, level.fuelValues());
     }
 
     @Override
