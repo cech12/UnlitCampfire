@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [26.3-4.2.1.0] - 2026-10-01
+### Changed
+- updated to NeoForge 26.3.0.37-beta
+
+### Fixed
+- startup crash because of a breaking change in NeoForge 26.3.0.37-beta
+
 ## [26.3-4.2.0.0] - 2026-09-20
 - updated to Minecraft 26.3 (Fabric 0.161.0+26.3, NeoForge 26.3.0.7-beta, Forge 66.0.2)
 - updated Cloth Config support (26.3.158) (Fabric/Quilt)
