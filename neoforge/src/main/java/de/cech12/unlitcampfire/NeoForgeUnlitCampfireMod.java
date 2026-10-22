@@ -1,5 +1,6 @@
 package de.cech12.unlitcampfire;
 
+import de.cech12.unlitcampfire.compat.TOPCompat;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.clock.ClockTimeMarker;
@@ -24,7 +25,7 @@ public class NeoForgeUnlitCampfireMod {
 
         //The One Probe registration.
         if (ModList.get().isLoaded("theoneprobe")) {
-            //TOPCompat.register();
+            TOPCompat.register();
         }
     }
 

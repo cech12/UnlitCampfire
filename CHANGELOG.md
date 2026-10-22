@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [26.3-4.2.2.0] - 2026-10-22
+### Changed
+- updated to NeoForge 26.3.0.83
+- re-added The One Probe support
+
 ## [26.3-4.2.1.0] - 2026-10-01
 ### Changed
 - updated to NeoForge 26.3.0.37-beta
